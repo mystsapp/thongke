@@ -229,6 +229,20 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThongKe.Common\ThongKe.Common.csproj">
+      <Project>{1e126c48-81da-4829-8828-af278f4fa6b4}</Project>
+      <Name>ThongKe.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThongKe.Data\ThongKe.Data.csproj">
+      <Project>{17bada06-e594-4a6a-a321-41a644247a82}</Project>
+      <Name>ThongKe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThongKe.Service\ThongKe.Service.csproj">
+      <Project>{a1078bba-184e-4a44-ba61-ab368816b6ee}</Project>
+      <Name>ThongKe.Service</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

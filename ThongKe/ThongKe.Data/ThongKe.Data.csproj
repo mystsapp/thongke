@@ -53,5 +53,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ThongKe.Common\ThongKe.Common.csproj">
+      <Project>{1e126c48-81da-4829-8828-af278f4fa6b4}</Project>
+      <Name>ThongKe.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
