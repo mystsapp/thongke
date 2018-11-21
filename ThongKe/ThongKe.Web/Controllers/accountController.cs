@@ -16,12 +16,13 @@ namespace ThongKe.Web.Controllers
             _accountService = accountService;
         }
         // GET: account
-        public ActionResult Index(string name, string status, int page, int pageSize)
+        public ActionResult Index(string name, string status, int page=1, int pageSize=10)
+
         {
             int totalRow = 0;
 
             var listAccout = _accountService.Search(name, page, pageSize, status, out totalRow);
-            return View();
+            return View(listAccout);
         }
     }
 }
