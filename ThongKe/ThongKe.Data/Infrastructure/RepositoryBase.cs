@@ -144,6 +144,17 @@ namespace ThongKe.Data.Infrastructure
         {
             return dataContext.Set<T>().Count<T>(predicate) > 0;
         }
+
+        public T Delete(string id)
+        {
+            var entity = dbSet.Find(id);
+            return dbSet.Remove(entity);
+        }
+
+        public T GetSingleById(string id)
+        {
+            return dbSet.Find(id);
+        }
         #endregion
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ThongKe.Data.Infrastructure
 {
@@ -20,11 +17,16 @@ namespace ThongKe.Data.Infrastructure
 
         T Delete(int id);
 
+        T Delete(string id);
+
         //Delete multi records
         void DeleteMulti(Expression<Func<T, bool>> where);
 
         // Get an entity by int id
         T GetSingleById(int id);
+
+        // Get an entity by string id
+        T GetSingleById(string id);
 
         T GetSingleByCondition(Expression<Func<T, bool>> expression, string[] includes = null);
 
