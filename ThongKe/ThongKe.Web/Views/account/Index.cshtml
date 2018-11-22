@@ -1,105 +1,91 @@
-﻿@model IEnumerable<ThongKe.Data.Models.account>
-
+﻿
 @{
     ViewBag.Title = "Index";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.hoten)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.daily)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.chinhanh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.role)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.doimatkhau)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ngaydoimk)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.trangthai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.khoi)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nguoitao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ngaytao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nguoicapnhat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ngaycapnhat)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hoten)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.daily)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.chinhanh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.doimatkhau)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ngaydoimk)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.trangthai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.khoi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nguoitao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ngaytao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nguoicapnhat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ngaycapnhat)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.username }) |
-            @Html.ActionLink("Details", "Details", new { id=item.username }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.username })
-        </td>
-    </tr>
+@section scripts{
+    <script src="~/Assets/Admin/js/User/bootbox.min.js"></script>
+    <script src="~/Assets/Admin/js/User/mustache.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery.twbsPagination.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery.validate.min.js"></script>
+    <script src="~/Assets/Admin/js/User/userController.js"></script>
+    <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
+    @*<script>
+            $(function () {
+                $('.modal-dialog').draggable();
+            });
+        </script>*@
 }
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-10">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="txtNameS" placeholder="Type name or username..." />
+            </div>
+            <div class="col-md-3">
+                <select class="form-control" id="ddlStatusS">
+                    <option value="">Tất cả</option>
+                    <option value="true">Kích hoạt</option>
+                    <option value="false">Khóa</option>
+                </select>
+            </div>
 
-</table>
+            <div class="col-md-3 btn-group">
+                <button id="btnSearch" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <button id="btnReset" class="btn btn-secondary">Reset</button>
+                <button id="btnAddNew" class="btn btn-success"><i class="fa fa-plus-square"></i></button>
+            </div>
+
+        </div>
+        @*<div class="col-md-2">
+                <button id="btnAddNew" class="btn btn-success pull-right"><i class="fa fa-plus-square"></i>Add new</button>
+            </div>*@
+
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover text-center">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Username</td>
+                    <td>Họ Tên</td>
+                    <td>đại lý</td>
+                    <td>Chi nhánh</td>
+                    <td>Trạng thái</td>
+
+                </tr>
+            </thead>
+            <tbody id="tblData" class="table"></tbody>
+        </table>
+
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+
+    <script id="data-template" type="x-tmpl-mustache">
+        Hello {{ hoten }}!
+        <tr>
+            <td class="col-md-1">
+                <div class="btn-group">
+                    <button class="btn btn-outline btn-primary btn-xs btn-edit" data-id="{{username}}"><i class="fa fa-edit"></i></button>
+                    <button class="btn btn-outline btn-danger btn-xs btn-delete" data-id="{{username}}"><i class="fa fa-trash-alt">Xóa</i></button>
+                </div>
+            </td>
+
+            <td>{{username}}</td>
+            <td>{{hoten}}</td>
+            <td>{{{daily}}}</td>
+            <td>{{chinhanh}}</td>
+            <td>{{{trangthai}}}</td>
+
+        </tr>
+    </script>
+</div>
+
+@RenderPage("_AddUpdateModal.cshtml");

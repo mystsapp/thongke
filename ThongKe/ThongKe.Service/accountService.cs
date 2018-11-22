@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLHD.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,8 @@ namespace ThongKe.Service
 
         //string GetLastId();
 
+        string EncodeSHA1(string pass);
+
         void Save();
     }
     public class accountService : IaccountService
@@ -53,6 +56,12 @@ namespace ThongKe.Service
         public void Delete(string id)
         {
             _accountRepository.Delete(id);
+        }
+
+        public string EncodeSHA1(string pass)
+        {
+            var sh1 = new MaHoaSHA1();
+            return sh1.EncodeSHA1(pass);
         }
 
         public IEnumerable<account> GetAll()
@@ -102,6 +111,7 @@ namespace ThongKe.Service
 
         public void Update(account acc)
         {
+
             _accountRepository.Update(acc);
         }
     }

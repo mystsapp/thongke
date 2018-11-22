@@ -20,11 +20,26 @@ namespace ThongKe.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            //bundles.Add(new StyleBundle("~/Content/css").Include(
+            //          "~/Content/bootstrap.css",
+            //          "~/Content/boostrap/vendor/metisMenu/metisMenu.min.css",
+            //          "~/Content/boostrap/dist/css/sb-admin-2.css",
+            //          "~/Content/boxover/css/boxover.css",
+            //          "~/Content/boostrap/vendor/morrisjs/morris.css",
+            //          "~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
+            //          "~/Content/Site.css"));
+
+
+            //bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
+            //         "~/Content/boostrap/vendor/metisMenu/metisMenu.min.js",
+            //         "~/Content/boostrap/vendor/raphael/raphael.min.js",
+            //         "~/Content/boostrap/dist/js/sb-admin-2.js",
+            //         "~/Content/boxover/js/boxover.js"));
+
+            
         }
     }
 }
