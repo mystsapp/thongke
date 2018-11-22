@@ -10,12 +10,12 @@ namespace ThongKe.Data.Repositories
 {
     public interface IaccountRepository : IRepository<account>
     {
-
     }
     public class accountRepository : RepositoryBase<account>, IaccountRepository
     {
         public accountRepository(IDbFactory dbFactory) : base(dbFactory)
         {
         }
+
     }
 }

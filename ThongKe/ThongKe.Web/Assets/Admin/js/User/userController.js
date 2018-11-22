@@ -45,7 +45,7 @@ var userController = {
                     minlength: 3
                 },
                 password: {
-                    required: true,
+                    //required: true,
                     minlength: 3
                 },
                 hoten: {
@@ -243,6 +243,8 @@ var userController = {
         var ngaycapnhat = $('#txtNgayCapNhat').val();
         var ncn = $.stringToDate(ngaycapnhat, 'dd/MM/yyyy', '/');
 
+        var hidPass = $('#txtHidPass').val();
+
         //var status = $('#ckStatus').prop('checked');
         var id = $('#hidID').val();
         var user = {
@@ -263,7 +265,8 @@ var userController = {
             url: '/account/SaveData',
             data: {
                 strUser: JSON.stringify(user),
-                Hidid: id
+                Hidid: id,
+                hidPass: hidPass
             },
             dataType: 'json',
             type: 'POST',
@@ -322,7 +325,7 @@ var userController = {
 
                     $('#hidID').val(data.username);
                     $('#txtUsername').val(data.username);
-                    $('#txtPassword').val(data.password);
+                    $('#txtPassword').val('');
                     $('#txtHoTen').val(data.hoten);
                     $('#ddlChiNhanh').val(data.chinhanh);
                     $('#ddlDaiLy').val(data.daily);
@@ -338,6 +341,7 @@ var userController = {
 
                     $('#txtNgayTao').val(nt);
                     $('#txtNgayCapNhat').val(ncn);
+                    $('#txtHidPass').val(data.password);
                 }
                 else {
                     bootbox.alert({

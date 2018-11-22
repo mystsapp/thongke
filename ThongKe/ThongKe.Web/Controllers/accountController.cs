@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using ThongKe.Data.Models;
 using ThongKe.Service;
+using ThongKe.Web.Infrastructure.Extensions;
 using ThongKe.Web.Models;
 
 namespace ThongKe.Web.Controllers
@@ -64,10 +65,14 @@ namespace ThongKe.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveData(string strUser, string Hidid)
+        public JsonResult SaveData(string strUser, string Hidid, string hidPass)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var user = serializer.Deserialize<account>(strUser);
+            var user1 = serializer.Deserialize<accountViewModel>(strUser);
+
+            var user = new account();
+            user.Updateaccount(user1);
+
             bool status = true;
             string message = string.Empty;
             if (Hidid == "0")//dang them
@@ -89,13 +94,13 @@ namespace ThongKe.Web.Controllers
             }
             else if (Hidid != "0")
             {
-                var oldUser = _accountService.GetById(user.username);
-                if (user.password != oldUser.password) //password field is required
+                //var oldUser = _accountService.GetById(user.username);
+                if (user.password != "") //password field is required
                 {
                     user.password = _accountService.EncodeSHA1(user.password);
                 }
+                user.password = hidPass;
 
-                user.password = _accountService.EncodeSHA1(user.password);
                 try
                 {
                     _accountService.Update(user);

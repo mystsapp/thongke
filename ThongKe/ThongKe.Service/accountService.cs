@@ -82,6 +82,7 @@ namespace ThongKe.Service
         public account GetById(string id)
         {
             return _accountRepository.GetSingleById(id);
+            //return _accountRepository.GetSingleByCondition(x => x.username == id);
         }
 
         public void Save()

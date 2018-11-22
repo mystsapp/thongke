@@ -43,6 +43,7 @@ namespace ThongKe.Data.Infrastructure
         {
             dbSet.Attach(entity);
             dataContext.Entry(entity).State = EntityState.Modified;
+
         }
 
         public virtual T Delete(T entity)

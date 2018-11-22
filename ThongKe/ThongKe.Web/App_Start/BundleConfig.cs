@@ -23,23 +23,32 @@ namespace ThongKe.Web
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            //bundles.Add(new StyleBundle("~/Content/css").Include(
-            //          "~/Content/bootstrap.css",
-            //          "~/Content/boostrap/vendor/metisMenu/metisMenu.min.css",
-            //          "~/Content/boostrap/dist/css/sb-admin-2.css",
-            //          "~/Content/boxover/css/boxover.css",
-            //          "~/Content/boostrap/vendor/morrisjs/morris.css",
-            //          "~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
-            //          "~/Content/Site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                      "~/Assets/Admin/vendor/bootstrap/css/bootstrap.min.css",
+                      "~/Assets/Admin/js/User/jquery-ui/jquery-ui.css",
+                      "~/Assets/Admin/vendor/metisMenu/metisMenu.min.css",
+                      "~/Assets/Admin/dist/css/sb-admin-2.css",
+                      "~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/fontawesome.css",
+                      "~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/all.css"
+
+                      //"~/Content/boxover/css/boxover.css",
+                      //"~/Content/boostrap/vendor/morrisjs/morris.css",
+                      //"~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
+                      //"~/Content/Site.css"
+                      ));
 
 
-            //bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
-            //         "~/Content/boostrap/vendor/metisMenu/metisMenu.min.js",
-            //         "~/Content/boostrap/vendor/raphael/raphael.min.js",
-            //         "~/Content/boostrap/dist/js/sb-admin-2.js",
-            //         "~/Content/boxover/js/boxover.js"));
+            bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
+                "~/Assets/Admin/vendor/jquery/jquery.min.js",
+                "~/Assets/Admin/js/User/jquery-ui/jquery-ui.js",
+                "~/Assets/Admin/vendor/bootstrap/js/bootstrap.min.js",
+                     "~/Assets/Admin/vendor/metisMenu/metisMenu.min.js",
+                     //"~/Content/boostrap/vendor/raphael/raphael.min.js",
+                     "~/Assets/Admin/dist/js/sb-admin-2.js"
+                     //"~/Content/boxover/js/boxover.js"
+                     ));
 
-            
+
         }
     }
 }

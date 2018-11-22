@@ -8,23 +8,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Báo cáo thống kê.</title>
-    @*@Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")*@
+    @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
 
-    <!-- Bootstrap Core CSS -->
-    <link href="~/Assets/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Assets/Admin/js/User/jquery-ui/jquery-ui.css" rel="stylesheet" />
+    @*<!-- Bootstrap Core CSS -->
+            <link href="~/Assets/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="~/Assets/Admin/js/User/jquery-ui/jquery-ui.css" rel="stylesheet" />
 
-    <!-- MetisMenu CSS -->
-    <link href="~/Assets/Admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+            <!-- MetisMenu CSS -->
+            <link href="~/Assets/Admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="~/Assets/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
+            <!-- Custom CSS -->
+            <link href="~/Assets/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    @*<link href="~/Assets/Admin/vendor/font-awesome/css/all.css" rel="stylesheet" />*@
-    <link href="~/Assets/Admin/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" />
+            <!-- Custom Fonts -->
+            @*<link href="~/Assets/Admin/vendor/font-awesome/css/all.css" rel="stylesheet" />
+        <link href="~/Assets/Admin/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" />*@
     @*<link href="~/Assets/Admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
+
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -195,14 +197,13 @@
             @RenderBody()
         </div>
     </div>
-    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/vendor")*@
+        @Scripts.Render("~/bundles/vendor")
 
-    <!-- jQuery -->
+    @*<!-- jQuery -->
     <script src="~/Assets/Admin/vendor/jquery/jquery.min.js"></script>
     <script src="~/Assets/Admin/js/User/jquery-ui/jquery-ui.js"></script>
-    @*<script src="~/Scripts/jquery-3.3.1.js"></script>*@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="~/Assets/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -211,7 +212,7 @@
     <script src="~/Assets/Admin/vendor/metisMenu/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="~/Assets/Admin/dist/js/sb-admin-2.js"></script>
+    <script src="~/Assets/Admin/dist/js/sb-admin-2.js"></script>*@
 
 
     @RenderSection("scripts", required: false)
