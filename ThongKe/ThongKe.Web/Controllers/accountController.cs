@@ -54,7 +54,7 @@ namespace ThongKe.Web.Controllers
             if (user != null)
             {
                 statusUser = true;
-                
+
             }
             return Json(new
             {
@@ -89,10 +89,13 @@ namespace ThongKe.Web.Controllers
             }
             else if (Hidid != "0")
             {
-                if (user.password != null)
+                var oldUser = _accountService.GetById(user.username);
+                if (user.password != oldUser.password) //password field is required
                 {
                     user.password = _accountService.EncodeSHA1(user.password);
                 }
+
+                user.password = _accountService.EncodeSHA1(user.password);
                 try
                 {
                     _accountService.Update(user);

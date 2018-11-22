@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "NgayCN";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+}
+
+@section scripts{
+    <script src="~/Assets/Admin/js/User/bootbox.min.js"></script>
+    <script src="~/Assets/Admin/js/User/mustache.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery.twbsPagination.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery.validate.min.js"></script>
+    <script src="~/Assets/Admin/js/NgayCN/ngaycnController.js"></script>
+    <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
+    @*<script>
+            $(function () {
+                $('.modal-dialog').draggable();
+            });
+        </script>*@
+}
+
+<br />
+<form id="frmSearch">
+    <div class="row">
+        <div class="col-md-12">
+
+            
+            <div class="col-md-4">
+                Từ ngày
+                <input type="text" class="form-control" name="tungay" id="txtTuNgay" placeholder="Type date..." />
+            </div>
+
+            <div class="col-md-4">
+                Dến ngày
+                <input type="text" class="form-control" name="denngay" id="txtDenNgay" placeholder="Type date..." />
+            </div>
+
+            <div class="col-md-2">
+                Chi nhánh
+                <select class="form-control" id="ddlChiNhanh">
+                    <option value="">Tất cả</option>
+                    <option value="STS">STS</option>
+                    <option value="STL">STL</option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <br />
+                <button id="btnSearch" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <button id="btnReset" class="btn btn-secondary">Reset</button>
+                @* <button id="btnAddNew" class="btn btn-success"><i class="fa fa-plus-square"></i></button>*@
+            </div>
+
+
+            @*<div class="col-md-2">
+                    <button id="btnAddNew" class="btn btn-success pull-right"><i class="fa fa-plus-square"></i>Add new</button>
+                </div>*@
+
+        </div>
+    </div>
+</form>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover text-center">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Ngay</td>
+                    @*<td>Họ Tên</td>
+                        <td>đại lý</td>
+                        <td>Chi nhánh</td>*@
+                    <td>Trạng thái</td>
+
+                </tr>
+            </thead>
+            <tbody id="tblData" class="table"></tbody>
+        </table>
+
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+
+    <script id="data-template" type="x-tmpl-mustache">
+
+        <tr>
+            <td>{{ngay}}</td>
+            <td>{{chinhanh}}</td>
+
+        </tr>
+    </script>
+</div>

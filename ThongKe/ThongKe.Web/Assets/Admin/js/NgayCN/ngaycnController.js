@@ -28,54 +28,36 @@ $.stringToDate = function (_date, _format, _delimiter) {
     return formatedDate;
 }
 
-var userController = {
+var ngaycnController = {
     init: function () {
-        userController.LoadData();
-
+        // ngaycnController.LoadData();
+        ngaycnController.registerEvent();
     },
 
     registerEvent: function () {
 
         //$('.modal-dialog').draggable();
 
-        $('#frmSaveData').validate({
+        $('#frmSearch').validate({
             rules: {
-                username: {
+                tungay: {
                     required: true,
-                    minlength: 3
+                    date: true
                 },
-                password: {
+                denngay: {
                     required: true,
-                    minlength: 3
-                },
-                hoten: {
-                    required: true
-                },
-                role: {
-                    required: true
-                },
-                khoi: {
-                    required: true
+                    date: true
                 }
             },
             messages: {
-                username: {
+                tungay: {
                     required: "Trường này không được để trống.",
-                    minlength: "Username phải có ít nhất 3 ký tự"
+                    date: "Chưa đúng định dạng."
                 },
-                password: {
+                denngay: {
                     required: "Trường này không được để trống.",
                     //number: "password phải là số",
-                    minlength: "Password phải có ít nhất 3 ký tự"
-                },
-                hoten: {
-                    required: "Trường này không được để trống."
-                },
-                role: {
-                    required: "Trường này không được để trống."
-                },
-                khoi: {
-                    required: "Trường này không được để trống."
+                    date: "Chưa đúng định dạng."
                 }
             }
         });
@@ -83,36 +65,35 @@ var userController = {
 
         $('#btnAddNew').off('click').on('click', function () {
             $('#modalAddUpdate').modal('show');
-            userController.resetForm();
-            //userController.getUserId();
+            ngaycnController.resetForm();
+            //ngaycnController.getUserId();
         });
 
         $('#btnSave').off('click').on('click', function () {
             if ($('#frmSaveData').valid()) {
-                userController.saveData();
+                ngaycnController.saveData();
             }
         });
 
         $('#btnSearch').off('click').on('click', function () {
-            userController.LoadData(true);
+            ngaycnController.LoadData(true);
         });
 
         $('#txtNameS').off('keypress').on('keypress', function (e) {
             if (e.which == 13)
-                userController.LoadData(true);
+                ngaycnController.LoadData(true);
         });
 
         $('#btnReset').off('click').on('click', function () {
             $('#txtNameS').val('');
             $('#ddlStatusS').val('');
-            userController.LoadData(true);
+            ngaycnController.LoadData(true);
         });
 
         $('.btn-edit').off('click').on('click', function () {
             $('#modalAddUpdate').modal('show');
             var id = $(this).data('id');
-            $('#txtUsername').prop("disabled", true);
-            userController.loadDetail(id);
+            ngaycnController.loadDetail(id);
         });
 
         $('.btn-delete').off('click').on('click', function () {
@@ -131,19 +112,19 @@ var userController = {
                 },
                 callback: function (result) {
                     if (result) {
-                        userController.deleteUser(id);
+                        ngaycnController.deleteUser(id);
                     }
                 }
 
             })
         });
 
-        //$("#txtNgaySinh, #txtNgayCMND, #txtHanTheHDV, #txtHieuLucHoChieu, #txtHanVisa").datepicker({
-        //    changeMonth: true,
-        //    changeYear: true,
-        //    dateFormat: "dd/mm/yy"
+        $("#txtTuNgay, #txtDenNgay").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "dd/mm/yy"
 
-        //});
+        });
 
     },
 
@@ -179,7 +160,7 @@ var userController = {
                 if (response.status) {
                     //console.log(response.data);
                     var data = response.data;
-                    userController.nextUserId(data);
+                    ngaycnController.nextUserId(data);
                 }
                 else {
                     bootbox.alert({
@@ -207,7 +188,7 @@ var userController = {
                         title: "Delete Infomation",
                         message: "Đã xóa thành cong.",
                         callback: function () {
-                            userController.LoadData(true);
+                            ngaycnController.LoadData(true);
                         }
                     })
                 }
@@ -275,7 +256,7 @@ var userController = {
                         message: "Đã Lưu Thành Công.",
                         callback: function () {
                             $('#modalAddUpdate').modal('hide');
-                            userController.LoadData(true);
+                            ngaycnController.LoadData(true);
                         }
                     });
                 }
@@ -322,7 +303,7 @@ var userController = {
 
                     $('#hidID').val(data.username);
                     $('#txtUsername').val(data.username);
-                    $('#txtPassword').val(data.password);
+                    $('#txtPassword').val('');
                     $('#txtHoTen').val(data.hoten);
                     $('#ddlChiNhanh').val(data.chinhanh);
                     $('#ddlDaiLy').val(data.daily);
@@ -337,7 +318,7 @@ var userController = {
                     $('#ckTrangThai').prop('checked', data.trangthai);
 
                     $('#txtNgayTao').val(nt);
-                    $('#txtNgayCapNhat').val(ncn);
+                    $('#txtNgayCapNhat').val(nct);
                 }
                 else {
                     bootbox.alert({
@@ -398,15 +379,17 @@ var userController = {
 
 
     LoadData: function (changePageSize) {
-        var name = $('#txtNameS').val();
-        var status = $('#ddlStatusS').val();
+        var tungay = $('#txtTuNgay').val();
+        var denngay = $('#txtDenNgay').val();
+        var chinhanh = $('#ddlChiNhanh').val();
 
         $.ajax({
-            url: '/account/LoadData',
+            url: '/BaoCao/NgayCN/LoadData',
             type: 'GET',
             data: {
-                name: name,
-                status: status,
+                tungay: name,
+                denngay: denngay,
+                chinhanh: chinhanh,
                 page: homeconfig.pageIndex,
                 pageSize: homeconfig.pageSize
             },
@@ -414,11 +397,9 @@ var userController = {
             success: function (response) {
                 //console.log(response.data);
                 if (response.status) {
-                    //console.log(response.data);
                     var data = response.data;
                     //var data = JSON.parse(response.data);
 
-                    //alert(data);
                     var html = '';
                     var template = $('#data-template').html();
 
@@ -426,27 +407,25 @@ var userController = {
                         //usage:
                         //var formattedDate = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
                         //alert(formattedDate)
-                        var ns = "";
-                        if (item.ngaysinh == null)
-                            ns = "";
-                        else
-                            ns = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
+                        //var ns = "";
+                        //if (item.ngaysinh == null)
+                        //    ns = "";
+                        //else
+                        //    ns = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
 
                         html += Mustache.render(template, {
-                            username: item.username,
-                            hoten: item.hoten,
-                            daily: item.daily,
+                            ngay: item.ngay,
                             chinhanh: item.chinhanh,
-                            trangthai: item.trangthai == true ? "<span class=\"label label-success\">Kích hoạt</span>" : "<span class=\"label label-danger\">Khóa</span>"
+                            //trangthai: item.trangthai == true ? "<span class=\"label label-success\">Kích hoạt</span>" : "<span class=\"label label-danger\">Khóa</span>"
                         });
 
                     })
 
                     $('#tblData').html(html);
-                    userController.paging(response.total, function () {
-                        userController.LoadData();
+                    ngaycnController.paging(response.total, function () {
+                        ngaycnController.LoadData();
                     }, changePageSize);
-                    userController.registerEvent();
+                    //ngaycnController.registerEvent();
                 }
             }
         })
@@ -476,4 +455,4 @@ var userController = {
         });
     }
 }
-userController.init();
+ngaycnController.init();
