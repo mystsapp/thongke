@@ -8,10 +8,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Báo cáo thống kê.</title>
-
     @Styles.Render("~/Content/css")
-
     @Scripts.Render("~/bundles/modernizr")
+
+
     <link rel="shortcut icon" href="/Content/image/favicon.ico" />
 </head>
 <body>
@@ -52,7 +52,7 @@
                             <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-gear fa-key"></i> Đổi mật khẩu</a>
+                            <a href="/Login/changepass"><i class="fa fa-gear fa-key"></i> Đổi mật khẩu</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -83,6 +83,7 @@
             </ul>
             <!-- /.navbar-rigt top link -->
         </nav>
+
         <!--menu trai-->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
@@ -190,6 +191,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/vendor")
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>
