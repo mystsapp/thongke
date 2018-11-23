@@ -7,12 +7,13 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using ThongKe.Data.Models;
 using ThongKe.Service;
+using ThongKe.Web.Infrastructure.Core;
 using ThongKe.Web.Infrastructure.Extensions;
 using ThongKe.Web.Models;
 
 namespace ThongKe.Web.Controllers
 {
-    public class accountController : Controller
+    public class accountController : BaseController
     {
         private IaccountService _accountService;
 

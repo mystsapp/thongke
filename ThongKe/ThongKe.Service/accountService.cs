@@ -36,6 +36,12 @@ namespace ThongKe.Service
 
         string EncodeSHA1(string pass);
 
+        int login(string username, string password);
+
+        account getUserByName(string username);
+
+        int changepass(string username, string password, string newpass, string confirmpass);
+
         void Save();
     }
     public class accountService : IaccountService
@@ -114,6 +120,75 @@ namespace ThongKe.Service
         {
 
             _accountRepository.Update(acc);
+        }
+
+        public int login(string username, string password)
+        {
+            var result = _accountRepository.GetSingleByCondition(x => x.username == username);
+            if (result == null)
+            {
+                return 0;
+            }
+            else
+            {
+                if (result.trangthai == false)
+                {
+                    return -1;
+                }
+                else
+                {
+                    if (result.password == EncodeSHA1(password))
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return -2;
+                    }
+                }
+            }
+        }
+
+        public account getUserByName(string username)
+        {
+            return _accountRepository.GetSingleById(username);
+        }
+
+        public int changepass(string username, string password, string newpass, string confirmpass)
+        {
+            try
+            {
+                var result = _accountRepository.GetSingleById(username);
+                if (string.IsNullOrEmpty(password))
+                {
+                    return -1;
+                }
+                if (result.password != EncodeSHA1(password))
+                {
+                    return -2;
+                }
+                if (string.IsNullOrEmpty(newpass))
+                {
+                    return -3;
+                }
+                if (string.IsNullOrEmpty(confirmpass))
+                {
+                    return -4;
+                }
+                if (confirmpass != newpass)
+                {
+                    return -5;
+                }
+                else
+                {
+                    result.password = EncodeSHA1(newpass);
+                    result.doimatkhau = false;
+                    result.ngaydoimk = System.DateTime.Now;
+                    Save();
+                    return 1;
+                }
+            }
+            catch { return -6; }
         }
     }
 }
