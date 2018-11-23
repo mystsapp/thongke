@@ -18,6 +18,42 @@ namespace ThongKe.Web.Controllers
         public ActionResult NgayCN()
         {
 
+            return View(); 
+        }
+
+        public ActionResult NgayBan()
+        {
+
+            return View();
+        }
+
+        public ActionResult NgayDiTour()
+        {
+
+            return View();
+        }
+
+        public ActionResult TuyenTheoNgay()
+        {
+
+            return View();
+        }
+
+        public ActionResult LienKetKhachLe()
+        {
+
+            return View();
+        }
+
+        public ActionResult QuayVaNgay()
+        {
+
+            return View();
+        }
+
+        public ActionResult SaleTheoNgay()
+        {
+
             return View();
         }
     }

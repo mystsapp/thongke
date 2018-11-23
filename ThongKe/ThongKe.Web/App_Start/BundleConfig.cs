@@ -29,26 +29,21 @@ namespace ThongKe.Web
                       "~/Assets/Admin/vendor/metisMenu/metisMenu.min.css",
                       "~/Assets/Admin/dist/css/sb-admin-2.css",
                       "~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/fontawesome.css",
-                      "~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/all.css"
+                      "~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/all.css",
 
-                      //"~/Content/boxover/css/boxover.css",
-                      //"~/Content/boostrap/vendor/morrisjs/morris.css",
-                      //"~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
-                      //"~/Content/Site.css"
+                      "~/Content/boxover/css/boxover.css",
+                      "~/Content/boostrap/vendor/morrisjs/morris.css",
+                      "~/Content/Site.css"
                       ));
-
 
             bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
                 "~/Assets/Admin/vendor/jquery/jquery.min.js",
-                "~/Assets/Admin/js/User/jquery-ui/jquery-ui.js",
                 "~/Assets/Admin/vendor/bootstrap/js/bootstrap.min.js",
                      "~/Assets/Admin/vendor/metisMenu/metisMenu.min.js",
-                     //"~/Content/boostrap/vendor/raphael/raphael.min.js",
-                     "~/Assets/Admin/dist/js/sb-admin-2.js"
-                     //"~/Content/boxover/js/boxover.js"
+                     "~/Content/boostrap/vendor/raphael/raphael.min.js",
+                     "~/Assets/Admin/dist/js/sb-admin-2.js",
+                     "~/Content/boxover/js/boxover.js"
                      ));
-
-
         }
     }
 }

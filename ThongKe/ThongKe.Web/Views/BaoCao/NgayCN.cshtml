@@ -10,6 +10,7 @@
     <script src="~/Assets/Admin/js/User/mustache.min.js"></script>
     <script src="~/Assets/Admin/js/User/jquery.twbsPagination.min.js"></script>
     <script src="~/Assets/Admin/js/User/jquery.validate.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery-ui/jquery-ui.js"></script>
     <script src="~/Assets/Admin/js/NgayCN/ngaycnController.js"></script>
     <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
     @*<script>
@@ -20,11 +21,11 @@
 }
 
 <br />
-<form id="frmSearch">
+<form id="frmSearch" asp-controller="BaoCao" asp-action="NgayCN" method="get" class="form-horizontal" role="form">
     <div class="row">
         <div class="col-md-12">
 
-            
+
             <div class="col-md-4">
                 Từ ngày
                 <input type="text" class="form-control" name="tungay" id="txtTuNgay" placeholder="Type date..." />
@@ -60,34 +61,3 @@
     </div>
 </form>
 <br />
-
-<div class="row">
-    <div class="col-md-12">
-        <table class="table table-bordered table-hover text-center">
-            <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Ngay</td>
-                    @*<td>Họ Tên</td>
-                        <td>đại lý</td>
-                        <td>Chi nhánh</td>*@
-                    <td>Trạng thái</td>
-
-                </tr>
-            </thead>
-            <tbody id="tblData" class="table"></tbody>
-        </table>
-
-        <div id="pagination" class="pagination"></div>
-    </div>
-
-
-    <script id="data-template" type="x-tmpl-mustache">
-
-        <tr>
-            <td>{{ngay}}</td>
-            <td>{{chinhanh}}</td>
-
-        </tr>
-    </script>
-</div>

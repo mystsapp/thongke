@@ -9,31 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Báo cáo thống kê.</title>
     @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")
 
-    @*<!-- Bootstrap Core CSS -->
-            <link href="~/Assets/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-            <link href="~/Assets/Admin/js/User/jquery-ui/jquery-ui.css" rel="stylesheet" />
-
-            <!-- MetisMenu CSS -->
-            <link href="~/Assets/Admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
-
-            <!-- Custom CSS -->
-            <link href="~/Assets/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
-
-            <!-- Custom Fonts -->
-            @*<link href="~/Assets/Admin/vendor/font-awesome/css/all.css" rel="stylesheet" />
-        <link href="~/Assets/Admin/vendor/font-awesome/css/font-awesome.css" rel="stylesheet" />*@
-    @*<link href="~/Assets/Admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
-
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <link rel="shortcut icon" href="/Content/image/favicon.ico" />
 </head>
@@ -75,7 +52,7 @@
                             <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-gear fa-key"></i> Đổi mật khẩu</a>
+                            <a href="/Login/changepass"><i class="fa fa-gear fa-key"></i> Đổi mật khẩu</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -106,6 +83,7 @@
             </ul>
             <!-- /.navbar-rigt top link -->
         </nav>
+
         <!--menu trai-->
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
@@ -114,19 +92,32 @@
                         <a href="/"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                     </li>
                     <li>
-                        <a href="/Account"><i class="fa fa-car fa-fw"></i> Account</a>
+                        <a href="/Account"><i class="fa fa-car fa-fw"></i> Tài khoản</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Báo cáo <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/BaoCao/NgayCN">Ngày và CN </a>
+                                <a href="/BaoCao/NgayBan">Ngày bán</a>
                             </li>
                             <li>
-                                <a href="/Laixe">Lái xe</a>
+                                <a href="/BaoCao/NgayCN">Ngày và quầy </a>
+                            </li>
+
+                            <li>
+                                <a href="/BaoCao/NgayDiTour">Ngày đi tour</a>
                             </li>
                             <li>
-                                <a href="#">Đối tác</a>
+                                <a href="/BaoCao/TuyenTheoNgay">Tuyến theo ngày</a>
+                            </li>
+                            <li>
+                                <a href="/BaoCao/LienKetKhachLe">Liên kết khách lẻ</a>
+                            </li>
+                            <li>
+                                <a href="/BaoCao/QuayVaNgay">Quầy và ngày đi</a>
+                            </li>
+                            <li>
+                                <a href="/BaoCao/SaleTheoNgay">DT Sale theo ngày</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -198,23 +189,9 @@
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/vendor")
-
-    @*<!-- jQuery -->
-    <script src="~/Assets/Admin/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Assets/Admin/js/User/jquery-ui/jquery-ui.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="~/Assets/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="~/Assets/Admin/vendor/metisMenu/metisMenu.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="~/Assets/Admin/dist/js/sb-admin-2.js"></script>*@
-
-
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/vendor")
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

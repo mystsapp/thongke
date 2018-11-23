@@ -66,6 +66,12 @@ namespace ThongKe.Web.Controllers
             return View("Index");
         }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return Redirect("/");
+        }
+
         [HttpGet]
         public ActionResult changepass(string name)
         {
