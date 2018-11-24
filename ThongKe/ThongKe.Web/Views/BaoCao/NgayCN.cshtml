@@ -25,7 +25,6 @@
     <div class="row">
         <div class="col-md-12">
 
-
             <div class="col-md-4">
                 Từ ngày
                 <input type="text" class="form-control" name="tungay" id="txtTuNgay" placeholder="Type date..." />
@@ -36,27 +35,23 @@
                 <input type="text" class="form-control" name="denngay" id="txtDenNgay" placeholder="Type date..." />
             </div>
 
-            <div class="col-md-2">
-                Văn phòng
-                <select class="form-control" id="ddlChiNhanh">
-                    <option value="">Tất cả</option>
-                    <option value="102nh">102 Nguyễn Huệ</option>
-                    <option value="607nt">607 Nguyễn Trãi</option>
-                </select>
+            <div class="col-md-4">
+                <div class="form-group input-group">
+                    Văn phòng
+                    <select class="form-control" id="ddlChiNhanh">
+                        <option value="">Tất cả</option>
+                        <option value="102nh">102 Nguyễn Huệ</option>
+                        <option value="607nt">607 Nguyễn Trãi</option>
+                    </select>
+
+                    <span class="input-group-btn">
+                        <br />
+                        <button id="btnSearch" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        <button id="btnReset" class="btn btn-secondary">Reset</button>
+                    </span>
+                </div>
             </div>
-
-            <div class="col-md-2">
-                <br />
-                <button id="btnSearch" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                <button id="btnReset" class="btn btn-secondary">Reset</button>
-                @* <button id="btnAddNew" class="btn btn-success"><i class="fa fa-plus-square"></i></button>*@
-            </div>
-
-
-            @*<div class="col-md-2">
-                    <button id="btnAddNew" class="btn btn-success pull-right"><i class="fa fa-plus-square"></i>Add new</button>
-                </div>*@
-
+           
         </div>
     </div>
 </form>

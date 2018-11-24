@@ -40,13 +40,21 @@ var ngayBanController = {
 
         $('#frmSearch').validate({
             rules: {
-                ngayban: {
+                tungay: {
+                    required: true,
+                    date: true
+                },
+                denngay: {
                     required: true,
                     date: true
                 }
             },
             messages: {
-                ngayban: {
+                tungay: {
+                    required: "Trường này không được để trống.",
+                    date: "Chưa đúng định dạng."
+                },
+                denngay: {
                     required: "Trường này không được để trống.",
                     date: "Chưa đúng định dạng."
                 }
@@ -57,7 +65,7 @@ var ngayBanController = {
             $('#frmSearch').submit();
         });
 
-        $("#txtNgayBan").datepicker({
+        $("#txtTuNgay, #txtDenNgay").datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "mm/dd/yy"

@@ -12,7 +12,7 @@
     @Styles.Render("~/Content/css")
 
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="shortcut icon" href="/Content/image/favicon.ico" />
+    <link rel="shortcut icon" href="~/Content/image/favicon.ico" />
 </head>
 <body>
     <div id="wrapper">
@@ -52,7 +52,7 @@
                             <a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-gear fa-key"></i> Đổi mật khẩu</a>
+                            <a href="@Url.Action("changepass", "Login", new {area="",name=Session["username"].ToString()})"><i class="fa fa-gear fa-key"></i> Đổi mật khẩu</a>
                         </li>
                         <li class="divider"></li>
                         <li>
