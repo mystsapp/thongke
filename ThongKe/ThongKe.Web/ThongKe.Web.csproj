@@ -209,6 +209,7 @@
     <Content Include="Assets\Admin\dist\css\sb-admin-2.min.css" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.js" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.min.js" />
+    <Content Include="Assets\Admin\js\Home\homController.js" />
     <Content Include="Assets\Admin\js\LienKetKhachLe\lienKetKhachLeController.js" />
     <Content Include="Assets\Admin\js\SaleTheoNgay\saleTheoNgayController.js" />
     <Content Include="Assets\Admin\js\QuayVaNgay\quayVaNgayController.js" />

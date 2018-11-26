@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="MaHoaSHA1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\RevenueStatisticViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
