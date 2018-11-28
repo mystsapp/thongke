@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace ThongKe.Web
 {
@@ -49,10 +48,46 @@ namespace ThongKe.Web
     public class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+        //public static void RegisterBundles(BundleCollection bundles)
+        //{
+        //    bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+        //                  "~/Scripts/jquery-1.10.2.js",
+        //                  "~/Scripts/jquery-{version}.js"));
+
+        //    bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+        //                "~/Scripts/jquery.validate*"));
+
+        //    // Use the development version of Modernizr to develop with and learn from. Then, when you're
+        //    // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+        //    bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+        //                "~/Scripts/modernizr-*"));
+
+        //    bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+        //              //"~/Scripts/bootstrap.js",
+        //              //"~/Scripts/respond.js"));
+        //    bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
+        //             //"~/Content/boostrap/vendor/metisMenu/metisMenu.min.js",
+        //             //"~/Content/boostrap/vendor/raphael/raphael.min.js",
+        //             //"~/Content/boostrap/dist/js/sb-admin-2.js",
+        //             "~/Content/boxover/js/boxover.js"));
+
+        //    bundles.Add(new StyleBundle("~/Content/css").Include(
+        //              "~/Content/bootstrap.css",
+        //              "~/Assets/Admin/js/User/jquery-ui/jquery-ui.css",
+        //              //"~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/all.css",
+        //              "~/Content/boostrap/vendor/metisMenu/metisMenu.min.css",
+        //              "~/Content/boostrap/dist/css/sb-admin-2.css",
+        //              "~/Content/boxover/css/boxover.css",
+        //              "~/Content/boostrap/vendor/morrisjs/morris.css",
+        //              //"~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/all.css",
+        //              "~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
+        //              "~/Content/Site.css"));
+        //}
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                          "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-1.10.2.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -63,25 +98,31 @@ namespace ThongKe.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      //"~/Content/boostrap/vendor/jquery/jquery.min.js",                      
+                      //"~/Scripts/respond.js"
+                      ));
+
             bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
-                     "~/Content/boostrap/vendor/metisMenu/metisMenu.min.js",
-                     "~/Content/boostrap/vendor/raphael/raphael.min.js",
-                     "~/Content/boostrap/dist/js/sb-admin-2.js",
+                      //"~/Assets/Admin/AdminLayout/vendor/metisMenu/metisMenu.min.js"
+                      "~/Content/boostrap/vendor/bootstrap/js/bootstrap.min.js",
+                     //"~/Content/boostrap/vendor/metisMenu/metisMenu.min.js",
+                     //"~/Content/boostrap/vendor/raphael/raphael.min.js",
+                     //"~/Content/boostrap/dist/js/sb-admin-2.js",
+                     "~/Assets/Admin/jquery-ui/jquery-ui.min.js",
                      "~/Content/boxover/js/boxover.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Assets/Admin/js/User/jquery-ui/jquery-ui.css",
-                      //"~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/all.css",
-                      "~/Content/boostrap/vendor/metisMenu/metisMenu.min.css",
-                      "~/Content/boostrap/dist/css/sb-admin-2.css",
-                      "~/Content/boxover/css/boxover.css",
-                      "~/Content/boostrap/vendor/morrisjs/morris.css",                      
-                      //"~/Assets/Admin/vendor/fontawesome-free-5.1.0-web/css/all.css",
-                      "~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
-                      "~/Content/Site.css"));
+                       "~/Content/boostrap/vendor/bootstrap/css/bootstrap.min.css",
+                        "~/Assets/Admin/js/User/jquery-ui/jquery-ui.css",
+                       "~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
+                       //"~/Content/boostrap/vendor/metisMenu/metisMenu.min.css",
+                       "~/Content/boostrap/dist/css/sb-admin-2.css",
+                       "~/Content/boxover/css/boxover.css",
+                       "~/Content/boostrap/vendor/morrisjs/morris.css",
+                       "~/Assets/Admin/fontawesome-free-5.1.0-web/css/all.css",
+                       "~/Assets/Admin/jquery-ui/jquery-ui.css",
+                       "~/Content/Site.css"
+                      ));
         }
     }
 }

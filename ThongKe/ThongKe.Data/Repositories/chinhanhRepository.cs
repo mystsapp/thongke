@@ -8,14 +8,15 @@ using ThongKe.Data.Models.EF;
 
 namespace ThongKe.Data.Repositories
 {
-    public interface IaccountRepository : IRepository<account>
+    public interface IchinhanhRepository : IRepository<chinhanh>
     {
-    }
-    public class accountRepository : RepositoryBase<account>, IaccountRepository
-    {
-        public accountRepository(IDbFactory dbFactory) : base(dbFactory)
-        {
-        }
 
+    }
+    public class chinhanhRepository : RepositoryBase<chinhanh>, IchinhanhRepository
+    {
+        public chinhanhRepository(IDbFactory dbFactory) : base(dbFactory)
+        {
+
+        }
     }
 }

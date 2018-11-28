@@ -1,11 +1,11 @@
-﻿using QLHD.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ThongKe.Common;
 using ThongKe.Data.Infrastructure;
-using ThongKe.Data.Models;
+using ThongKe.Data.Models.EF;
 using ThongKe.Data.Repositories;
 
 namespace ThongKe.Service

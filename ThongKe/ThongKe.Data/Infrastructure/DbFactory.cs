@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThongKe.Data.Models;
+using ThongKe.Data.Models.EF;
 
 namespace ThongKe.Data.Infrastructure
 {
     public class DbFactory : Disposable, IDbFactory
     {
-        private ThongKeDbContext dbContext;
+        private TKDbContext dbContext;
 
-        public ThongKeDbContext Init()
+        public TKDbContext Init()
         {
-            return dbContext ?? (dbContext = new ThongKeDbContext());
+            return dbContext ?? (dbContext = new TKDbContext());
         }
 
         protected override void DisposeCore()

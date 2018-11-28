@@ -1,8 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "NgayCN";
-    Layout = "/Views/Shared/_Layout.cshtml";
-
+    ViewBag.Title = "QuayVaNgay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @section scripts{
@@ -11,7 +10,7 @@
     <script src="~/Assets/Admin/js/User/jquery.twbsPagination.min.js"></script>
     <script src="~/Assets/Admin/js/User/jquery.validate.min.js"></script>
     <script src="~/Assets/Admin/js/User/jquery-ui/jquery-ui.js"></script>
-    <script src="~/Assets/Admin/js/NgayCN/ngaycnController.js"></script>
+    <script src="~/Assets/Admin/js/QuayTheoNgayDi/quayTheoNgayDiController.js"></script>
     <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
     @*<script>
             $(function () {
@@ -21,9 +20,10 @@
 }
 
 <br />
-<form id="frmSearch" asp-controller="BaoCao" asp-action="NgayCN" method="get" class="form-horizontal" role="form">
+<form id="frmSearch" asp-controller="BaoCao" asp-action="QuayTheoNgayDi" method="post" class="form-horizontal" role="form">
     <div class="row">
         <div class="col-md-12">
+
 
             <div class="col-md-4">
                 Từ ngày
@@ -35,24 +35,15 @@
                 <input type="text" class="form-control" name="denngay" id="txtDenNgay" placeholder="Type date..." />
             </div>
 
-            <div class="col-md-4">
-                <div class="form-group input-group">
-                    Văn phòng
-                    <select class="form-control" id="ddlChiNhanh">
-                        <option value="">Tất cả</option>
-                        <option value="102nh">102 Nguyễn Huệ</option>
-                        <option value="607nt">607 Nguyễn Trãi</option>
-                    </select>
-
-                    <span class="input-group-btn">
-                        <br />
-                        <button id="btnSearch" class="btn btn-primary"><i class="fa fa-search"></i></button>
-                        <button id="btnReset" class="btn btn-secondary">Reset</button>
-                    </span>
-                </div>
+            <br />
+            <div class="col-md-2">
+                <span class="btn-group">
+                    <button id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-search"></i></button>
+                    <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
+                </span>
             </div>
-           
         </div>
-    </div>
+
+        </div>
 </form>
 <br />

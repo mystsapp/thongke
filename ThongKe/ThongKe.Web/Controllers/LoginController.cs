@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ThongKe.Common;
 using ThongKe.Service;
 using ThongKe.Web.Models;
 
@@ -36,10 +37,14 @@ namespace ThongKe.Web.Controllers
                 else if (result == 1)
                 {
                     var userInfo = _accountService.GetById(model.username);
+                    Session[CommonConstants.UserSession] = userInfo;
+
                     Session["username"] = userInfo.username;
                     Session["hoten"] = userInfo.hoten;
                     Session["chinhanh"] = userInfo.chinhanh;
                     Session["role"] = userInfo.role;
+                    Session["daily"] = userInfo.daily;
+                    Session["khoi"] = userInfo.khoi;
 
                     bool doi = userInfo.doimatkhau;
                     if (doi)

@@ -94,29 +94,29 @@
                         <a href="/Account"><i class="fa fa-car fa-fw"></i> Tài khoản</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Báo cáo <span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Báo cáo Doanh Thu <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/BaoCao/NgayBan">Ngày bán</a>
+                                <a href="/BaoCao/QuayTheoNgayBan">Quay theo ngày bán</a>
                             </li>
                             <li>
-                                <a href="/BaoCao/NgayCN">Ngày và quầy </a>
+                                <a href="/BaoCao/SaleTheoQuay">Sale Theo Quay </a>
                             </li>
 
                             <li>
-                                <a href="/BaoCao/NgayDiTour">Ngày đi tour</a>
+                                <a href="/BaoCao/DoanTheoNgayDi">Doàn Theo Ngày</a>
                             </li>
                             <li>
-                                <a href="/BaoCao/TuyenTheoNgay">Tuyến theo ngày</a>
+                                <a href="/BaoCao/TuyentqTheoNgayDi">Tuyến tham quan theo ngày đi</a>
                             </li>
                             <li>
                                 <a href="/BaoCao/LienKetKhachLe">Liên kết khách lẻ</a>
                             </li>
                             <li>
-                                <a href="/BaoCao/QuayVaNgay">Quầy và ngày đi</a>
+                                <a href="/BaoCao/QuayTheoNgayDi">Quầy theo ngày đi</a>
                             </li>
                             <li>
-                                <a href="/BaoCao/SaleTheoNgay">DT Sale theo ngày</a>
+                                <a href="/BaoCao/SaleTheoNgay">Sale theo ngày bán</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
@@ -184,12 +184,21 @@
         <!--/ menu trai-->
         <!-- navbar-side menu -->
         <div id="page-wrapper">
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div id="Alert-Box" class="alert @TempData["AlertType"] hide">
+                    @TempData["AlertMessage"]
+                </div>
+            }
             @RenderBody()
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/vendor")
+
+    <script src="~/Assets/Admin/js/alertBox.js"></script>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿using ThongKe.Data.Models;
+﻿using ThongKe.Data.Models.EF;
 using ThongKe.Web.Models;
 
 namespace ThongKe.Web.Infrastructure.Extensions

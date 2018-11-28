@@ -5,14 +5,15 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using ThongKe.Data.Models;
+//using ThongKe.Data.Models;
+using ThongKe.Data.Models.EF;
 
 namespace ThongKe.Data.Infrastructure
 {
     public abstract class RepositoryBase<T> : IRepository<T> where T : class
     {
         #region Properties
-        private ThongKeDbContext dataContext;
+        private TKDbContext dataContext;
         private readonly IDbSet<T> dbSet;
 
         protected IDbFactory DbFactory
@@ -21,7 +22,7 @@ namespace ThongKe.Data.Infrastructure
             private set;
         }
 
-        protected ThongKeDbContext DbContext
+        protected TKDbContext DbContext
         {
             get { return dataContext ?? (dataContext = DbFactory.Init()); }
         }

@@ -84,7 +84,7 @@ var userController = {
         $('#btnAddNew').off('click').on('click', function () {
             $('#modalAddUpdate').modal('show');
             userController.resetForm();
-            //userController.getUserId();
+            userController.loadDddlChiNhanh();
         });
 
         $('#btnSave').off('click').on('click', function () {
@@ -145,6 +145,45 @@ var userController = {
 
         //});
 
+    },
+
+    loadDddlChiNhanh: function () {
+        $('#ddlChiNhanh').html('');
+        var option = '';
+       // option = option + '<option value=select>Select</option>';
+
+        $.ajax({
+            url: '/account/GetAllChiNhanh',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                //if (response.length > 0) {
+                //var data = JSON.stringify(response.data);
+                var data = JSON.parse(response.data);
+                $('#ddlChiNhanh').html('');
+                //var options = '';
+                //options += '<option value="Select">Select</option>';
+
+                //for (var i = 0; i < data.length; i++) {
+                //    options += '<option value="' + data[i].SoXe + '">' + data[i].LoaiXe + '</option>'; 
+
+                //}
+                //$('#ddlDMXe').append(options);
+
+                $.each(data, function (i, item) {
+                    option = option + '<option value="' + item.chinhanh1 + '">' + item.tencn + '</option>'; //chinhanh1
+
+                });
+                $('#ddlChiNhanh').html(option);
+                //suachuaController.registerEvent();
+                //$('#ddlDMXe').change(function () {
+                //    var a=$('#ddlDMXe').val();
+                //    alert(a);
+                //})
+                //}
+            }
+        });
+        //homeController.resetForm();
     },
 
     nextUserId: function (data) {

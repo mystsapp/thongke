@@ -10,6 +10,7 @@ using Microsoft.Owin;
 using Owin;
 using ThongKe.Data.Infrastructure;
 using ThongKe.Data.Models;
+using ThongKe.Data.Models.EF;
 using ThongKe.Data.Repositories;
 using ThongKe.Service;
 
@@ -35,7 +36,7 @@ namespace ThongKe.Web.App_Start
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerRequest();
             builder.RegisterType<DbFactory>().As<IDbFactory>().InstancePerRequest();
 
-            builder.RegisterType<ThongKeDbContext>().AsSelf().InstancePerRequest();
+            builder.RegisterType<TKDbContext>().AsSelf().InstancePerRequest();
 
             // Repositories
             builder.RegisterAssemblyTypes(typeof(accountRepository).Assembly)

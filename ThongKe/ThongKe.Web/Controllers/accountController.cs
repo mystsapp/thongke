@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using ThongKe.Data.Models;
+using ThongKe.Data.Models.EF;
 using ThongKe.Service;
 using ThongKe.Web.Infrastructure.Core;
 using ThongKe.Web.Infrastructure.Extensions;
@@ -16,10 +17,12 @@ namespace ThongKe.Web.Controllers
     public class accountController : BaseController
     {
         private IaccountService _accountService;
+        private ICommonService _commonService;
 
-        public accountController(IaccountService accountService)
+        public accountController(IaccountService accountService,ICommonService commonService)
         {
             _accountService = accountService;
+            _commonService = commonService;
         }
         // GET: account
         public ActionResult Index()
@@ -142,6 +145,17 @@ namespace ThongKe.Web.Controllers
                 status = status,
                 message = message
             });
+        }
+
+        [HttpGet]
+        public JsonResult GetAllChiNhanh()
+        {
+            var model = _commonService.GetAllChiNhanh();
+            var viewModel = Mapper.Map<IEnumerable<chinhanh>, IEnumerable<chinhanhViewModel>>(model);
+            return Json(new
+            {
+                data = JsonConvert.SerializeObject(viewModel)
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

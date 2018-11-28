@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "NgayCN";
+    Layout = "/Views/Shared/_Layout.cshtml";
+
+}
+
+@section scripts{
+    <script src="~/Assets/Admin/js/User/bootbox.min.js"></script>
+    <script src="~/Assets/Admin/js/User/mustache.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery.twbsPagination.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery.validate.min.js"></script>
+    <script src="~/Assets/Admin/js/User/jquery-ui/jquery-ui.js"></script>
+    <script src="~/Assets/Admin/js/SaleTheoQuay/saleTheoQuayController.js"></script>
+    <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
+    @*<script>
+            $(function () {
+                $('.modal-dialog').draggable();
+            });
+        </script>*@
+}
+
+<br />
+<form id="frmSearch" asp-controller="BaoCao" asp-action="NgayCN" method="post" class="form-horizontal" role="form">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-md-4">
+                Từ ngày
+                <input type="text" class="form-control" name="tungay" id="txtTuNgay" placeholder="Type date..." />
+            </div>
+
+            <div class="col-md-4">
+                Dến ngày
+                <input type="text" class="form-control" name="denngay" id="txtDenNgay" placeholder="Type date..." />
+            </div>
+
+            <br />
+            <div class="col-md-2">
+                <span class="btn-group">
+                    <button id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-search"></i></button>
+                    <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
+                </span>
+            </div>
+        </div>
+
+    </div>
+</form>
+<br />
