@@ -71,6 +71,9 @@
     <Compile Include="Models\EF\doanhthuSaleQuay.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\doanhthuToanhethong.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\doanthuQuayNgayBan.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>

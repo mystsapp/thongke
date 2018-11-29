@@ -34,6 +34,7 @@ namespace ThongKe.Data.Models.EF
         public virtual DbSet<doanhthuSaleQuay> doanhthuSaleQuays { get; set; }
         public virtual DbSet<doanthuQuayNgayBan> doanthuQuayNgayBans { get; set; }
         public virtual DbSet<tuyentqNgaydi> tuyentqNgaydis { get; set; }
+        public virtual DbSet<doanhthuToanhethong> doanhthuToanhethongs { get; set; }
     
         public virtual ObjectResult<doanhthuDoanNgayDi> spBaocaoDoanhThuDoanTheoNgayDi(Nullable<System.DateTime> tungay, Nullable<System.DateTime> denngay, string chinhanh, string khoi)
         {
@@ -306,6 +307,48 @@ namespace ThongKe.Data.Models.EF
                 new ObjectParameter("khoi", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<tuyentqNgaydi>("spThongkeTuyentqTheoNgayDi", mergeOption, tungayParameter, denngayParameter, chinhanhParameter, khoiParameter);
+        }
+    
+        public virtual ObjectResult<doanhthuToanhethong> spThongkeKhachToanHeThong(Nullable<System.DateTime> tungay, Nullable<System.DateTime> denngay, string chinhanh, string khoi)
+        {
+            var tungayParameter = tungay.HasValue ?
+                new ObjectParameter("tungay", tungay) :
+                new ObjectParameter("tungay", typeof(System.DateTime));
+    
+            var denngayParameter = denngay.HasValue ?
+                new ObjectParameter("denngay", denngay) :
+                new ObjectParameter("denngay", typeof(System.DateTime));
+    
+            var chinhanhParameter = chinhanh != null ?
+                new ObjectParameter("chinhanh", chinhanh) :
+                new ObjectParameter("chinhanh", typeof(string));
+    
+            var khoiParameter = khoi != null ?
+                new ObjectParameter("khoi", khoi) :
+                new ObjectParameter("khoi", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<doanhthuToanhethong>("spThongkeKhachToanHeThong", tungayParameter, denngayParameter, chinhanhParameter, khoiParameter);
+        }
+    
+        public virtual ObjectResult<doanhthuToanhethong> spThongkeKhachToanHeThong(Nullable<System.DateTime> tungay, Nullable<System.DateTime> denngay, string chinhanh, string khoi, MergeOption mergeOption)
+        {
+            var tungayParameter = tungay.HasValue ?
+                new ObjectParameter("tungay", tungay) :
+                new ObjectParameter("tungay", typeof(System.DateTime));
+    
+            var denngayParameter = denngay.HasValue ?
+                new ObjectParameter("denngay", denngay) :
+                new ObjectParameter("denngay", typeof(System.DateTime));
+    
+            var chinhanhParameter = chinhanh != null ?
+                new ObjectParameter("chinhanh", chinhanh) :
+                new ObjectParameter("chinhanh", typeof(string));
+    
+            var khoiParameter = khoi != null ?
+                new ObjectParameter("khoi", khoi) :
+                new ObjectParameter("khoi", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<doanhthuToanhethong>("spThongkeKhachToanHeThong", mergeOption, tungayParameter, denngayParameter, chinhanhParameter, khoiParameter);
         }
     }
 }

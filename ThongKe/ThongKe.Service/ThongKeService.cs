@@ -20,6 +20,10 @@ namespace ThongKe.Service
         DataTable doanhthuTuyentqTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
 
         DataTable doanhthuQuayTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
+
+        DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
+
+        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string khoi);
     }
     public class ThongKeService : IThongKeService
     {
@@ -38,6 +42,12 @@ namespace ThongKe.Service
             return result;
         }
 
+        public DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi)
+        {
+            var result = _thongkeRepository.doanhthuKhachleHethong(tungay, denngay, chinhanh, khoi);
+            return result;
+        }
+
         public DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi)
         {
             var result = _thongkeRepository.doanhthuQuayTheoNgayBan(tungay, denngay, chinhanh, khoi);
@@ -47,6 +57,12 @@ namespace ThongKe.Service
         public DataTable doanhthuQuayTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi)
         {
             var result = _thongkeRepository.doanhthuQuayTheoNgayDi(tungay, denngay, chinhanh, khoi);
+            return result;
+        }
+
+        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string khoi)
+        {
+            var result = _thongkeRepository.doanhthuSaleTheoNgayDi(tungay, denngay, daily, khoi);
             return result;
         }
 

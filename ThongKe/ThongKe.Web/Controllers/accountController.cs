@@ -19,7 +19,7 @@ namespace ThongKe.Web.Controllers
         private IaccountService _accountService;
         private ICommonService _commonService;
 
-        public accountController(IaccountService accountService,ICommonService commonService)
+        public accountController(IaccountService accountService, ICommonService commonService)
         {
             _accountService = accountService;
             _commonService = commonService;
@@ -56,6 +56,7 @@ namespace ThongKe.Web.Controllers
         {
             bool statusUser = false;
             var user = _accountService.GetById(id);
+            var userViewModel = Mapper.Map<account, accountViewModel>(user);
             if (user != null)
             {
                 statusUser = true;
@@ -63,7 +64,7 @@ namespace ThongKe.Web.Controllers
             }
             return Json(new
             {
-                data = user,
+                data = userViewModel,
                 status = statusUser
             }, JsonRequestBehavior.AllowGet);
         }
@@ -152,6 +153,28 @@ namespace ThongKe.Web.Controllers
         {
             var model = _commonService.GetAllChiNhanh();
             var viewModel = Mapper.Map<IEnumerable<chinhanh>, IEnumerable<chinhanhViewModel>>(model);
+            return Json(new
+            {
+                data = JsonConvert.SerializeObject(viewModel)
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetDmdailyByChiNhanh(string chinhanh)
+        {
+            var model = _commonService.GetDmdailyByChiNhanh(chinhanh);
+            var viewModel = Mapper.Map<IEnumerable<dmdaily>, IEnumerable<dmdailyViewModel>>(model);
+            return Json(new
+            {
+                data = JsonConvert.SerializeObject(viewModel)
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetAllDmDaiLy()
+        {
+            var model = _commonService.GetAllDmDaiLy();
+            var viewModel = Mapper.Map<IEnumerable<dmdaily>, IEnumerable<dmdailyViewModel>>(model);
             return Json(new
             {
                 data = JsonConvert.SerializeObject(viewModel)

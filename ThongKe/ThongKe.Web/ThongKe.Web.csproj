@@ -217,6 +217,8 @@
     <Content Include="Assets\Admin\dist\js\sb-admin-2.js" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.min.js" />
     <Content Include="Assets\Admin\js\alertBox.js" />
+    <Content Include="Assets\Admin\js\SaleTheoNgayDi\saleTheoNgayDiController.js" />
+    <Content Include="Assets\Admin\js\KhachLeHeThong\khachLeHeThongController.js" />
     <Content Include="Assets\Admin\js\Home\homController.js" />
     <Content Include="Assets\Admin\js\LienKetKhachLe\lienKetKhachLeController.js" />
     <Content Include="Assets\Admin\js\SaleTheoNgay\saleTheoNgayController.js" />
@@ -689,6 +691,8 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\BaoCao\QuayTheoNgayBan.cshtml" />
     <Content Include="Views\BaoCao\NgayDiTour.cshtml" />
+    <Content Include="Views\BaoCao\KhachLeHethong.cshtml" />
+    <Content Include="Views\BaoCao\SaleTheoNgayDi.cshtml" />
     <None Include="Views\BaoCao\TuyentqTheoNgayDi.cshtml" />
     <Content Include="Views\BaoCao\LienKetKhachLe.cshtml" />
     <Content Include="Views\BaoCao\QuayTheoNgayDi.cshtml" />

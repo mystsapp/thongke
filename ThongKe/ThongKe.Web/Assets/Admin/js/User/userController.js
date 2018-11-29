@@ -83,8 +83,16 @@ var userController = {
 
         $('#btnAddNew').off('click').on('click', function () {
             $('#modalAddUpdate').modal('show');
+            $('#txtUsername').prop("disabled", false);
+
             userController.resetForm();
-            userController.loadDddlChiNhanh();
+            userController.loadDdlChiNhanh();
+            userController.loadDdlDaiLy();
+        });
+
+        $('#ddlChiNhanh').off('change').on('change', function () {
+            var optionValue = $(this).val();
+            userController.loadDdlDaiLyByChiNhanh(optionValue);
         });
 
         $('#btnSave').off('click').on('click', function () {
@@ -112,6 +120,8 @@ var userController = {
             $('#modalAddUpdate').modal('show');
             var id = $(this).data('id');
             $('#txtUsername').prop("disabled", true);
+            userController.loadDdlChiNhanh();
+            userController.loadDdlDaiLy();
             userController.loadDetail(id);
         });
 
@@ -147,7 +157,7 @@ var userController = {
 
     },
 
-    loadDddlChiNhanh: function () {
+    loadDdlChiNhanh: function () {
         $('#ddlChiNhanh').html('');
         var option = '';
        // option = option + '<option value=select>Select</option>';
@@ -171,7 +181,7 @@ var userController = {
                 //$('#ddlDMXe').append(options);
 
                 $.each(data, function (i, item) {
-                    option = option + '<option value="' + item.chinhanh1 + '">' + item.tencn + '</option>'; //chinhanh1
+                    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
 
                 });
                 $('#ddlChiNhanh').html(option);
@@ -184,6 +194,86 @@ var userController = {
             }
         });
         //homeController.resetForm();
+    },
+
+    loadDdlDaiLy: function () {
+        $('#ddlDaiLy').html('');
+        var option = '';
+        // option = option + '<option value=select>Select</option>';
+
+        $.ajax({
+            url: '/account/GetAllDmDaiLy',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                //if (response.length > 0) {
+                //var data = JSON.stringify(response.data);
+                var data = JSON.parse(response.data);
+                //$('#ddlDaiLy').html('');
+                //var options = '';
+                //options += '<option value="Select">Select</option>';
+
+                //for (var i = 0; i < data.length; i++) {
+                //    options += '<option value="' + data[i].SoXe + '">' + data[i].LoaiXe + '</option>'; 
+
+                //}
+                //$('#ddlDMXe').append(options);
+
+                $.each(data, function (i, item) {
+                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+
+                });
+                $('#ddlDaiLy').html(option);
+                //suachuaController.registerEvent();
+                //$('#ddlDMXe').change(function () {
+                //    var a=$('#ddlDMXe').val();
+                //    alert(a);
+                //})
+                //}
+            }
+        });
+        //homeController.resetForm();
+    },
+
+    loadDdlDaiLyByChiNhanh: function (optionValue) {
+        $('#ddlDaiLy').html('');
+        var option = '';
+
+        $.ajax({
+            url: '/account/GetDmdailyByChiNhanh',
+            type: 'GET',
+            data: {
+                chinhanh: optionValue
+            },
+            dataType: 'json',
+            success: function (response) {
+                //if (response.length > 0) {
+                //var data = JSON.stringify(response.data);
+                var data = JSON.parse(response.data);
+                //$('#ddlDaiLy').html('');
+
+                //var options = '';
+                //options += '<option value="Select">Select</option>';
+
+                //for (var i = 0; i < data.length; i++) {
+                //    options += '<option value="' + data[i].SoXe + '">' + data[i].LoaiXe + '</option>'; 
+
+                //}
+                //$('#ddlDMXe').append(options);
+
+                $.each(data, function (i, item) {
+                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+
+                });
+                $('#ddlDaiLy').html(option);
+                //suachuaController.registerEvent();
+                //$('#ddlDMXe').change(function () {
+                //    var a=$('#ddlDMXe').val();
+                //    alert(a);
+                //})
+                //}
+            }
+        });
     },
 
     nextUserId: function (data) {
@@ -270,8 +360,8 @@ var userController = {
         var hoten = $('#txtHoTen').val();
         var chinhanh = $('#ddlChiNhanh').val();
         var daily = $('#ddlDaiLy').val();
-        var role = $('#txtRole').val();
-        var khoi = $('#txtKhoi').val();
+        var role = $('#ddlRole').val();
+        var khoi = $('#ddlKhoi').val();
         var trangthai = $('#ckTrangThai').prop('checked');
 
         var ngaytao = $('#txtNgayTao').val();
@@ -368,14 +458,14 @@ var userController = {
                     $('#txtHoTen').val(data.hoten);
                     $('#ddlChiNhanh').val(data.chinhanh);
                     $('#ddlDaiLy').val(data.daily);
-                    $('#txtRole').val(data.role);
+                    $('#ddlRole').val(data.role);
                     //var gioitinh = data.phai;
                     //console.log(gioitinh);
                     //$('#ddlPhai').val(gioitinh);
                     //$('#ddlPhai').prop('selectedIndex', !gioitinh);
                     //$("#ddlPhai").selectedIndex = gioitinh;
 
-                    $('#txtKhoi').val(data.khoi);
+                    $('#ddlKhoi').val(data.khoi);
                     $('#ckTrangThai').prop('checked', data.trangthai);
 
                     $('#txtNgayTao').val(nt);

@@ -20,6 +20,10 @@ namespace ThongKe.Data.Repositories
         DataTable doanhthuTuyentqTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
 
         DataTable doanhthuQuayTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
+
+        DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
+
+        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string khoi);
     }
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
     {
@@ -120,6 +124,42 @@ namespace ThongKe.Data.Repositories
                 if (dt.Rows.Count > 0)
                     return dt;
                 return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var result = DbContext.spThongkeKhachToanHeThong(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                if (dt.Rows.Count > 0)
+                    return dt;
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
             }
             catch
             {
