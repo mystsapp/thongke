@@ -119,10 +119,13 @@ var userController = {
         $('.btn-edit').off('click').on('click', function () {
             $('#modalAddUpdate').modal('show');
             var id = $(this).data('id');
+           // $('#txtHidID').val(id);
+
             $('#txtUsername').prop("disabled", true);
             userController.loadDdlChiNhanh();
             userController.loadDdlDaiLy();
             userController.loadDetail(id);
+
         });
 
         $('.btn-delete').off('click').on('click', function () {
@@ -233,6 +236,8 @@ var userController = {
             }
         });
         //homeController.resetForm();
+        //var id = $('.btn-edit').data('id');
+
     },
 
     loadDdlDaiLyByChiNhanh: function (optionValue) {

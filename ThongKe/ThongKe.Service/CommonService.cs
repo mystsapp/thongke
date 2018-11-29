@@ -40,7 +40,12 @@ namespace ThongKe.Service
 
         public IEnumerable<dmdaily> GetDmdailyByChiNhanh(string chinhanh)
         {
-            return _dmdailyRepository.GetMulti(x => x.chinhanh == chinhanh);
+            var listDaily = new List<dmdaily>();
+            if (chinhanh != "")
+                listDaily = _dmdailyRepository.GetMulti(x => x.chinhanh == chinhanh).ToList();
+            else
+                listDaily = _dmdailyRepository.GetAll().ToList();
+            return listDaily;
         }
     }
 }
