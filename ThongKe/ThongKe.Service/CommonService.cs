@@ -42,7 +42,7 @@ namespace ThongKe.Service
         {
             var listDaily = new List<dmdaily>();
             if (chinhanh != "")
-                listDaily = _dmdailyRepository.GetMulti(x => x.chinhanh == chinhanh).ToList();
+                listDaily = _dmdailyRepository.GetMulti(x => x.chinhanh == chinhanh && x.trangthai).ToList();
             else
                 listDaily = _dmdailyRepository.GetAll().ToList();
             return listDaily;
