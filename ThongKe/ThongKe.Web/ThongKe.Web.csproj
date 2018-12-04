@@ -662,6 +662,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -679,26 +682,22 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout_.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\account\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout_mo.cshtml" />
     <Content Include="Views\account\_AddUpdateModal.cshtml" />
     <Content Include="Views\BaoCao\SaleTheoQuay.cshtml" />
     <Content Include="Views\Login\changepass.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\BaoCao\QuayTheoNgayBan.cshtml" />
-    <Content Include="Views\BaoCao\NgayDiTour.cshtml" />
     <Content Include="Views\BaoCao\KhachLeHethong.cshtml" />
     <Content Include="Views\BaoCao\SaleTheoNgayDi.cshtml" />
     <None Include="Views\BaoCao\TuyentqTheoNgayDi.cshtml" />
-    <Content Include="Views\BaoCao\LienKetKhachLe.cshtml" />
     <Content Include="Views\BaoCao\QuayTheoNgayDi.cshtml" />
-    <Content Include="Views\BaoCao\SaleTheoNgay_.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout_.cshtml" />
     <Content Include="Views\BaoCao\DoanTheoNgayDi.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

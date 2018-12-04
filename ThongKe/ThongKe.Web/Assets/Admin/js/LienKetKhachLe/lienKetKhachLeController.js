@@ -45,6 +45,7 @@
             dateFormat: "mm/dd/yy"
 
         });
+        $("#txtTuNgay, #txtDenNgay").mask("99/99/9999");
     },
     resetForm: function () {
         $('#txtTuNgay').val('');

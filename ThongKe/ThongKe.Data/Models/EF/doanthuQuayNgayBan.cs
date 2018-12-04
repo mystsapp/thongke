@@ -16,8 +16,8 @@ namespace ThongKe.Data.Models.EF
     {
         public string dailyxuatve { get; set; }
         public string chinhanh { get; set; }
-        public Nullable<int> sokhach { get; set; }
-        public Nullable<decimal> doanhso { get; set; }
+        public int sokhach { get; set; }
+        public decimal doanhso { get; set; }
         public Nullable<decimal> doanhthu { get; set; }
     }
 }

@@ -24,6 +24,7 @@
 var saleTheoNgayDiController = {
     init: function () {
         // saleTheoNgayDiController.LoadData();
+        saleTheoNgayDiController.loadDdlDaiLy();
         saleTheoNgayDiController.registerEvent();
     },
 
@@ -76,6 +77,32 @@ var saleTheoNgayDiController = {
     resetForm: function () {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
+    },
+    loadDdlDaiLy: function () {
+        $('#ddlDaiLy').html('');
+        var option = '';
+        // option = option + '<option value=select>Select</option>';
+
+        $.ajax({
+            url: '/account/GetAllDmDaiLy',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+                //if (response.length > 0) {
+                //var data = JSON.stringify(response.data);
+                var data = JSON.parse(response.data);
+                console.log(data);
+
+                $.each(data, function (i, item) {
+                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+
+                });
+                $('#ddlDaiLy').html(option);
+            }
+        });
+        //homeController.resetForm();
+        //var id = $('.btn-edit').data('id');
+
     }
 
 }

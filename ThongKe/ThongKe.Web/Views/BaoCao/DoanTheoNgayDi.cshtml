@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "NgayCN";
+    ViewBag.Title = "";
     Layout = "/Views/Shared/_Layout.cshtml";
 
 }
@@ -13,37 +13,64 @@
     <script src="~/Assets/Admin/js/User/jquery-ui/jquery-ui.js"></script>
     <script src="~/Assets/Admin/js/DoanTheoNgayDi/doanTheoNgayDiController.js"></script>
     <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
-    @*<script>
-            $(function () {
-                $('.modal-dialog').draggable();
-            });
-        </script>*@
+    <script>
+            //$(function () {
+            //    $('.modal-dialog').draggable();
+            //});
+      
+    </script>
+  
 }
-
-<br />
-<form id="frmSearch" asp-controller="BaoCao" asp-action="DoanTheoNgay" method="post" class="form-horizontal" role="form">
-    <div class="row">
-        <div class="col-md-12">
-
-            <div class="col-md-4">
-                Từ ngày
-                <input type="text" class="form-control" name="tungay" id="txtTuNgay" placeholder="Type date..." />
-            </div>
-
-            <div class="col-md-4">
-                Dến ngày
-                <input type="text" class="form-control" name="denngay" id="txtDenNgay" placeholder="Type date..." />
-            </div>
-
-            <br />
-            <div class="col-md-2">
-                <span class="btn-group">                    
-                    <button id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-search"></i></button>
-                    <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
-                </span>
-            </div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>BÁO CÁO DOANH THU ĐOÀN THEO NGÀY ĐI</h4>
         </div>
-           
+        <div class="panel-body">
+            <form id="frmSearch" asp-controller="BaoCao" asp-action="DoanTheoNgay" method="post" class="form-horizontal" role="form">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="col-md-2">
+                            Từ ngày
+                            <input type="text" class="form-control maskInput" name="tungay" id="txtTuNgay" placeholder="Type date..." />
+                        </div>
+
+                        <div class="col-md-2">
+                            Đến ngày
+                            <input type="text" class="form-control maskInput" name="denngay" id="txtDenNgay" placeholder="Type date..." />
+                        </div>
+                        @if (Session["chinhanh"].ToString() == "")
+                        {
+                            <div class="col-md-2">
+                                Chi nhánh
+                                <select class="form-control" id="ddlChiNhanh" name="cn">
+                                    @*<option value="STS">STS</option>
+                                    <option value="STL">STL</option>*@
+                                </select>
+                            </div>
+
+                            <div class="col-md-2">
+                                Khối
+                                <select class="form-control" id="ddlKhoi" name="khoi">
+                                    <option value="OB">OB</option>
+                                    <option value="ND">ND</option>
+                                </select>
+                            </div>
+                        } 
+                        <br />
+                        <div class="col-md-2">
+
+                            <span class="btn-group">
+                                <button id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-file-excel-o"></i></button>
+                                <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
         </div>
-</form>
+    </div>
+</div>
 <br />

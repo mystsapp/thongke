@@ -13,7 +13,7 @@ namespace ThongKe.Data.Repositories
     {
         DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi);
 
-        DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string khoi);
+        DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi);
 
         DataTable doanhthuDoanTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
 
@@ -23,7 +23,7 @@ namespace ThongKe.Data.Repositories
 
         DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
 
-        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string khoi);
+        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi);
     }
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
     {
@@ -69,7 +69,7 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string khoi)
+        public DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace ThongKe.Data.Repositories
                 //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
                 //DateTime dn = Convert.ToDateTime("2018-11-10");
 
-                var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, khoi).ToList();
+                var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, cn, khoi).ToList();
                 var count = result.Count();
                 //var result = db.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, khoi);
                 //var count = result.Count();
@@ -150,12 +150,12 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string khoi)
+        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi)
         {
             try
             {
                 DataTable dt = new DataTable();
-                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, khoi).ToList();
+                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, chinhanh, khoi).ToList();
                 var count = result.Count();
 
                 dt = EntityToTable.ToDataTable(result);

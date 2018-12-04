@@ -30,6 +30,7 @@ $.validator.addMethod("dateFormat",
 var quayTheoNgayBanController = {
     init: function () {
         // quayTheoNgayBanController.LoadData();
+        quayTheoNgayBanController.loadDdlChiNhanh();
         quayTheoNgayBanController.registerEvent();
     },
 
@@ -74,5 +75,29 @@ var quayTheoNgayBanController = {
         });
 
     },
+    loadDdlChiNhanh: function () {
+        $('#ddlChiNhanh').html('');
+        var option = '';
+        // option = option + '<option value=select>Select</option>';
+
+        $.ajax({
+            url: '/account/GetAllChiNhanh',
+            type: 'GET',
+            dataType: 'json',
+            success: function (response) {
+
+                var data = JSON.parse(response.data);
+                $('#ddlChiNhanh').html('');
+
+                $.each(data, function (i, item) {
+                    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
+
+                });
+                $('#ddlChiNhanh').html(option);
+
+            }
+        });
+
+    }
 }
 quayTheoNgayBanController.init();

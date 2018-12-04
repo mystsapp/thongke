@@ -1,6 +1,6 @@
 ﻿var saleTheoNgayController = {
     init: function () {
-        // saleTheoNgayController.LoadData();
+        // saleTheoNgayController.LoadData();t
         saleTheoNgayController.registerEvent();
     },
 
@@ -49,7 +49,32 @@
     resetForm: function () {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
-    }
+    },
+
+    loadDdlDaiLyByChiNhanh: function (optionValue) {
+        $('#ddlDaily').html('');
+        var option = '';
+
+        $.ajax({
+            url: '/baocao/GetDmdailyByChiNhanh',
+            type: 'GET',
+            data: {
+                chinhanh: optionValue
+            },
+            dataType: 'json',
+            success: function (response) {
+              
+                var data = JSON.parse(response.data);
+             
+                $.each(data, function (i, item) {
+                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+
+                });
+                $('#ddlDaiLy').html(option);
+            
+            }
+        });
+    },
 
 }
 saleTheoNgayController.init();

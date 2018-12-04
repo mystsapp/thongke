@@ -1,5 +1,6 @@
-﻿@{
-
+﻿
+@{
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -7,12 +8,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Báo cáo thống kê.</title>
-
+    <title>@ViewBag.Title - Chương trình Quản lý xe.</title>
     @Styles.Render("~/Content/css")
-
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="shortcut icon" href="~/Content/image/favicon.ico" />
+    <link rel="shortcut icon" href="/Content/image/favicon.ico" />
 </head>
 <body>
     <div id="wrapper">
@@ -59,27 +58,29 @@
                             <a href="@Url.Action("Logout", "Login", new {area=""})"><i class="fa fa-sign-out fa-fw"></i> Thoát</a>
                         </li>
                     </ul>
-                </li><!--nav account-->
+                </li>
+                <!--nav account-->
                 <!--nav search-->
-                <li class="dropdown">
+                @*<li class="dropdown">
 
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="glyphicon glyphicon-search" style="color:black"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-tasks">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="glyphicon glyphicon-search" style="color:black"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-tasks">
 
-                        <li>
-                            <div class="input-group custom-search-form">
+                <li>
+                    <div class="input-group custom-search-form">
 
-                                <input type="text" class="form-control" placeholder="Nhập thông tin....">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-facebook" type="button">Tìm</button>
-                                </span>
-                            </div>
+                        <input type="text" class="form-control" placeholder="Nhập thông tin....">
+                        <span class="input-group-btn">
+                            <button class="btn btn-facebook" type="button">Tìm</button>
+                        </span>
+                    </div>
 
-                        </li>
-                    </ul>
-                </li><!-- /nav search-->
+                </li>
+            </ul>
+        </li>*@
+                <!-- /nav search-->
             </ul>
             <!-- /.navbar-rigt top link -->
         </nav>
@@ -120,13 +121,6 @@
                                 <a href="/BaoCao/TuyentqTheoNgayDi">Tuyến tham quan theo ngày đi</a>
                             </li>
 
-                            @*<li>
-                                <a href="/BaoCao/LienKetKhachLe">Liên kết khách lẻ</a>
-                            </li>*@
-
-                            @*<li>
-                                <a href="/BaoCao/SaleTheoNgayBan">Sale theo ngày bán</a>
-                            </li>*@
                             <li>
                                 <a href="/BaoCao/KhachleHethong">Khách lẻ toàn hệ thống</a>
                             </li>
@@ -135,83 +129,29 @@
                         <!-- /.nav-second-level -->
                     </li>
 
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Sửa chữa<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="panels-wells.html">Bảo dưỡng</a>
-                            </li>
-                            <li>
-                                <a href="buttons.html">Đột xuất</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
-                    <li>
-                        <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Second Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Second Level Item</a>
-                            </li>
-                            <li>
-                                <a href="#">Third Level <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Third Level Item</a>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="blank.html">Blank Page</a>
-                            </li>
-                            <li>
-                                <a href="login.html">Login Page</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
         </div>
         <!--/ menu trai-->
         <!-- navbar-side menu -->
+       
+        
         <div id="page-wrapper">
             @if (TempData["AlertMessage"] != null)
             {
-                <div id="Alert-Box" class="alert @TempData["AlertType"] hide">
+                <div id="AlertBox" class="alert @TempData["AlertType"] hide">
                     @TempData["AlertMessage"]
                 </div>
             }
+
             @RenderBody()
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/vendor")
-
-    <script src="~/Assets/Admin/js/alertBox.js"></script>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>
+

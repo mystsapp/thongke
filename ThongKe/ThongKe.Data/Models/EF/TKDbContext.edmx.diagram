@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="67c0375fabea41a7ab4d4d5b6f38c165" Name="Diagram1">
+      <Diagram DiagramId="fca3ed06df9e4fe1b742f9f9f8b8575e" Name="Diagram1">
         <EntityTypeShape EntityType="thongkeModel.account" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="thongkeModel.chinhanh" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="thongkeModel.dmdaily" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="thongkeModel.doanhthuDoanNgayDi" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="thongkeModel.doanhthuSaleQuay" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="thongkeModel.doanthuQuayNgayBan" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="thongkeModel.tuyentqNgaydi" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="thongkeModel.doanhthuToanhethong" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="thongkeModel.doanhthuToanhethong" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="thongkeModel.doanthuQuayNgayBan" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="thongkeModel.tuyentqNgaydi" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
