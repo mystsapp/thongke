@@ -131,8 +131,9 @@ namespace ThongKe.Web.Controllers
             setFontBold(5, 1, 5, 6, 12, xlSheet);
             // font bold dong cuoi cùng
             setFontBold(dong, 1, dong, 6, 12, xlSheet);
-            setBorder(dong, 2, dong, 6, xlSheet);
-
+            setBorder(dong, 3, dong, 6, xlSheet);
+            // canh giưa cot stt
+            setCenterAligment(6, 1, 6 + dt.Rows.Count, 1, xlSheet);
 
             // canh giưa cot chinhanh va so khach
             setCenterAligment(6, 3, 6 + dt.Rows.Count, 4, xlSheet);
@@ -159,7 +160,6 @@ namespace ThongKe.Web.Controllers
         [HttpPost]
         public ViewResult SaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi)//(string tungay,string denngay, string daily)
         {
-
             cn = String.IsNullOrEmpty(cn) ? Session["chinhanh"].ToString() : cn;
             khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
             string fromTo = "";
@@ -236,14 +236,18 @@ namespace ThongKe.Web.Controllers
             // Sum tổng tiền
             xlSheet.Cells[dong, 3].Formula = "SUM(C6:C" + (6 + dt.Rows.Count - 1) + ")";
             xlSheet.Cells[dong, 4].Formula = "SUM(D6:D" + (6 + dt.Rows.Count - 1) + ")";
-            // định dạng số
-            NumberFormat(dong, 2, dong, 3, xlSheet);
+
 
             setBorder(5, 1, 5 + dt.Rows.Count, 4, xlSheet);
             setFontBold(5, 1, 5, 3, 12, xlSheet);
             setFontSize(6, 1, 6 + dt.Rows.Count, 4, 12, xlSheet);
-            NumberFormat(6, 2, 6 + dt.Rows.Count, 4, xlSheet);
-
+            // canh giua cot stt
+            setCenterAligment(6, 1, 6 + dt.Rows.Count, 1, xlSheet);
+            NumberFormat(6, 3, 6 + dt.Rows.Count, 4, xlSheet);
+            // định dạng số cot tong cong
+            NumberFormat(dong, 2, dong, 3, xlSheet);
+            setBorder(dong, 3, dong, 4, xlSheet);
+            setFontBold(dong, 3, dong, 4, 12, xlSheet);
             xlSheet.View.FreezePanes(6, 20);
 
 
@@ -349,7 +353,12 @@ namespace ThongKe.Web.Controllers
             setBorder(5, 1, 5 + dt.Rows.Count, 4, xlSheet);
             setFontBold(5, 1, 5, 3, 12, xlSheet);
             setFontSize(6, 1, 6 + dt.Rows.Count, 4, 12, xlSheet);
+            // canh giua cot stt
+            setCenterAligment(6, 1, 6 + dt.Rows.Count, 1, xlSheet);
+
             NumberFormat(6, 3, 6 + dt.Rows.Count, 4, xlSheet);
+            setBorder(dong, 3, dong, 4, xlSheet);
+            setFontBold(dong, 3, dong, 4, 12, xlSheet);
 
             xlSheet.View.FreezePanes(6, 20);
 
@@ -459,9 +468,11 @@ namespace ThongKe.Web.Controllers
             setBorder(5, 1, 5 + dt.Rows.Count, 7, xlSheet);
             setFontBold(5, 1, 5, 6, 12, xlSheet);
             setFontSize(6, 1, 6 + dt.Rows.Count, 7, 12, xlSheet);
+            // dinh dang giua cho cot stt
+            setCenterAligment(6, 1, 6 + dt.Rows.Count, 1, xlSheet);
 
-            setBorder(dong, 4, dong, 6, xlSheet);
-            setFontBold(dong, 4, dong, 7, 12, xlSheet);
+            setBorder(dong, 5, dong, 7, xlSheet);
+            setFontBold(dong, 5, dong, 7, 12, xlSheet);
 
             // dinh dạng ngay thang cho cot ngay di , ngay ve
             DateTimeFormat(6, 4, 6 + dt.Rows.Count, 5, xlSheet);
@@ -592,11 +603,13 @@ namespace ThongKe.Web.Controllers
             dong++;
 
             xlSheet.Cells[dong, 5].Formula = "SUM(E6:E" + (6 + dt.Rows.Count - 1) + ")";
-            //setBorder(dong, 5, 6 + dt.Rows.Count, 5, xlSheet);
+           
+           
             xlSheet.Cells[dong, 7].Formula = "SUM(G6:G" + (6 + dt.Rows.Count - 1) + ")";
-            //setBorder(dong, 7, 6 + dt.Rows.Count, 7, xlSheet);
+           
             xlSheet.Cells[dong, 9].Formula = "SUM(I6:I" + (6 + dt.Rows.Count - 1) + ")";
-            //setBorder(dong, 9, 6 + dt.Rows.Count, 9, xlSheet);
+            setBorder(dong, 5, dong, 9, xlSheet);
+            setFontBold(dong, 5, dong, 9, 12, xlSheet);
 
             // dinh dạng number cot dt kl
             NumberFormat(6, 5, 6 + dt.Rows.Count, 5, xlSheet);
@@ -712,13 +725,15 @@ namespace ThongKe.Web.Controllers
             setFontSize(6, 1, 6 + dt.Rows.Count, 6, 12, xlSheet);
             setBorder(5, 1, 5 + dt.Rows.Count, 6, xlSheet);
             setFontBold(5, 1, 5, 6, 12, xlSheet);
+            // canh giưa cot stt
+            setCenterAligment(6, 1, 6 + dt.Rows.Count, 1, xlSheet);
 
-            setBorder(dong, 2, dong, 6, xlSheet);
+            setBorder(dong, 3, dong, 6, xlSheet);
             setFontBold(dong, 1, dong, 6, 12, xlSheet);
             // canh giưa cot chinhanh va so khach
             setCenterAligment(6, 3, 6 + dt.Rows.Count, 4, xlSheet);
             // dinh dạng number cot sokhach, doanh so, thuc thu
-            NumberFormat(6, 4, 6 + dt.Rows.Count, 6, xlSheet);
+            NumberFormat(6, 5, 6 + dt.Rows.Count, 6, xlSheet);
 
             xlSheet.View.FreezePanes(6, 20);
 
@@ -826,8 +841,8 @@ namespace ThongKe.Web.Controllers
                             xlSheet.Cells[dong, j + 1].Value = dt.Rows[i][j];
                         }
 
-                        xlSheet.Cells[dong, 7].Value = (Convert.ToInt32(xlSheet.Cells[dong, 3].Value) - Convert.ToInt32(xlSheet.Cells[dong, 5].Value));
-                        xlSheet.Cells[dong, 8].Value = Convert.ToDecimal(xlSheet.Cells[dong, 4].Value) - Convert.ToDecimal(xlSheet.Cells[dong, 6].Value);
+                        xlSheet.Cells[dong, 8].Value = (Convert.ToInt32(xlSheet.Cells[dong, 4].Value) - Convert.ToInt32(xlSheet.Cells[dong,6].Value));
+                        xlSheet.Cells[dong,9].Value = Convert.ToDecimal(xlSheet.Cells[dong, 5].Value) - Convert.ToDecimal(xlSheet.Cells[dong, 7].Value);
                     }
                 }
             }
@@ -856,6 +871,7 @@ namespace ThongKe.Web.Controllers
             setFontBold(5, 1, 5, 5, 12, xlSheet);
             setFontSize(7, 1, 6 + dt.Rows.Count + 2, 9, 12, xlSheet);
             // dinh dang giu cho so khach
+            setCenterAligment(7, 1, 7 + dt.Rows.Count, 2, xlSheet);
             setCenterAligment(7, 4, 7 + dt.Rows.Count, 4, xlSheet);
             setCenterAligment(7, 6, 7 + dt.Rows.Count, 6, xlSheet);
             setCenterAligment(7, 8, 7 + dt.Rows.Count, 8, xlSheet);
@@ -864,6 +880,8 @@ namespace ThongKe.Web.Controllers
             NumberFormat(7, 7, 6 + dt.Rows.Count + 1, 7, xlSheet);
             NumberFormat(7, 9, 6 + dt.Rows.Count + 1, 9, xlSheet);
 
+            setBorder(dong, 4, dong, 9, xlSheet);
+            setFontBold(dong, 4, dong, 9, 12, xlSheet);
             xlSheet.View.FreezePanes(7, 20);
 
 

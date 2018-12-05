@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Chương trình Quản lý xe.</title>
+    <title>@ViewBag.Title -.</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="shortcut icon" href="/Content/image/favicon.ico" />
@@ -107,7 +107,7 @@
                             </li>
 
                             <li>
-                                <a href="/BaoCao/QuayTheoNgayBan">Quay theo ngày bán</a>
+                                <a href="/BaoCao/QuayTheoNgayBan">Quầy theo ngày bán</a>
                             </li>
 
                             <li>
@@ -115,14 +115,14 @@
                             </li>
 
                             <li>
-                                <a href="/BaoCao/DoanTheoNgayDi">Doàn Theo Ngày</a>
+                                <a href="/BaoCao/DoanTheoNgayDi">Đoàn Theo Ngày</a>
                             </li>
                             <li>
                                 <a href="/BaoCao/TuyentqTheoNgayDi">Tuyến tham quan theo ngày đi</a>
                             </li>
 
                             <li>
-                                <a href="/BaoCao/KhachleHethong">Khách lẻ toàn hệ thống</a>
+                                <a href="/BaoCao/KhachleHethong">Khách lẽ toàn hệ thống</a>
                             </li>
 
                         </ul>
@@ -152,7 +152,16 @@
     <script src="~/Assets/Admin/js/Plugin/numeral/numeral.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/vendor")
+    <script src="~/Assets/Admin/js/alertBox.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.min.js"></script>
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            $(".maskInput").mask("99/99/9999");
+        });
+
+    </script>
+    
 </body>
 </html>
 
