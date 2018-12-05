@@ -3,6 +3,7 @@
     ViewBag.Title = "NgayCN";
     Layout = "/Views/Shared/_Layout.cshtml";
     var cn = Session["chinhanh"].ToString();
+    
 }
 
 @section scripts{
@@ -59,12 +60,17 @@
                                 </select>
                             </div>
                         }
+                        else
+                        {
+                            var khoi = Session["khoi"].ToString();
+                            <input type="hidden" name="k" data-cn="@khoi" id="hidKhoi" />
+                        }
                         <br />
                         <div class="col-md-3">
                             <span class="btn-group">
                                 <button id="btnExport" class="btn btn-outline btn-primary"><i class="fa fa-file-excel-o"></i></button>
                                 <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
-                                <button id="btnSearch" class="btn btn-outline btn-default"><i class="fa fa-search"></i></button>
+                                <input type="button" id="btnSearch" class="btn btn-outline btn-default"><i class="fa fa-search"></i>
                             </span>
                         </div>
                     </div>
@@ -80,11 +86,11 @@
         <table class="table table-bordered table-hover text-center">
             <thead>
                 <tr>
-
+                    <td>STT</td>
                     <td>Nhân viên sale</td>
                     <td>Doanh số</td>
                     <td>Doanh thu</td>
-                    <td>Tổng cộng</td>
+                    
                 </tr>
             </thead>
             <tbody id="tblData" class="table"></tbody>
@@ -97,11 +103,11 @@
     <script id="data-template" type="x-tmpl-mustache">
         Hello {{ hoten }}!
         <tr>
-
+            <td>{{stt}}</td>
             <td>{{nguoixuatve}}</td>
             <td>{{doanhso}}</td>
-            <td>{{doanhthu}}</td>
-            <td>{{tongcong}}</td>
+            <td>{{thucthu}}</td>
+            @*<td>{{tongcong}}</td>*@
 
         </tr>
     </script>

@@ -7,8 +7,9 @@ namespace ThongKe.Web.Models
 {
     public class doanhthuSaleQuayViewModel
     {
+        public long stt { get; set; }
         public string nguoixuatve { get; set; }
-        public decimal doanhso { get; set; }
-        public decimal doanhthu { get; set; }
+        public Nullable<decimal> doanhso { get; set; }
+        public Nullable<decimal> thucthu { get; set; }
     }
 }

@@ -26,7 +26,6 @@ namespace ThongKe.Web.Controllers
         }
         // GET: account
         public ActionResult Index()
-
         {
            
             return View();

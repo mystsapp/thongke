@@ -22,11 +22,16 @@ $.validator.addMethod("dateFormat",
     },
     "Chưa đúng định dạng dd/mm/yyyy.");
 
+var homeconfig = {
+    pageSize: 10,
+    pageIndex: 1
+};
+
 var saleTheoQuayController = {
     init: function () {
         // saleTheoQuayController.LoadData();
         //var cn = '@Request.RequestContext.HttpContext.Session["chinhanh"]';
-        saleTheoQuayController.loadDdlDaiLy();
+        saleTheoQuayController.loadDdlDaiLyByChiNhanh();
         saleTheoQuayController.registerEvent();
     },
 
@@ -70,7 +75,9 @@ var saleTheoQuayController = {
         });
 
         $('#btnSearch').off('click').on('click', function () {
-            saleTheoQuayController.LoadData();
+            if ($('#frmSearch').valid()) {
+                saleTheoQuayController.LoadData();
+            }
         });
 
         $("#txtTuNgay, #txtDenNgay").datepicker({
@@ -84,44 +91,34 @@ var saleTheoQuayController = {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
     },
-    loadDdlDaiLyByChiNhanh: function (cn) {
-        //var cn = "STS";
-        $('#ddlDaily').html('');
-        var option = '';
+    //loadDdlDaiLyByChiNhanh: function () {
+    //    var cn = $('#hidCn').data('cn');
+    //    $('#ddlDaily').html('');
+    //    var option = '';
 
-        $.ajax({
-            url: '/account/GetDmdailyByChiNhanh',
-            type: 'GET',
-            data: {
-                chinhanh: cn
-            },
-            dataType: 'json',
-            success: function (response) {
-                //if (response.length > 0) {
-                //var data = JSON.stringify(response.data);
-                var data = JSON.parse(response.data);
-                //$('#ddlDaiLy').html('');
+    //    $.ajax({
+    //        url: '/account/GetDmdailyByChiNhanh',
+    //        type: 'GET',
+    //        data: {
+    //            chinhanh: cn
+    //        },
+    //        dataType: 'json',
+    //        success: function (response) {
+    //            //if (response.length > 0) {
+    //            //var data = JSON.stringify(response.data);
+    //            var data = JSON.parse(response.data);
 
-                //var options = '';
-                //options += '<option value="Select">Select</option>';
+    //            $.each(data, function (i, item) {
+    //                option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
 
-                //for (var i = 0; i < data.length; i++) {
-                //    options += '<option value="' + data[i].SoXe + '">' + data[i].LoaiXe + '</option>'; 
-
-                //}
-                //$('#ddlDMXe').append(options);
-
-                $.each(data, function (i, item) {
-                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
-
-                });
-                $('#ddlDaily').html(option);
+    //            });
+    //            $('#ddlDaily').html(option);
               
-            }
-        });
-    },
+    //        }
+    //    });
+    //},
 
-    loadDdlDaiLy: function () {
+    loadDdlDaiLyByChiNhanh: function () {
         var cn = $('#hidCn').data('cn');
         $('#ddlDaiLy').html('');
         var option = '';
@@ -154,11 +151,27 @@ var saleTheoQuayController = {
     LoadData: function (changePageSize) {
         //var name = $('#txtNameS').val();
         //var status = $('#ddlStatusS').val();
+        var tungay = $('#txtTuNgay').val();
+        var denngay = $('#txtDenNgay').val();
+        var daily = $('#ddlDaiLy').val();
+        var hidCn = $('#hidCn').data('cn');
+        
+        //var hidCn = '' ? khoi = $('#ddlKhoi').val() : khoi = $('#hidKhoi').data('khoi');
+        if (hidCn == "")
+            var khoi = $('#ddlKhoi').val();
+        else {
+            var khoi = $('#hidKhoi').data('khoi');
+        }
 
         $.ajax({
             url: '/BaoCao/LoadDataSaleTheoQuay',
             type: 'GET',
             data: {
+                tungay: tungay,
+                denngay: denngay,
+                daily: daily,
+                cn: hidCn,
+                khoi: khoi,
                 page: homeconfig.pageIndex,
                 pageSize: homeconfig.pageSize
             },
@@ -185,20 +198,21 @@ var saleTheoQuayController = {
                             ns = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
 
                         html += Mustache.render(template, {
-                            username: item.username,
-                            hoten: item.hoten,
-                            daily: item.daily,
-                            chinhanh: item.chinhanh,
-                            trangthai: item.trangthai == true ? "<span class=\"label label-success\">Kích hoạt</span>" : "<span class=\"label label-danger\">Khóa</span>"
+                            stt: item.stt,
+                            nguoixuatve: item.nguoixuatve,
+                            doanhso: numeral(item.doanhso).format('0,0'),
+                            thucthu: numeral(item.thucthu).format('0,0')
+                            //tongcong: item.chinhanh,
+                            //numeral(item.Product.Price).format('0,0'),
                         });
 
                     })
 
                     $('#tblData').html(html);
-                    userController.paging(response.total, function () {
-                        userController.LoadData();
+                    saleTheoQuayController.paging(response.total, function () {
+                        saleTheoQuayController.LoadData();
                     }, changePageSize);
-                    userController.registerEvent();
+                    //saleTheoQuayController.registerEvent();
                 }
             }
         })

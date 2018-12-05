@@ -77,7 +77,8 @@ namespace ThongKe.Service
 
         public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
         {
-            return _thongkeRepository.doanhthuSaleTheoQuayEntities(tungay, denngay, daily, cn, khoi, page, page, out totalRow);
+            var listDanhThu= _thongkeRepository.doanhthuSaleTheoQuayEntities(tungay, denngay, daily, cn, khoi, page, page, out totalRow);
+            return listDanhThu;
         }
 
         public DataTable doanhthuTuyentqTheoNgay(string tungay, string denngay, string chinhanh, string khoi)

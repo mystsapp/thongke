@@ -876,7 +876,26 @@ namespace ThongKe.Web.Controllers
             return View();
         }
 
+        ////////////////////////////////////
+        [HttpGet]
+        public JsonResult LoadDataSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize)
+        {
+            cn = String.IsNullOrEmpty(cn) ? Session["chinhanh"].ToString() : cn;
+            khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
 
+            int totalRow = 0;
+
+            var listAccount = _thongkeService.doanhthuSaleTheoQuayEntities(tungay, denngay, daily, cn, khoi, page, pageSize, out totalRow);
+            //var query = listuser.OrderBy(x => x.tenhd);
+            var responseData = Mapper.Map<IEnumerable<doanhthuSaleQuay>, IEnumerable<doanhthuSaleQuayViewModel>>(listAccount);
+
+            return Json(new
+            {
+                data = responseData,
+                total = totalRow,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
         ///////////////////////////
         private static void NumberFormat(int fromRow, int fromColumn, int toRow, int toColumn, ExcelWorksheet sheet)
         {

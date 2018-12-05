@@ -97,17 +97,16 @@ namespace ThongKe.Data.Repositories
 
         public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
         {
+            pageSize = 10;
             try
             {
-                TKDbContext db = new TKDbContext();
-                DataTable dt = new DataTable();
                 //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
                 //DateTime dn = Convert.ToDateTime("2018-11-10");
 
                 var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, cn, khoi).ToList();
                  totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.nguoixuatve).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;
