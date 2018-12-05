@@ -24,7 +24,7 @@
 var saleTheoNgayDiController = {
     init: function () {
         // saleTheoNgayDiController.LoadData();
-        saleTheoNgayDiController.loadDdlDaiLy();
+        saleTheoNgayDiController.loadDdlDaiLyByChiNhanh();
         saleTheoNgayDiController.registerEvent();
     },
 
@@ -78,14 +78,17 @@ var saleTheoNgayDiController = {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
     },
-    loadDdlDaiLy: function () {
+    loadDdlDaiLyByChiNhanh: function () {
+        var cn = $('#hidcn').data('cn');
         $('#ddlDaiLy').html('');
         var option = '';
-        // option = option + '<option value=select>Select</option>';
-
+        option = '<option value=" "> Tất cả </option>';
         $.ajax({
-            url: '/account/GetAllDmDaiLy',
+            url: '/account/GetDmdailyByChiNhanh',
             type: 'GET',
+            data: {
+                chinhanh: cn
+            },
             dataType: 'json',
             success: function (response) {
                 //if (response.length > 0) {
@@ -98,12 +101,11 @@ var saleTheoNgayDiController = {
 
                 });
                 $('#ddlDaiLy').html(option);
+
             }
         });
-        //homeController.resetForm();
-        //var id = $('.btn-edit').data('id');
+    },
 
-    }
 
 }
 saleTheoNgayDiController.init();

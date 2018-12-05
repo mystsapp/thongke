@@ -31,7 +31,7 @@
                 <form id="frmSearch" asp-controller="BaoCao" asp-action="SaleTheoNgayDi" method="post" class="form-horizontal" role="form">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="hidden" name="cn" />
+                            <input type="hidden" name="cn" id="hidcn" data-cn="@cn" />
                             <div class="col-md-2">
                                 Từ ngày
                                 <input type="text" class="form-control maskInput" name="tungay" id="txtTuNgay" placeholder="Type date..." />

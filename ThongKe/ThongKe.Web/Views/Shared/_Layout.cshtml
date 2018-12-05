@@ -8,10 +8,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Chương trình Quản lý xe.</title>
+    <title>@ViewBag.Title - Báo cáo thống kê.</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="shortcut icon" href="/Content/image/favicon.ico" />
+
 </head>
 <body>
     <div id="wrapper">
@@ -63,23 +64,23 @@
                 <!--nav search-->
                 @*<li class="dropdown">
 
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="glyphicon glyphicon-search" style="color:black"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-tasks">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="glyphicon glyphicon-search" style="color:black"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-tasks">
 
-                <li>
-                    <div class="input-group custom-search-form">
+                            <li>
+                                <div class="input-group custom-search-form">
 
-                        <input type="text" class="form-control" placeholder="Nhập thông tin....">
-                        <span class="input-group-btn">
-                            <button class="btn btn-facebook" type="button">Tìm</button>
-                        </span>
-                    </div>
+                                    <input type="text" class="form-control" placeholder="Nhập thông tin....">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-facebook" type="button">Tìm</button>
+                                    </span>
+                                </div>
 
-                </li>
-            </ul>
-        </li>*@
+                            </li>
+                        </ul>
+                    </li>*@
                 <!-- /nav search-->
             </ul>
             <!-- /.navbar-rigt top link -->
@@ -91,9 +92,12 @@
                     <li>
                         <a href="/"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                     </li>
+                    @if (Session["role"].ToString() == "admin")
+                    {
                     <li>
                         <a href="/Account"><i class="fa fa-car fa-fw"></i> Tài khoản</a>
                     </li>
+                    }
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Báo cáo Doanh Thu <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -107,7 +111,7 @@
                             </li>
 
                             <li>
-                                <a href="/BaoCao/QuayTheoNgayBan">Quay theo ngày bán</a>
+                                <a href="/BaoCao/QuayTheoNgayBan">Quầy theo ngày bán</a>
                             </li>
 
                             <li>
@@ -115,7 +119,7 @@
                             </li>
 
                             <li>
-                                <a href="/BaoCao/DoanTheoNgayDi">Doàn Theo Ngày</a>
+                                <a href="/BaoCao/DoanTheoNgayDi">Đoàn Theo Ngày</a>
                             </li>
                             <li>
                                 <a href="/BaoCao/TuyentqTheoNgayDi">Tuyến tham quan theo ngày đi</a>
@@ -135,8 +139,8 @@
         </div>
         <!--/ menu trai-->
         <!-- navbar-side menu -->
-       
-        
+
+
         <div id="page-wrapper">
             @if (TempData["AlertMessage"] != null)
             {
@@ -151,7 +155,16 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/vendor")
+
+    <script src="~/Assets/Admin/js/alertBox.js"></script>
+    <script src="~/Scripts/jquery.maskedinput.min.js"></script>
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            $(".maskInput").mask("99/99/9999");
+        });
+
+    </script>
 </body>
 </html>
 

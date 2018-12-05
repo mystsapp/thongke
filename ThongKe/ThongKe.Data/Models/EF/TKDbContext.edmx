@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="thongkeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="thongkeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="account">
           <Key>
             <PropertyRef Name="username" />
@@ -66,11 +66,12 @@
         </EntityType>
         <EntityType Name="doanhthuSaleQuay">
           <Key>
-            <PropertyRef Name="nguoixuatve" />
+            <PropertyRef Name="stt" />
           </Key>
-          <Property Name="nguoixuatve" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="doanhso" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="doanhthu" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="stt" Type="int" Nullable="false" />
+          <Property Name="nguoixuatve" Type="nvarchar" MaxLength="50" />
+          <Property Name="doanhso" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="thucthu" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="doanhthuToanhethong">
           <Key>
@@ -167,8 +168,7 @@
           <EntitySet Name="doanthuQuayNgayBan" EntityType="Self.doanthuQuayNgayBan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tuyentqNgaydi" EntityType="Self.tuyentqNgaydi" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="thongkeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -231,14 +231,6 @@
           <Property Name="sokhach" Type="Int32" />
           <Property Name="doanhthu" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
-        <EntityType Name="doanhthuSaleQuay">
-          <Key>
-            <PropertyRef Name="nguoixuatve" />
-          </Key>
-          <Property Name="nguoixuatve" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="doanhso" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="doanhthu" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-        </EntityType>
         <EntityType Name="doanhthuToanhethong">
           <Key>
             <PropertyRef Name="chinhanh" />
@@ -285,7 +277,6 @@
           <EntitySet Name="chinhanhs" EntityType="Self.chinhanh" />
           <EntitySet Name="dmdailies" EntityType="Self.dmdaily" />
           <EntitySet Name="doanhthuDoanNgayDis" EntityType="Self.doanhthuDoanNgayDi" />
-          <EntitySet Name="doanhthuSaleQuays" EntityType="Self.doanhthuSaleQuay" />
           <EntitySet Name="doanhthuToanhethongs" EntityType="Self.doanhthuToanhethong" />
           <EntitySet Name="doanthuQuayNgayBans" EntityType="Self.doanthuQuayNgayBan" />
           <EntitySet Name="tuyentqNgaydis" EntityType="Self.tuyentqNgaydi" />
@@ -333,7 +324,17 @@
             <Parameter Name="chinhanh" Mode="In" Type="String" />
             <Parameter Name="khoi" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="doanhthuSaleQuays" EntityType="thongkeModel.doanhthuSaleQuay" />
         </EntityContainer>
+        <EntityType Name="doanhthuSaleQuay">
+          <Key>
+            <PropertyRef Name="stt" />
+          </Key>
+          <Property Name="stt" Type="Int32" Nullable="false" />
+          <Property Name="nguoixuatve" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="doanhso" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="thucthu" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -401,15 +402,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="doanhthuSaleQuays">
-            <EntityTypeMapping TypeName="thongkeModel.doanhthuSaleQuay">
-              <MappingFragment StoreEntitySet="doanhthuSaleQuay">
-                <ScalarProperty Name="nguoixuatve" ColumnName="nguoixuatve" />
-                <ScalarProperty Name="doanhso" ColumnName="doanhso" />
-                <ScalarProperty Name="doanhthu" ColumnName="doanhthu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="doanhthuToanhethongs">
             <EntityTypeMapping TypeName="thongkeModel.doanhthuToanhethong">
               <MappingFragment StoreEntitySet="doanhthuToanhethong">
@@ -454,6 +446,16 @@
           <FunctionImportMapping FunctionImportName="spBaocaoDoanhThuSaleTheoQuay" FunctionName="thongkeModel.Store.spBaocaoDoanhThuSaleTheoQuay" />
           <FunctionImportMapping FunctionImportName="spThongkeKhachToanHeThong" FunctionName="thongkeModel.Store.spThongkeKhachToanHeThong" />
           <FunctionImportMapping FunctionImportName="spThongkeTuyentqTheoNgayDi" FunctionName="thongkeModel.Store.spThongkeTuyentqTheoNgayDi" />
+          <EntitySetMapping Name="doanhthuSaleQuays">
+            <EntityTypeMapping TypeName="thongkeModel.doanhthuSaleQuay">
+              <MappingFragment StoreEntitySet="doanhthuSaleQuay">
+                <ScalarProperty Name="thucthu" ColumnName="thucthu" />
+                <ScalarProperty Name="doanhso" ColumnName="doanhso" />
+                <ScalarProperty Name="nguoixuatve" ColumnName="nguoixuatve" />
+                <ScalarProperty Name="stt" ColumnName="stt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

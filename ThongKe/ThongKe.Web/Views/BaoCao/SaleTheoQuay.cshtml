@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "NgayCN";
+    ViewBag.Title = "SaleTheoQuay";
     Layout = "/Views/Shared/_Layout.cshtml";
     var cn = Session["chinhanh"].ToString();
 }
@@ -23,13 +23,13 @@
     <div class="row">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4>BÁO CÁO DOANH THU SALES THEO QUẦY @Session["daily"]</h4>
+                <h4>BÁO CÁO DOANH THU SALES THEO QUẦY </h4>
             </div>
             <div class="panel-body">
                 <form id="frmSearch" asp-controller="BaoCao" asp-action="NgayCN" method="post" class="form-horizontal" role="form">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="hidden" name="@cn" id="ddlChiNhanh" />
+                            <input type="hidden" name="cn" id="hidcn" data-cn="@cn" />
                             <div class="col-md-2">
                                 Từ ngày
                                 <input type="text" class="form-control maskInput" name="tungay" id="txtTuNgay" placeholder="Type date..." />

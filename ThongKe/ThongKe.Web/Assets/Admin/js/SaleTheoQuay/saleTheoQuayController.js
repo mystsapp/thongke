@@ -26,7 +26,7 @@ var saleTheoQuayController = {
     init: function () {
         // saleTheoQuayController.LoadData();
         //var cn = '@Request.RequestContext.HttpContext.Session["chinhanh"]';
-        saleTheoQuayController.loadDdlDaiLy();
+        saleTheoQuayController.loadDdlDaiLyByChiNhanh();
         saleTheoQuayController.registerEvent();
     },
 
@@ -80,11 +80,11 @@ var saleTheoQuayController = {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
     },
-    loadDdlDaiLyByChiNhanh: function (cn) {
-        //var cn = "STS";
-        $('#ddlDaily').html('');
+    loadDdlDaiLyByChiNhanh: function () {
+        var cn = $('#hidcn').data('cn');
+        $('#ddlDaiLy').html('');
         var option = '';
-
+        option = '<option value=" "> Tất cả </option>';
         $.ajax({
             url: '/account/GetDmdailyByChiNhanh',
             type: 'GET',
@@ -93,55 +93,18 @@ var saleTheoQuayController = {
             },
             dataType: 'json',
             success: function (response) {
-                //if (response.length > 0) {
-                //var data = JSON.stringify(response.data);
                 var data = JSON.parse(response.data);
-                //$('#ddlDaiLy').html('');
-
-                //var options = '';
-                //options += '<option value="Select">Select</option>';
-
-                //for (var i = 0; i < data.length; i++) {
-                //    options += '<option value="' + data[i].SoXe + '">' + data[i].LoaiXe + '</option>'; 
-
-                //}
-                //$('#ddlDMXe').append(options);
-
-                $.each(data, function (i, item) {
-                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
-
-                });
-                $('#ddlDaily').html(option);
-              
-            }
-        });
-    },
-
-    loadDdlDaiLy: function () {
-        $('#ddlDaiLy').html('');
-        var option = '';
-
-        $.ajax({
-            url: '/account/GetAllDmDaiLy',
-            type: 'GET',
-            dataType: 'json',
-            success: function (response) {
-
-                var data = JSON.parse(response.data);
-                //console.log(data);
-
+         
                 $.each(data, function (i, item) {
                     option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
 
                 });
                 $('#ddlDaiLy').html(option);
-
+              
             }
         });
-        //homeController.resetForm();
-        //var id = $('.btn-edit').data('id');
-
     },
 
+  
 }
 saleTheoQuayController.init();

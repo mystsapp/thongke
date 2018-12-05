@@ -14,8 +14,9 @@ namespace ThongKe.Data.Models.EF
     
     public partial class doanhthuSaleQuay
     {
+        public int stt { get; set; }
         public string nguoixuatve { get; set; }
-        public decimal doanhso { get; set; }
-        public decimal doanhthu { get; set; }
+        public Nullable<decimal> doanhso { get; set; }
+        public Nullable<decimal> thucthu { get; set; }
     }
 }
