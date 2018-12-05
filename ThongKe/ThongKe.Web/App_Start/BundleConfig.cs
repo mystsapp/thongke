@@ -79,6 +79,7 @@ namespace ThongKe.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Assets/Admin/js/User/jquery-ui/jquery-ui.css",
                       "~/Content/boostrap/vendor/metisMenu/metisMenu.min.css",
                       "~/Content/boostrap/dist/css/sb-admin-2.css",
                       "~/Content/boxover/css/boxover.css",

@@ -30,8 +30,8 @@ namespace ThongKe.Data.Models.EF
         public virtual DbSet<account> accounts { get; set; }
         public virtual DbSet<chinhanh> chinhanhs { get; set; }
         public virtual DbSet<dmdaily> dmdailies { get; set; }
-        public virtual DbSet<doanhthuDoanNgayDi> doanhthuDoanNgayDis { get; set; }
         public virtual DbSet<doanhthuSaleQuay> doanhthuSaleQuays { get; set; }
+        public virtual DbSet<doanhthuDoanNgayDi> doanhthuDoanNgayDis { get; set; }
         public virtual DbSet<doanhthuToanhethong> doanhthuToanhethongs { get; set; }
         public virtual DbSet<doanthuQuayNgayBan> doanthuQuayNgayBans { get; set; }
         public virtual DbSet<tuyentqNgaydi> tuyentqNgaydis { get; set; }

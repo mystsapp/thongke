@@ -207,6 +207,7 @@
     <Compile Include="Models\changepassViewModel.cs" />
     <Compile Include="Models\chinhanhViewModel.cs" />
     <Compile Include="Models\dmdailyViewModel.cs" />
+    <Compile Include="Models\doanhthuSaleQuayViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

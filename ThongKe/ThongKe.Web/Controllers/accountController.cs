@@ -28,9 +28,7 @@ namespace ThongKe.Web.Controllers
         public ActionResult Index()
 
         {
-            //int totalRow = 0;
-
-            //var listAccout = _accountService.Search(name, page, pageSize, status, out totalRow);
+           
             return View();
         }
 

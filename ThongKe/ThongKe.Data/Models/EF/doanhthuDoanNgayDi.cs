@@ -14,9 +14,10 @@ namespace ThongKe.Data.Models.EF
     
     public partial class doanhthuDoanNgayDi
     {
+        public long stt { get; set; }
         public string sgtcode { get; set; }
         public string tuyentq { get; set; }
-        public System.DateTime batdau { get; set; }
+        public Nullable<System.DateTime> batdau { get; set; }
         public Nullable<System.DateTime> ketthuc { get; set; }
         public Nullable<int> sokhach { get; set; }
         public Nullable<decimal> doanhthu { get; set; }

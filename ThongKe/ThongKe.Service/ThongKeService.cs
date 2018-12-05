@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ThongKe.Data.Infrastructure;
+using ThongKe.Data.Models.EF;
 using ThongKe.Data.Repositories;
 
 namespace ThongKe.Service
@@ -14,6 +15,8 @@ namespace ThongKe.Service
         DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi);
 
         DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi);
+
+        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow);
 
         DataTable doanhthuDoanTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
 
@@ -72,10 +75,35 @@ namespace ThongKe.Service
             return result;
         }
 
+        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
+        {
+            return _thongkeRepository.doanhthuSaleTheoQuayEntities(tungay, denngay, daily, cn, khoi, page, page, out totalRow);
+        }
+
         public DataTable doanhthuTuyentqTheoNgay(string tungay, string denngay, string chinhanh, string khoi)
         {
             var result = _thongkeRepository.doanhthuTuyentqTheoNgay(tungay, denngay, chinhanh, khoi);
             return result;
         }
+
+        //public IEnumerable<doanhthuSaleQuay> Search(int page, int pageSize, out int totalRow)
+        //{
+        //    var query = _thongkeRepository.GetAll();
+        //    if (!string.IsNullOrEmpty(keyword))
+        //    {
+        //        query = _accountRepository.GetMulti(x => x.hoten.Contains(keyword) || x.username.Contains(keyword));
+        //    }
+
+        //    if (!string.IsNullOrEmpty(status))
+        //    {
+        //        var statusBool = bool.Parse(status);
+        //        query = query.Where(x => x.trangthai == statusBool);
+        //    }
+
+        //    totalRow = query.Count();
+        //    query = query.OrderByDescending(x => x.ngaytao).Skip((page - 1) * pageSize).Take(pageSize);
+
+        //    return query;
+        //}
     }
 }

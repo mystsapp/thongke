@@ -79,13 +79,19 @@ var saleTheoNgayDiController = {
         $('#txtDenNgay').val('');
     },
     loadDdlDaiLy: function () {
+        
         $('#ddlDaiLy').html('');
+        var cn = $('#hidCn').data('cn');
+        //alert(cn);
         var option = '';
         // option = option + '<option value=select>Select</option>';
 
         $.ajax({
-            url: '/account/GetAllDmDaiLy',
+            url: '/account/GetDmdailyByChiNhanh',
             type: 'GET',
+            data: {
+                chinhanh: cn
+            },
             dataType: 'json',
             success: function (response) {
                 //if (response.length > 0) {

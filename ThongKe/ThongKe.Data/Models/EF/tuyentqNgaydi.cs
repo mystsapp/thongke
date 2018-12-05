@@ -14,13 +14,14 @@ namespace ThongKe.Data.Models.EF
     
     public partial class tuyentqNgaydi
     {
+        public long stt { get; set; }
         public string chinhanh { get; set; }
         public string tuyentq { get; set; }
-        public int skkl { get; set; }
-        public decimal dtkl { get; set; }
-        public int skkd { get; set; }
-        public decimal dtkd { get; set; }
-        public int tongkhach { get; set; }
-        public decimal tongdoanhthu { get; set; }
+        public Nullable<int> skkl { get; set; }
+        public Nullable<decimal> dtkl { get; set; }
+        public Nullable<int> skkd { get; set; }
+        public Nullable<decimal> dtkd { get; set; }
+        public Nullable<int> tongkhach { get; set; }
+        public Nullable<decimal> tongdoanhthu { get; set; }
     }
 }

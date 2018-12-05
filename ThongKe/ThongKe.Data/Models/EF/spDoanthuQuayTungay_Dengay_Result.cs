@@ -10,13 +10,18 @@
 namespace ThongKe.Data.Models.EF
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class doanhthuSaleQuay
+    public partial class spDoanthuQuayTungay_Dengay_Result
     {
-        public long stt { get; set; }
-        public string nguoixuatve { get; set; }
-        public Nullable<decimal> doanhso { get; set; }
+        public string sgtcode { get; set; }
+        public Nullable<System.DateTime> ngaydi { get; set; }
+        public Nullable<System.DateTime> ngayve { get; set; }
+        public string tenkhach { get; set; }
+        public int vetourid { get; set; }
+        public Nullable<decimal> tongthu { get; set; }
         public Nullable<decimal> thucthu { get; set; }
+        public string nguoixuatve { get; set; }
+        public Nullable<System.DateTime> ngayxuatve { get; set; }
+        public System.DateTime ngaytao { get; set; }
     }
 }

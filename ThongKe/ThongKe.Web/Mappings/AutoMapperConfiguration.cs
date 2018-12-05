@@ -15,6 +15,8 @@ namespace ThongKe.Web.Mappings
             Mapper.CreateMap<account, accountViewModel>();
             Mapper.CreateMap<chinhanh, chinhanhViewModel>();
             Mapper.CreateMap<dmdaily, dmdailyViewModel>();
+
+            Mapper.CreateMap<doanhthuSaleQuay, doanhthuSaleQuayViewModel>();
         }
     }
 }

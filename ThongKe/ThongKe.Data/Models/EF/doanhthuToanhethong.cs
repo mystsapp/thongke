@@ -14,6 +14,7 @@ namespace ThongKe.Data.Models.EF
     
     public partial class doanhthuToanhethong
     {
+        public long stt { get; set; }
         public string chinhanh { get; set; }
         public string dailyxuatve { get; set; }
         public Nullable<int> khachht { get; set; }

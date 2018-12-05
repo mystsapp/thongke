@@ -61,12 +61,16 @@ var saleTheoQuayController = {
         });
 
 
-        $('#btnSearch').off('click').on('click', function () {
+        $('#btnExport').off('click').on('click', function () {
             $('#frmSearch').submit();
         });
 
         $('#btnReset').off('click').on('click', function () {
             saleTheoQuayController.resetForm();
+        });
+
+        $('#btnSearch').off('click').on('click', function () {
+            saleTheoQuayController.LoadData();
         });
 
         $("#txtTuNgay, #txtDenNgay").datepicker({
@@ -118,12 +122,16 @@ var saleTheoQuayController = {
     },
 
     loadDdlDaiLy: function () {
+        var cn = $('#hidCn').data('cn');
         $('#ddlDaiLy').html('');
         var option = '';
 
         $.ajax({
-            url: '/account/GetAllDmDaiLy',
+            url: '/account/GetDmdailyByChiNhanh',
             type: 'GET',
+            data: {
+                chinhanh: cn
+            },
             dataType: 'json',
             success: function (response) {
 
@@ -142,6 +150,83 @@ var saleTheoQuayController = {
         //var id = $('.btn-edit').data('id');
 
     },
+
+    LoadData: function (changePageSize) {
+        //var name = $('#txtNameS').val();
+        //var status = $('#ddlStatusS').val();
+
+        $.ajax({
+            url: '/BaoCao/LoadDataSaleTheoQuay',
+            type: 'GET',
+            data: {
+                page: homeconfig.pageIndex,
+                pageSize: homeconfig.pageSize
+            },
+            dataType: 'json',
+            success: function (response) {
+                //console.log(response.data);
+                if (response.status) {
+                    //console.log(response.data);
+                    var data = response.data;
+                    //var data = JSON.parse(response.data);
+
+                    //alert(data);
+                    var html = '';
+                    var template = $('#data-template').html();
+
+                    $.each(data, function (i, item) {
+                        //usage:
+                        //var formattedDate = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
+                        //alert(formattedDate)
+                        var ns = "";
+                        if (item.ngaysinh == null)
+                            ns = "";
+                        else
+                            ns = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
+
+                        html += Mustache.render(template, {
+                            username: item.username,
+                            hoten: item.hoten,
+                            daily: item.daily,
+                            chinhanh: item.chinhanh,
+                            trangthai: item.trangthai == true ? "<span class=\"label label-success\">Kích hoạt</span>" : "<span class=\"label label-danger\">Khóa</span>"
+                        });
+
+                    })
+
+                    $('#tblData').html(html);
+                    userController.paging(response.total, function () {
+                        userController.LoadData();
+                    }, changePageSize);
+                    userController.registerEvent();
+                }
+            }
+        })
+    },
+
+    paging: function (totalRow, callback, changePageSize) {
+        var totalPage = Math.ceil(totalRow / homeconfig.pageSize);//lam tron len
+
+        //unbind pagination if it existed or click change size ==> reset
+        if (('#pagination a').length === 0 || changePageSize === true) {
+            $('#pagination').empty();
+            $('#pagination').removeData('twbsPagination');
+            $('#pagination').unbind("page");
+        }
+
+        $('#pagination').twbsPagination({
+            totalPages: totalPage,
+            first: "Đầu",
+            next: "Tiếp",
+            last: "Cuối",
+            prev: "trước",
+            visiblePages: 10, // tong so trang hien thi , ...12345678910...
+            onPageClick: function (event, page) {
+                homeconfig.pageIndex = page;//khi chuyen trang thi set lai page index
+                setTimeout(callback, 200);
+            }
+        });
+    }
 
 }
 saleTheoQuayController.init();

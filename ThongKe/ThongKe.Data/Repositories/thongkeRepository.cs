@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ThongKe.Common;
 using ThongKe.Data.Infrastructure;
 using ThongKe.Data.Models.EF;
-using System.Data;
-using ThongKe.Common;
+
 namespace ThongKe.Data.Repositories
 {
     public interface IthongkeRepository : IRepository<doanthuQuayNgayBan>
@@ -14,6 +13,8 @@ namespace ThongKe.Data.Repositories
         DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi);
 
         DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi);
+
+        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow);
 
         DataTable doanhthuDoanTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
 
@@ -25,6 +26,7 @@ namespace ThongKe.Data.Repositories
 
         DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi);
     }
+
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
     {
         public thongkeRepository(IDbFactory dbFactory) : base(dbFactory)
@@ -85,6 +87,30 @@ namespace ThongKe.Data.Repositories
                 dt = EntityToTable.ToDataTable(result);
                 if (dt.Rows.Count > 0)
                     return dt;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
+        {
+            try
+            {
+                TKDbContext db = new TKDbContext();
+                DataTable dt = new DataTable();
+                //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
+                //DateTime dn = Convert.ToDateTime("2018-11-10");
+
+                var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, cn, khoi).ToList();
+                 totalRow = result.Count();
+
+                result = result.OrderByDescending(x => x.nguoixuatve).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
                 return null;
             }
             catch
@@ -167,6 +193,4 @@ namespace ThongKe.Data.Repositories
             }
         }
     }
-
-
 }
