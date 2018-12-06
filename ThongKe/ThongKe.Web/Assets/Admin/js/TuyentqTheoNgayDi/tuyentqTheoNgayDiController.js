@@ -21,12 +21,16 @@
     },
     "Chưa đúng định dạng dd/mm/yyyy.");
 
+var homeconfig = {
+    pageSize: 10,
+    pageIndex: 1
+};
 
-var tuyenTheoNgayDiController = {
+var tuyentqTheoNgayDiController = {
     init: function () {
-        // tuyenTheoNgayDiController.LoadData();
-        tuyenTheoNgayDiController.loadDdlChiNhanh();
-        tuyenTheoNgayDiController.registerEvent();
+        // tuyentqTheoNgayDiController.LoadData();
+        tuyentqTheoNgayDiController.loadDdlChiNhanh();
+        tuyentqTheoNgayDiController.registerEvent();
     },
 
     registerEvent: function () {
@@ -58,12 +62,18 @@ var tuyenTheoNgayDiController = {
         });
 
 
-        $('#btnSearch').off('click').on('click', function () {
+        $('#btnExport').off('click').on('click', function () {
             $('#frmSearch').submit();
         });
 
         $('#btnReset').off('click').on('click', function () {
-            tuyenTheoNgayDiController.resetForm();
+            tuyentqTheoNgayDiController.resetForm();
+        });
+
+        $('#btnSearch').off('click').on('click', function () {
+            if ($('#frmSearch').valid()) {
+                tuyentqTheoNgayDiController.LoadData();
+            }
         });
 
         $("#txtTuNgay, #txtDenNgay").datepicker({
@@ -100,7 +110,95 @@ var tuyenTheoNgayDiController = {
             }
         });
        
+    },
+
+    LoadData: function (changePageSize) {
+        var tungay = $('#txtTuNgay').val();
+        var denngay = $('#txtDenNgay').val();
+        var cn = $('#hidCn').data('cn');
+        if (cn == "") {
+            cn = $('#ddlChiNhanh').val();
+            var khoi = $('#ddlKhoi').val();
+        } else {
+            var khoi = $('#hidKhoi').data('khoi');
+        }
+
+        $.ajax({
+            url: '/BaoCao/LoadDataTuyentqTheoNgayDi',
+            type: 'GET',
+            data: {
+                tungay: tungay,
+                denngay: denngay,
+                chinhanh: cn,
+                khoi: khoi,
+                page: homeconfig.pageIndex,
+                pageSize: homeconfig.pageSize
+            },
+            dataType: 'json',
+            success: function (response) {
+                //console.log(response.data);
+                if (response.status) {
+                    //console.log(response.data);
+                    var data = response.data;
+                    //var data = JSON.parse(response.data);
+
+                    //alert(data);
+                    var html = '';
+                    var template = $('#data-template').html();
+
+                    $.each(data, function (i, item) {
+
+                        //var batdau = $.formattedDate(new Date(parseInt(item.batdau.substr(6))));
+                        //var ketthuc = $.formattedDate(new Date(parseInt(item.ketthuc.substr(6))));
+
+                        html += Mustache.render(template, {
+                            stt: item.stt,
+                            chinhanh: item.chinhanh,
+                            tuyentq: item.tuyentq,
+                            skkl: item.skkl,
+                            dtkl: numeral(item.dtkl).format('0,0'),
+                            skkd: item.skkd,
+                            dtkd: item.dtkd,
+                            tongkhach: item.tongkhach,
+                            tongdoanhthu: numeral(item.tongdoanhthu).format('0,0')
+                            //doanhthu: numeral(item.doanhthu).format('0,0'),
+                        });
+
+                    })
+
+                    $('#tblData').html(html);
+                    tuyentqTheoNgayDiController.paging(response.total, function () {
+                        tuyentqTheoNgayDiController.LoadData();
+                    }, changePageSize);
+                    //quayTheoNgayDiController.registerEvent();
+                }
+            }
+        })
+    },
+
+    paging: function (totalRow, callback, changePageSize) {
+        var totalPage = Math.ceil(totalRow / homeconfig.pageSize);//lam tron len
+
+        //unbind pagination if it existed or click change size ==> reset
+        if (('#pagination a').length === 0 || changePageSize === true) {
+            $('#pagination').empty();
+            $('#pagination').removeData('twbsPagination');
+            $('#pagination').unbind("page");
+        }
+
+        $('#pagination').twbsPagination({
+            totalPages: totalPage,
+            first: "Đầu",
+            next: "Tiếp",
+            last: "Cuối",
+            prev: "trước",
+            visiblePages: 10, // tong so trang hien thi , ...12345678910...
+            onPageClick: function (event, page) {
+                homeconfig.pageIndex = page;//khi chuyen trang thi set lai page index
+                setTimeout(callback, 200);
+            }
+        });
     }
 
 }
-tuyenTheoNgayDiController.init();
+tuyentqTheoNgayDiController.init();

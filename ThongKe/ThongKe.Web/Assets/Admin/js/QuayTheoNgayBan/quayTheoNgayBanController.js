@@ -63,8 +63,18 @@ var quayTheoNgayBanController = {
             }
         });
 
-        $('#btnSearch').off('click').on('click', function () {
+        $('#btnExport').off('click').on('click', function () {
             $('#frmSearch').submit();
+        });
+
+        $('#btnReset').off('click').on('click', function () {
+            quayTheoNgayBanController.resetForm();
+        });
+
+        $('#btnSearch').off('click').on('click', function () {
+            if ($('#frmSearch').valid()) {
+                quayTheoNgayBanController.LoadData();
+            }
         });
 
         $("#txtTuNgay, #txtDenNgay").datepicker({
@@ -75,6 +85,12 @@ var quayTheoNgayBanController = {
         });
 
     },
+
+    resetForm: function () {
+        $('#txtTuNgay').val('');
+        $('#txtDenNgay').val('');
+    },
+
     loadDdlChiNhanh: function () {
         $('#ddlChiNhanh').html('');
         var option = '';
@@ -98,6 +114,87 @@ var quayTheoNgayBanController = {
             }
         });
 
+    },
+
+    LoadData: function (changePageSize) {
+        var tungay = $('#txtTuNgay').val();
+        var denngay = $('#txtDenNgay').val();
+        var cn = $('#hidCn').data('cn');
+        if (cn == "") {
+            cn = $('#ddlChiNhanh').val();
+            var khoi = $('#ddlKhoi').val();
+        } else {
+            var khoi = $('#hidKhoi').data('khoi');
+        }
+
+        $.ajax({
+            url: '/BaoCao/LoadDataQuayTheoNgayBan',
+            type: 'GET',
+            data: {
+                tungay: tungay,
+                denngay: denngay,
+                chinhanh: cn,
+                khoi: khoi,
+                page: homeconfig.pageIndex,
+                pageSize: homeconfig.pageSize
+            },
+            dataType: 'json',
+            success: function (response) {
+                //console.log(response.data);
+                if (response.status) {
+                    //console.log(response.data);
+                    var data = response.data;
+                    //var data = JSON.parse(response.data);
+
+                    //alert(data);
+                    var html = '';
+                    var template = $('#data-template').html();
+
+                    $.each(data, function (i, item) {
+
+                        html += Mustache.render(template, {
+                            stt: item.stt,
+                            dailyxuatve: item.dailyxuatve,
+                            chinhanh: item.chinhanh,
+                            sokhach: item.sokhach,
+                            doanhso: numeral(item.doanhso).format('0,0'),
+                            thucthu: numeral(item.doanhthu).format('0,0')
+                        });
+
+                    })
+
+                    $('#tblData').html(html);
+                    quayTheoNgayBanController.paging(response.total, function () {
+                        quayTheoNgayBanController.LoadData();
+                    }, changePageSize);
+                    //quayTheoNgayBanController.registerEvent();
+                }
+            }
+        })
+    },
+
+    paging: function (totalRow, callback, changePageSize) {
+        var totalPage = Math.ceil(totalRow / homeconfig.pageSize);//lam tron len
+
+        //unbind pagination if it existed or click change size ==> reset
+        if (('#pagination a').length === 0 || changePageSize === true) {
+            $('#pagination').empty();
+            $('#pagination').removeData('twbsPagination');
+            $('#pagination').unbind("page");
+        }
+
+        $('#pagination').twbsPagination({
+            totalPages: totalPage,
+            first: "Đầu",
+            next: "Tiếp",
+            last: "Cuối",
+            prev: "trước",
+            visiblePages: 10, // tong so trang hien thi , ...12345678910...
+            onPageClick: function (event, page) {
+                homeconfig.pageIndex = page;//khi chuyen trang thi set lai page index
+                setTimeout(callback, 200);
+            }
+        });
     }
 }
 quayTheoNgayBanController.init();

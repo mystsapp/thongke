@@ -21,6 +21,11 @@
     },
     "Chưa đúng định dạng dd/mm/yyyy.");
 
+var homeconfig = {
+    pageSize: 10,
+    pageIndex: 1
+};
+
 var saleTheoNgayDiController = {
     init: function () {
         // saleTheoNgayDiController.LoadData();
@@ -59,12 +64,18 @@ var saleTheoNgayDiController = {
         });
 
 
-        $('#btnSearch').off('click').on('click', function () {
+        $('#btnExport').off('click').on('click', function () {
             $('#frmSearch').submit();
         });
 
         $('#btnReset').off('click').on('click', function () {
             saleTheoNgayDiController.resetForm();
+        });
+
+        $('#btnSearch').off('click').on('click', function () {
+            if ($('#frmSearch').valid()) {
+                saleTheoNgayDiController.LoadData();
+            }
         });
 
         $("#txtTuNgay, #txtDenNgay").datepicker({
@@ -106,9 +117,88 @@ var saleTheoNgayDiController = {
                 $('#ddlDaiLy').html(option);
             }
         });
-        //homeController.resetForm();
-        //var id = $('.btn-edit').data('id');
+        
 
+    },
+
+    LoadData: function (changePageSize) {
+        var tungay = $('#txtTuNgay').val();
+        var denngay = $('#txtDenNgay').val();
+        var daily = $('#ddlDaiLy').val();
+        var cn = $('#hidCn').data('cn');
+        if (cn == "") {
+            var khoi = $('#ddlKhoi').val();
+        } else {
+            var khoi = $('#hidKhoi').data('khoi');
+        }
+
+        $.ajax({
+            url: '/BaoCao/LoadDataSaleTheoNgayDi',
+            type: 'GET',
+            data: {
+                tungay: tungay,
+                denngay: denngay,
+                daily: daily,
+                chinhanh: cn,
+                khoi: khoi,
+                page: homeconfig.pageIndex,
+                pageSize: homeconfig.pageSize
+            },
+            dataType: 'json',
+            success: function (response) {
+                //console.log(response.data);
+                if (response.status) {
+                    //console.log(response.data);
+                    var data = response.data;
+                    //var data = JSON.parse(response.data);
+
+                    //alert(data);
+                    var html = '';
+                    var template = $('#data-template').html();
+
+                    $.each(data, function (i, item) {
+                       
+                        html += Mustache.render(template, {
+                            stt: item.stt,
+                            nguoixuatve: item.nguoixuatve,
+                            doanhso: numeral(item.doanhso).format('0,0'),
+                            thucthu: numeral(item.thucthu).format('0,0')
+                        });
+
+                    })
+
+                    $('#tblData').html(html);
+                    saleTheoNgayDiController.paging(response.total, function () {
+                        saleTheoNgayDiController.LoadData();
+                    }, changePageSize);
+                    //saleTheoNgayDiController.registerEvent();
+                }
+            }
+        })
+    },
+
+    paging: function (totalRow, callback, changePageSize) {
+        var totalPage = Math.ceil(totalRow / homeconfig.pageSize);//lam tron len
+
+        //unbind pagination if it existed or click change size ==> reset
+        if (('#pagination a').length === 0 || changePageSize === true) {
+            $('#pagination').empty();
+            $('#pagination').removeData('twbsPagination');
+            $('#pagination').unbind("page");
+        }
+
+        $('#pagination').twbsPagination({
+            totalPages: totalPage,
+            first: "Đầu",
+            next: "Tiếp",
+            last: "Cuối",
+            prev: "trước",
+            visiblePages: 10, // tong so trang hien thi , ...12345678910...
+            onPageClick: function (event, page) {
+                homeconfig.pageIndex = page;//khi chuyen trang thi set lai page index
+                setTimeout(callback, 200);
+            }
+        });
     }
 
 }

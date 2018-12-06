@@ -10,21 +10,32 @@ namespace ThongKe.Data.Repositories
 {
     public interface IthongkeRepository : IRepository<doanthuQuayNgayBan>
     {
-        DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi);
-
         DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi);
 
         IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow);
 
-        DataTable doanhthuDoanTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
+        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi);
 
-        DataTable doanhthuTuyentqTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
+        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow);
+
+        DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi);
+
+        IEnumerable<doanthuQuayNgayBan> doanhthuQuayTheoNgayBanEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
         DataTable doanhthuQuayTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
 
-        DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
+        IEnumerable<doanthuQuayNgayBan> doanhthuQuayTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
-        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi);
+        DataTable doanhthuDoanTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
+
+        IEnumerable<doanhthuDoanNgayDi> doanhthuDoanTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
+
+        DataTable doanhthuTuyentqTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
+        IEnumerable<tuyentqNgaydi> doanhthuTuyentqTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
+
+        DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
+        IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
+
     }
 
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
@@ -97,7 +108,7 @@ namespace ThongKe.Data.Repositories
 
         public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
         {
-            pageSize = 10;
+           // pageSize = 10;
             try
             {
                 //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
@@ -189,6 +200,120 @@ namespace ThongKe.Data.Repositories
             catch
             {
                 return null;
+            }
+        }
+
+        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string daily, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
+        {
+            try
+            {
+                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, chinhanh, khoi).ToList();
+                totalRow = result.Count();
+
+                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<doanthuQuayNgayBan> doanhthuQuayTheoNgayBanEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
+        {
+            try
+            {
+                var result = DbContext.spBaocaoDoanhThuQuayTheoNgayBan(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+                totalRow = result.Count();
+
+                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<doanthuQuayNgayBan> doanhthuQuayTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
+        {
+            try
+            {
+                var result = DbContext.spBaocaoDoanhThuQuayTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+                totalRow = result.Count();
+
+                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<doanhthuDoanNgayDi> doanhthuDoanTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
+        {
+            try
+            {
+                var result = DbContext.spBaocaoDoanhThuDoanTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+                totalRow = result.Count();
+
+                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<tuyentqNgaydi> doanhthuTuyentqTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
+        {
+            try
+            {
+                var result = DbContext.spThongkeTuyentqTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+                totalRow = result.Count();
+
+                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
+        {
+            try
+            {
+                var result = DbContext.spThongkeKhachToanHeThong(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+                totalRow = result.Count();
+
+                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
             }
         }
     }

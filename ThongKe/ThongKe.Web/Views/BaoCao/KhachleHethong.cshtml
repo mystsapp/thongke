@@ -2,6 +2,9 @@
 @{
     ViewBag.Title = "KhachLeHethong";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var cn = Session["chinhanh"].ToString();
+
 }
 
 
@@ -20,58 +23,104 @@
         })
         </script>*@
 }
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4>HIỆU QUẢ LIÊN KẾT KHÁCH LẼ CỦA CHI NHÁNH</h4>
-            </div>
-            <div class="panel-body">
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>HIỆU QUẢ LIÊN KẾT KHÁCH LẼ CỦA CHI NHÁNH</h4>
+        </div>
+        <div class="panel-body">
 
-                <form id="frmSearch" asp-controller="BaoCao" asp-action="KhachLeHeThong" method="post" class="form-horizontal" role="form">
-                    <div class="row">
+            <form id="frmSearch" asp-controller="BaoCao" asp-action="KhachLeHeThong" method="post" class="form-horizontal" role="form">
+                <div class="row">
 
-                        <div class="col-md-12">
+                    <div class="col-md-12">
 
-                            <div class="col-md-2">
-                                Từ ngày
-                                <input type="text" class="form-control maskInput" name="tungay" id="txtTuNgay" placeholder="Type date..." />
-                            </div>
+                        <input type="hidden" id="hidCn" data-cn="@cn" />
 
-                            <div class="col-md-2">
-                                Đến ngày
-                                <input type="text" class="form-control maskInput" name="denngay" id="txtDenNgay" placeholder="Type date..." />
-                            </div>
-                            @if (Session["chinhanh"].ToString() == "")
-                            {
-                                <div class="col-md-2">
-                                    Chi nhánh
-                                    <select class="form-control" id="ddlChiNhanh" name="cn">
-                                        @*<option value="">Tất cả</option>
-                                        <option value="STS">STS</option>
-                                        <option value="STH">STH</option>*@
-                                    </select>
-                                </div>
-                                <div class="col-md-2">
-                                    Khối
-                                    <select class="form-control" id="ddlKhoi" name="khoi">
-                                        <option value="OB">OB</option>
-                                        <option value="ND">ND</option>
-                                    </select>
-                                </div>
-                            }
-                            <br />
-                            <div class="col-md-2">
-                                <span class="btn-group">
-                                    <button id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-file-excel-o"></i></button>
-                                    <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
-                                </span>
-                            </div>
+
+                        <div class="col-md-2">
+                            Từ ngày
+                            <input type="text" class="form-control maskInput" name="tungay" id="txtTuNgay" placeholder="Type date..." />
                         </div>
 
+                        <div class="col-md-2">
+                            Đến ngày
+                            <input type="text" class="form-control maskInput" name="denngay" id="txtDenNgay" placeholder="Type date..." />
+                        </div>
+                        @if (Session["chinhanh"].ToString() == "")
+                        {
+                            <div class="col-md-2">
+                                Chi nhánh
+                                <select class="form-control" id="ddlChiNhanh" name="cn">
+                                    @*<option value="">Tất cả</option>
+                    <option value="STS">STS</option>
+                    <option value="STH">STH</option>*@
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                Khối
+                                <select class="form-control" id="ddlKhoi" name="khoi">
+                                    <option value="OB">OB</option>
+                                    <option value="ND">ND</option>
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+
+                            var khoi = Session["khoi"].ToString();
+                            <input type="hidden" id="hidKhoi" data-khoi="@khoi" />
+                        }
+                        <br />
+                        <div class="col-md-2">
+                            <span class="btn-group">
+                                <input type="button" id="btnSearch" class="btn btn-outline btn-default">
+                                <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
+                                <button id="btnExport" class="btn btn-outline btn-primary"><i class="fa fa-file-excel-o"></i></button>
+                            </span>
+                        </div>
                     </div>
-                </form>
-            </div>
+
+                </div>
+            </form>
         </div>
     </div>
+</div>
 
-<br />
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="text-left">
+                    <td>STT</td>
+                    <td>Chi nhánh</td>
+                    <td>Dại lý xuất vé</td>
+                    <td>Khách ht</td>
+                    <td>Thực thu ht</td>
+                    <td>Khách cu</td>
+                    <td>Thực thu cu</td>
+
+                </tr>
+            </thead>
+            <tbody id="tblData" class="table table-hover"></tbody>
+        </table>
+
+        <div id="pagination" class="pagination"></div>
+    </div>
+
+
+    <script id="data-template" type="x-tmpl-mustache">
+        Hello {{ hoten }}!
+        <tr class="text-right">
+
+            <td class="text-center">{{stt}}</td>
+            <td class="text-center">{{chinhanh}}</td>
+            <td class="text-left">{{dailyxuatve}}</td>
+            <td class="text-center">{{khachht}}</td>
+            <td>{{thucthuht}}</td>
+            <td class="text-center">{{khachcu}}</td>
+            <td>{{thucthucu}}</td>
+
+        </tr>
+    </script>
+</div>

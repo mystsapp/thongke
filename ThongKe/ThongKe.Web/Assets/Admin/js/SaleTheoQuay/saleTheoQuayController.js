@@ -91,32 +91,7 @@ var saleTheoQuayController = {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
     },
-    //loadDdlDaiLyByChiNhanh: function () {
-    //    var cn = $('#hidCn').data('cn');
-    //    $('#ddlDaily').html('');
-    //    var option = '';
-
-    //    $.ajax({
-    //        url: '/account/GetDmdailyByChiNhanh',
-    //        type: 'GET',
-    //        data: {
-    //            chinhanh: cn
-    //        },
-    //        dataType: 'json',
-    //        success: function (response) {
-    //            //if (response.length > 0) {
-    //            //var data = JSON.stringify(response.data);
-    //            var data = JSON.parse(response.data);
-
-    //            $.each(data, function (i, item) {
-    //                option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
-
-    //            });
-    //            $('#ddlDaily').html(option);
-              
-    //        }
-    //    });
-    //},
+    
 
     loadDdlDaiLyByChiNhanh: function () {
         var cn = $('#hidCn').data('cn');

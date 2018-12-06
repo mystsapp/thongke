@@ -17,6 +17,12 @@ namespace ThongKe.Web.Mappings
             Mapper.CreateMap<dmdaily, dmdailyViewModel>();
 
             Mapper.CreateMap<doanhthuSaleQuay, doanhthuSaleQuayViewModel>();
+            Mapper.CreateMap<doanthuQuayNgayBan, doanthuQuayNgayBanViewModel>();
+
+            Mapper.CreateMap<doanhthuDoanNgayDi, doanhthuDoanNgayDiViewModel>();
+            Mapper.CreateMap<tuyentqNgaydi, tuyentqNgaydiViewModel>();
+            Mapper.CreateMap<doanhthuToanhethong, doanhthuToanhethongViewModel>();
+
         }
     }
 }

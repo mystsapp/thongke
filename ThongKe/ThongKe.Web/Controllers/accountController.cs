@@ -27,7 +27,7 @@ namespace ThongKe.Web.Controllers
         // GET: account
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
@@ -101,7 +101,8 @@ namespace ThongKe.Web.Controllers
                 {
                     user.password = _accountService.EncodeSHA1(user.password);
                 }
-                user.password = hidPass;
+                else
+                    user.password = hidPass;
 
                 try
                 {

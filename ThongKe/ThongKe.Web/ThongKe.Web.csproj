@@ -207,8 +207,12 @@
     <Compile Include="Models\changepassViewModel.cs" />
     <Compile Include="Models\chinhanhViewModel.cs" />
     <Compile Include="Models\dmdailyViewModel.cs" />
+    <Compile Include="Models\doanhthuDoanNgayDiViewModel.cs" />
     <Compile Include="Models\doanhthuSaleQuayViewModel.cs" />
+    <Compile Include="Models\doanhthuToanhethongViewModel.cs" />
+    <Compile Include="Models\doanthuQuayNgayBanViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\tuyentqNgaydiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
