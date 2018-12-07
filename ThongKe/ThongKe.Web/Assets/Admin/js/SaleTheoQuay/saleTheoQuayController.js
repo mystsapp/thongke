@@ -97,7 +97,7 @@ var saleTheoQuayController = {
         var cn = $('#hidCn').data('cn');
         $('#ddlDaiLy').html('');
         var option = '';
-
+        option = '<option value=" ">' + "Tất cả" + '</option>';
         $.ajax({
             url: '/account/GetDmdailyByChiNhanh',
             type: 'GET',

@@ -54,7 +54,7 @@
     loadDdlDaiLyByChiNhanh: function (optionValue) {
         $('#ddlDaily').html('');
         var option = '';
-
+        option = '<option value=" ">' + "Tất cả" + '</option>';
         $.ajax({
             url: '/baocao/GetDmdailyByChiNhanh',
             type: 'GET',
