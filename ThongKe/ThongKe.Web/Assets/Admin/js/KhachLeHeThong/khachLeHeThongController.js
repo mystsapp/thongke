@@ -212,5 +212,29 @@ var khachLeHeThongController = {
         });
     }
 
+    //paging: function (totalRow, callback, changePageSize) {
+    //    var totalPage = Math.ceil(totalRow / homeconfig.pageSize);//lam tron len
+
+    //    //unbind pagination if it existed or click change size ==> reset
+    //    if (('#pagination a').length === 0 || changePageSize === true) {
+    //        $('#pagination').empty();
+    //        $('#pagination').removeData('twbsPagination');
+    //        $('#pagination').unbind("page");
+    //    }
+
+    //    $('#pagination').twbsPagination({
+    //        totalPages: totalPage,
+    //        first: "Đầu",
+    //        next: "Tiếp",
+    //        last: "Cuối",
+    //        prev: "trước",
+    //        visiblePages: 10, // tong so trang hien thi , ...12345678910...
+    //        onPageClick: function (event, page) {
+    //            homeconfig.pageIndex = page;//khi chuyen trang thi set lai page index
+    //            setTimeout(callback, 200);
+    //        }
+    //    });
+    //}
+
 }
 khachLeHeThongController.init();
