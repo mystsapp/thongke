@@ -11,7 +11,7 @@ namespace ThongKe.Service
 {
     public interface ICommonService
     {
-        IEnumerable<chinhanh> GetAllChiNhanh();
+        IEnumerable<string> GetAllChiNhanh();
         IEnumerable<dmdaily> GetDmdailyByChiNhanh(string chinhanh);
         IEnumerable<dmdaily> GetAllDmDaiLy();
     }
@@ -28,9 +28,11 @@ namespace ThongKe.Service
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<chinhanh> GetAllChiNhanh()
+        public IEnumerable<string> GetAllChiNhanh()
         {
-            return _chinhanhRepository.GetAll();
+            var result=_chinhanhRepository.GetAll().Select(x=>x.chinhanh1).Distinct();
+            var count=result.Count();
+            return result;
         }
 
         public IEnumerable<dmdaily> GetAllDmDaiLy()

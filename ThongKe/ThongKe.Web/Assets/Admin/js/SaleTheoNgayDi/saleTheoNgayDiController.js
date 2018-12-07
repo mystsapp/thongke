@@ -22,7 +22,7 @@
     "Chưa đúng định dạng dd/mm/yyyy.");
 
 var homeconfig = {
-    pageSize: 10,
+    pageSize: 15,
     pageIndex: 1
 };
 

@@ -67,10 +67,11 @@
                         }
                         <br />
                         <div class="col-md-3">
+
                             <span class="btn-group">
-                                <button id="btnExport" class="btn btn-outline btn-primary"><i class="fa fa-file-excel-o"></i></button>
-                                <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
-                                <input type="button" id="btnSearch" class="btn btn-outline btn-default"><i class="fa fa-search"></i>
+                                <button type="button" id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-search"></i></button>
+                                <button id="btnReset" class="btn btn-outline btn-warning"><i class="fas fa-broom"></i></button>
+                                <button id="btnExport" class="btn btn-outline btn-success"><i class="fas fa-file-export"></i></button>
                             </span>
                         </div>
                     </div>
@@ -83,9 +84,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <table class="table table-bordered table-hover text-center">
+        <table class="table table-bordered table-hover">
             <thead>
-                <tr>
+                <tr class="text-left">
                     <td>STT</td>
                     <td>Nhân viên sale</td>
                     <td>Doanh số</td>
@@ -103,10 +104,10 @@
     <script id="data-template" type="x-tmpl-mustache">
         Hello {{ hoten }}!
         <tr>
-            <td>{{stt}}</td>
-            <td>{{nguoixuatve}}</td>
-            <td>{{doanhso}}</td>
-            <td>{{thucthu}}</td>
+            <td class="text-center">{{stt}}</td>
+            <td class="text-left">{{nguoixuatve}}</td>
+            <td class="text-right">{{doanhso}}</td>
+            <td class="text-right">{{thucthu}}</td>
             @*<td>{{tongcong}}</td>*@
 
         </tr>

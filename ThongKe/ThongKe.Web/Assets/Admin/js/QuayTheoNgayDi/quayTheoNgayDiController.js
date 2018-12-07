@@ -22,7 +22,7 @@
     "Chưa đúng định dạng dd/mm/yyyy.");
 
 var homeconfig = {
-    pageSize: 10,
+    pageSize: 15,
     pageIndex: 1
 }
 
@@ -103,10 +103,19 @@ var quayTheoNgayDiController = {
                 var data = JSON.parse(response.data);
                 $('#ddlChiNhanh').html('');
 
-                $.each(data, function (i, item) {
-                    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
+                //$.each(data, function (i, item) {
+                //    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
 
-                });
+                //});
+                for (var i = 0; i < data.length; i++) {
+                    // set the key/property (input element) for your object
+                    var ele = data[i];
+                    //console.log(ele);
+                    option = option + '<option value="' + ele + '">' + ele + '</option>'; //chinhanh1
+                    // add the property to the object and set the value
+                    //params[ele] = $('#' + ele).val();
+                }
+
                 $('#ddlChiNhanh').html(option);
 
             }

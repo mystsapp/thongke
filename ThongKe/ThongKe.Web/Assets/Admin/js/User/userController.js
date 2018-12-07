@@ -174,26 +174,21 @@ var userController = {
                 //var data = JSON.stringify(response.data);
                 var data = JSON.parse(response.data);
                 $('#ddlChiNhanh').html('');
-                //var options = '';
-                //options += '<option value="Select">Select</option>';
+                
+                //$.each(data, function (i, item) {
+                //    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
 
-                //for (var i = 0; i < data.length; i++) {
-                //    options += '<option value="' + data[i].SoXe + '">' + data[i].LoaiXe + '</option>'; 
-
-                //}
-                //$('#ddlDMXe').append(options);
-
-                $.each(data, function (i, item) {
-                    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
-
-                });
+                //});
+                for (var i = 0; i < data.length; i++) {
+                    // set the key/property (input element) for your object
+                    var ele = data[i];
+                    //console.log(ele);
+                    option = option + '<option value="' + ele + '">' + ele + '</option>'; //chinhanh1
+                    // add the property to the object and set the value
+                    //params[ele] = $('#' + ele).val();
+                }
                 $('#ddlChiNhanh').html(option);
-                //suachuaController.registerEvent();
-                //$('#ddlDMXe').change(function () {
-                //    var a=$('#ddlDMXe').val();
-                //    alert(a);
-                //})
-                //}
+                
             }
         });
         //homeController.resetForm();

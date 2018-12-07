@@ -150,10 +150,10 @@ namespace ThongKe.Web.Controllers
         public JsonResult GetAllChiNhanh()
         {
             var model = _commonService.GetAllChiNhanh();
-            var viewModel = Mapper.Map<IEnumerable<chinhanh>, IEnumerable<chinhanhViewModel>>(model);
+            //var viewModel = Mapper.Map<IEnumerable<chinhanh>, IEnumerable<chinhanhViewModel>>(model);
             return Json(new
             {
-                data = JsonConvert.SerializeObject(viewModel)
+                data = JsonConvert.SerializeObject(model)
             }, JsonRequestBehavior.AllowGet);
         }
 

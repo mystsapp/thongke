@@ -117,7 +117,7 @@ namespace ThongKe.Data.Repositories
                 var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, cn, khoi).ToList();
                  totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;
@@ -210,7 +210,7 @@ namespace ThongKe.Data.Repositories
                 var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, chinhanh, khoi).ToList();
                 totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;
@@ -229,7 +229,7 @@ namespace ThongKe.Data.Repositories
                 var result = DbContext.spBaocaoDoanhThuQuayTheoNgayBan(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;
@@ -248,7 +248,7 @@ namespace ThongKe.Data.Repositories
                 var result = DbContext.spBaocaoDoanhThuQuayTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;
@@ -267,7 +267,7 @@ namespace ThongKe.Data.Repositories
                 var result = DbContext.spBaocaoDoanhThuDoanTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;
@@ -286,7 +286,7 @@ namespace ThongKe.Data.Repositories
                 var result = DbContext.spThongkeTuyentqTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;
@@ -305,7 +305,7 @@ namespace ThongKe.Data.Repositories
                 var result = DbContext.spThongkeKhachToanHeThong(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 totalRow = result.Count();
 
-                result = result.OrderByDescending(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;

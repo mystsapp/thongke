@@ -69,12 +69,12 @@
                             <input type="hidden" id="hidKhoi" data-khoi="@khoi" />
                         }
                         <br />
-                        <div class="col-md-2">
+                        <div class="col-md-3">
 
                             <span class="btn-group">
-                                <input type="button" id="btnSearch" class="btn btn-outline btn-default">
+                                <button type="button" id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-search"></i></button>
                                 <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
-                                <button id="btnExport" class="btn btn-outline btn-primary"><i class="fa fa-file-excel-o"></i></button>
+                                <button id="btnExport" class="btn btn-outline btn-success"><i class="fas fa-file-export"></i></button>
                             </span>
                         </div>
                     </div>
@@ -110,15 +110,15 @@
 
     <script id="data-template" type="x-tmpl-mustache">
         Hello {{ hoten }}!
-        <tr class="text-right">
+        <tr>
 
-            <td>{{stt}}</td>
-            <td>{{sgtcode}}</td>
-            <td>{{tuyentq}}</td>
-            <td>{{batdau}}</td>
-            <td>{{ketthuc}}</td>
-            <td>{{sokhach}}</td>
-            <td>{{doanhthu}}</td>
+            <td class="text-center">{{stt}}</td>
+            <td class="text-left">{{sgtcode}}</td>
+            <td class="text-left">{{tuyentq}}</td>
+            <td class="text-center">{{batdau}}</td>
+            <td class="text-center">{{ketthuc}}</td>
+            <td class="text-center">{{sokhach}}</td>
+            <td class="text-right">{{doanhthu}}</td>
 
         </tr>
     </script>

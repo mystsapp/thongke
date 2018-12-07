@@ -85,6 +85,7 @@ namespace ThongKe.Web
                       "~/Content/boxover/css/boxover.css",
                       "~/Content/boostrap/vendor/morrisjs/morris.css",
                       "~/Content/boostrap/vendor/font-awesome/css/font-awesome.min.css",
+                      "~/Assets/Admin/fontawesome-free-5.1.0-web/css/all.css",
                       "~/Content/Site.css"));
         }
     }
