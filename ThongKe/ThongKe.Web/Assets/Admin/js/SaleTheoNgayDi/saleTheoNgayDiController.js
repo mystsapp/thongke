@@ -95,6 +95,7 @@ var saleTheoNgayDiController = {
         var cn = $('#hidCn').data('cn');
         //alert(cn);
         var option = '';
+        option = '<option value=" ">' + "Tất cả" + '</option>';
         // option = option + '<option value=select>Select</option>';
 
         $.ajax({

@@ -91,19 +91,22 @@
                     <li>
                         <a href="/"><i class="fa fa-dashboard fa-fw"></i> Trang chủ</a>
                     </li>
+                    @if (Session["role"].ToString() == "admin")
+                    {
                     <li>
                         <a href="/Account"><i class="fa fa-car fa-fw"></i> Tài khoản</a>
                     </li>
+                    }
                     <li>
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Báo cáo Doanh Thu <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
 
                             <li>
-                                <a href="/BaoCao/SaleTheoQuay">Sale theo quầy theo ngày đi </a>
+                                <a href="/BaoCao/SaleTheoQuay">Sale theo ngày bán </a>
                             </li>
 
                             <li>
-                                <a href="/BaoCao/SaleTheoNgayDi">Sale theo ngày đi</a>
+                                <a href="/BaoCao/SaleTheoNgayDi">Sale theo ngày đi tour</a>
                             </li>
 
                             <li>
@@ -111,14 +114,14 @@
                             </li>
 
                             <li>
-                                <a href="/BaoCao/QuayTheoNgayDi">Quầy theo ngày đi</a>
+                                <a href="/BaoCao/QuayTheoNgayDi">Quầy theo ngày đi tour</a>
                             </li>
 
                             <li>
-                                <a href="/BaoCao/DoanTheoNgayDi">Đoàn Theo Ngày</a>
+                                <a href="/BaoCao/DoanTheoNgayDi">Đoàn Theo Ngày đi tour</a>
                             </li>
                             <li>
-                                <a href="/BaoCao/TuyentqTheoNgayDi">Tuyến tham quan theo ngày đi</a>
+                                <a href="/BaoCao/TuyentqTheoNgayDi">Tuyến tham quan theo ngày đi tour</a>
                             </li>
 
                             <li>
