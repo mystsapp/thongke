@@ -82,6 +82,7 @@ namespace ThongKe.Web.Controllers
                 user.password = _accountService.EncodeSHA1(user.password);
                 user.ngaytao = DateTime.Now;
                 user.ngaycapnhat = DateTime.Now;
+                user.ngaydoimk=DateTime.Now;
                 try
                 {
                     _accountService.Add(user);
@@ -100,6 +101,7 @@ namespace ThongKe.Web.Controllers
                 if (user.password != "") //password field is required
                 {
                     user.password = _accountService.EncodeSHA1(user.password);
+                    user.ngaydoimk = DateTime.Now;
                 }
                 else
                     user.password = hidPass;

@@ -36,6 +36,8 @@ namespace ThongKe.Data.Repositories
         DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
         IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
+        IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi);
+
     }
 
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
@@ -306,6 +308,22 @@ namespace ThongKe.Data.Repositories
                 totalRow = result.Count();
 
                 result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi)
+        {
+            try
+            {
+                var result = DbContext.spThongkeKhachToanHeThong(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+
                 // dt = EntityToTable.ToDataTable(result);
                 if (result.Count > 0)
                     return result;

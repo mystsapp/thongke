@@ -2213,6 +2213,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\Admin\js\Plugin\numeral\languages\" />
     <Folder Include="Assets\Admin\js\Plugin\numeral\min\languages\" />

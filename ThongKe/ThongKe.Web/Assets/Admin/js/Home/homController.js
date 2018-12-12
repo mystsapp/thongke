@@ -12,22 +12,77 @@
         };
     }])
 
-    .controller("ChartController", ["MyService","$scope", ChartController]);
+    .controller("ChartController", ["MyService", "$scope","$http", ChartController]);
+//ChartController.$inject=[]
 
-function ChartController(MyService, $scope) {
+function ChartController(MyService, $scope,$http) {
     var vm = this;
 
-    //$scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    //$scope.series = ['Doanh SỐ', 'Lợi nhuận'];
+    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+    $scope.series = ['Doanh SỐ', 'Lợi nhuận'];
 
-    //$scope.data = [
-    //    [65, 59, 80, 81, 56, 55, 40],
-    //    [28, 48, 40, 19, 86, 27, 90]
-    //];
+    $scope.data = [
+        [65, 59, 80, 81, 56, 55, 40],
+        [28, 48, 40, 19, 86, 27, 90]
+    ];
 
 
-        $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-        $scope.data = [300, 500, 100];
+        //$scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+        //$scope.data = [300, 500, 100];
+    //var tungay = '01/01/2016';
+    //var denngay = '01/01/2019';
+    //var cn = 'STS';
+    //var khoi = 'OB';
+
+    $http({
+        url: '/Home/LoadDataKhachLeHethong',
+        type: 'GET'
+        //data: {
+        //    tungay: "01/01/2016",
+        //    denngay: "01/01/2019",
+        //    chinhanh: "STS",
+        //    khoi: "OB"
+        //}
+    }).then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+
+        var labels = [];
+        var chartData = [];
+        var thucthuht = [];
+        var thucthucu = [];
+
+        var ajaxdata = response.data;
+        //console.log(ajaxdata.data);
+
+        $.each(ajaxdata.data, function (i, item) {
+            labels.push(item.dailyxuatve);
+            thucthuht.push(numeral(item.thucthuht).format('0.0')); 
+            thucthucu.push(numeral(item.thucthucu).format('0.0'));
+            //thucthucu.push(String.format("{0:#,##0}"), item.thucthucu);
+           // console.log(item.dailyxuatve);
+        });
+
+        //for (var i = 0; i < ajaxdata.length; i++) {
+        //    // set the key/property (input element) for your object
+        //    var ele = ajaxdata[i];
+        //    console.log(ele);
+        //    //option = option + '<option value="' + ele + '">' + ele + '</option>'; //chinhanh1
+        //    // add the property to the object and set the value
+        //    //params[ele] = $('#' + ele).val();
+        //}
+
+        chartData.push(thucthuht);
+        chartData.push(thucthucu);
+        $scope.data = chartData;
+        $scope.labels = labels;
+        console.log(chartData);
+        //$scope.data = response.data;
+    }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        $scope.error = response.statusText;
+    });
 
 
     //$scope.tabledata = [];
