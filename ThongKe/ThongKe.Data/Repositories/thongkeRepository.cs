@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using ThongKe.Common;
+using ThongKe.Common.ViewModel;
 using ThongKe.Data.Infrastructure;
 using ThongKe.Data.Models.EF;
 
@@ -31,13 +33,16 @@ namespace ThongKe.Data.Repositories
         IEnumerable<doanhthuDoanNgayDi> doanhthuDoanTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
         DataTable doanhthuTuyentqTheoNgay(string tungay, string denngay, string chinhanh, string khoi);
+
         IEnumerable<tuyentqNgaydi> doanhthuTuyentqTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
         DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
+
         IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
-        IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi);
+        IEnumerable<ThongKeKhachViewModel> ThongKeSoKhachOB(string khoi);
 
+        IEnumerable<ThongKeDoanhThuViewModel> ThongKeDoanhThuOB(string khoi);
     }
 
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
@@ -110,14 +115,14 @@ namespace ThongKe.Data.Repositories
 
         public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
         {
-           // pageSize = 10;
+            // pageSize = 10;
             try
             {
                 //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
                 //DateTime dn = Convert.ToDateTime("2018-11-10");
 
                 var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, cn, khoi).ToList();
-                 totalRow = result.Count();
+                totalRow = result.Count();
 
                 result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
                 // dt = EntityToTable.ToDataTable(result);
@@ -318,21 +323,42 @@ namespace ThongKe.Data.Repositories
                 throw;
             }
         }
-        public IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi)
-        {
-            try
-            {
-                var result = DbContext.spThongkeKhachToanHeThong(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
 
-                // dt = EntityToTable.ToDataTable(result);
-                if (result.Count > 0)
-                    return result;
-                return null;
-            }
-            catch
+        public IEnumerable<ThongKeKhachViewModel> ThongKeSoKhachOB(string khoi)
+        {
+            var parammeter = new SqlParameter[]
             {
-                throw;
-            }
+                new SqlParameter("@khoi",khoi)
+            };
+            var result = DbContext.Database.SqlQuery<ThongKeKhachViewModel>("spThongkeKhach @khoi", parammeter);
+            return result;
+            //try
+            //{
+            //    var parammeter = new SqlParameter[]
+            //{
+            //    new SqlParameter("@khoi",khoi)
+            //};
+            //    IEnumerable<ThongKeKhachViewModel> result = DbContext.Database.SqlQuery<ThongKeKhachViewModel>("spThongkeKhach @khoi", parammeter);
+
+            //    // dt = EntityToTable.ToDataTable(result);
+            //    if (result.Count() > 0)
+            //        return result;
+            //    return null;
+            //}
+            //catch
+            //{
+            //    throw;
+            //}
+        }
+
+        public IEnumerable<ThongKeDoanhThuViewModel> ThongKeDoanhThuOB(string khoi)
+        {
+            var parammeter = new SqlParameter[]
+            {
+                new SqlParameter("@khoi",khoi)
+            };
+            var result = DbContext.Database.SqlQuery<ThongKeDoanhThuViewModel>("spThongKeDoanhthu @khoi", parammeter);
+            return result;
         }
     }
 }

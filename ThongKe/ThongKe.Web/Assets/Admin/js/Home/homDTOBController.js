@@ -1,14 +1,23 @@
-﻿var app = angular.module("app", ["chart.js"]);
+﻿function addCommas(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + '.' + '$2');
+    }
+    return x1 + x2;
+};
 
-app.controller("ChartController", ChartController);
+app.controller("ChartDTOBController", ChartDTOBController);
 
-ChartController.$inject = ['$scope', '$http'];
+ChartDTOBController.$inject = ['$scope', '$http'];
 
-function ChartController($scope,$http) {
-    var vm = this;
+function ChartDTOBController($scope,$http) {
 
     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    $scope.series = ['SK Hiện tại', 'SK Tháng trước'];
+    $scope.series = ['Doanh Thu Hiện tại', 'Doanh Thu Tháng trước'];
     //$scope.series = ['Series A', 'Series B'];
 
     $scope.data = [
@@ -20,7 +29,7 @@ function ChartController($scope,$http) {
     //$scope.colours = ['#72C02C', '#3498DB', '#717984', '#F1C40F'];
 
     $http({
-        url: '/Home/LoadDataThongKeSoKhachOB',
+        url: '/Home/LoadDataThongDoanhThuOB',
         type: 'GET'
         //data: {
         //    tungay: "01/01/2016",
@@ -34,8 +43,8 @@ function ChartController($scope,$http) {
 
         var labels = [];
         var chartData = [];
-        var sokhachht = [];
-        var sokhachtt = [];
+        var doanhthuht = [];
+        var doanhthutt = [];
         
 
         var ajaxdata = response.data;
@@ -43,12 +52,13 @@ function ChartController($scope,$http) {
 
         $.each(tableData, function (i, item) {
             labels.push(item.DaiLyXuatVe);
-            sokhachht.push(item.SoKhachHT); 
-            sokhachtt.push(item.SoKhachTT);
+            doanhthuht.push(item.DoanhThuHT);
+            doanhthutt.push(item.DoanhThuTT);
+            //console.log(item.DoanhThuHT);
         });
 
-        chartData.push(sokhachht);
-        chartData.push(sokhachtt);
+        chartData.push(doanhthuht);
+        chartData.push(doanhthutt);
         $scope.data = chartData;
         $scope.labels = labels;
         $scope.tableData = tableData;

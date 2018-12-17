@@ -141,6 +141,12 @@
           <Parameter Name="chinhanh" Type="varchar" Mode="In" />
           <Parameter Name="khoi" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="spThongKeDoanhthu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="khoi" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spThongkeKhach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="khoi" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="spThongkeKhachToanHeThong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tungay" Type="date" Mode="In" />
           <Parameter Name="denngay" Type="date" Mode="In" />
@@ -266,6 +272,12 @@
           <EntitySet Name="doanhthuToanhethongs" EntityType="thongkeModel.doanhthuToanhethong" />
           <EntitySet Name="doanthuQuayNgayBans" EntityType="thongkeModel.doanthuQuayNgayBan" />
           <EntitySet Name="tuyentqNgaydis" EntityType="thongkeModel.tuyentqNgaydi" />
+          <FunctionImport Name="spThongkeKhach">
+          <Parameter Name="khoi" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spThongKeDoanhthu">
+            <Parameter Name="khoi" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spDoanthuQuayTungay_Dengay_Result">
           <Property Type="String" Name="sgtcode" Nullable="false" MaxLength="17" />
@@ -462,6 +474,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spThongkeKhach" FunctionName="thongkeModel.Store.spThongkeKhach" />
+          <FunctionImportMapping FunctionImportName="spThongKeDoanhthu" FunctionName="thongkeModel.Store.spThongKeDoanhthu" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

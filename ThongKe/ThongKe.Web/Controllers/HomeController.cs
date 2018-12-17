@@ -15,30 +15,53 @@ namespace ThongKe.Web.Controllers
     public class HomeController : BaseController
     {
         private IThongKeService _thongkeService;
+        private ICommonService _commonService;
 
-        public HomeController(IThongKeService thongKeService)
+        public HomeController(IThongKeService thongKeService, ICommonService commonService)
         {
             _thongkeService = thongKeService;
+            _commonService = commonService;
         }
         public ActionResult Index()
         {
             return View();
         }
 
-        public JsonResult LoadDataKhachLeHethong(string tungay, string denngay, string chinhanh, string khoi)
+        public JsonResult LoadDataThongKeSoKhachOB()
         {
-            tungay = "01/12/2018";
-            denngay = "11/12/2018";
-            chinhanh = "STS";
-            khoi = "OB";
+            string khoi = "OB";
 
-            var listDoanhthu = _thongkeService.doanhthuKhachLeHeThongEntities(tungay, denngay, chinhanh, khoi);
-            //var query = listuser.OrderBy(x => x.tenhd);
-            var responseData = Mapper.Map<IEnumerable<doanhthuToanhethong>, IEnumerable<doanhthuToanhethongViewModel>>(listDoanhthu);
+            var listOB = _commonService.ThongKeSoKhachOB(khoi);//doanhthuKhachLeHeThongEntities
 
             return Json(new
             {
-                data = responseData,
+                data = listOB,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LoadDataThongKeSoKhachND()
+        {
+            string khoi = "ND";
+
+            var listOB = _commonService.ThongKeSoKhachOB(khoi);//doanhthuKhachLeHeThongEntities
+
+            return Json(new
+            {
+                data = listOB,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LoadDataThongDoanhThuOB()
+        {
+            string khoi = "OB";
+
+            var listOB = _commonService.ThongKeDoanhThuOB(khoi);//doanhthuKhachLeHeThongEntities
+
+            return Json(new
+            {
+                data = listOB,
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }

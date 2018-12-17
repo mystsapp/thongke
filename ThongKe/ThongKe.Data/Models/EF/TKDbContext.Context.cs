@@ -345,5 +345,23 @@ namespace ThongKe.Data.Models.EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<tuyentqNgaydi>("spThongkeTuyentqTheoNgayDi", mergeOption, tungayParameter, denngayParameter, chinhanhParameter, khoiParameter);
         }
+    
+        public virtual int spThongkeKhach(string khoi)
+        {
+            var khoiParameter = khoi != null ?
+                new ObjectParameter("khoi", khoi) :
+                new ObjectParameter("khoi", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spThongkeKhach", khoiParameter);
+        }
+    
+        public virtual int spThongKeDoanhthu(string khoi)
+        {
+            var khoiParameter = khoi != null ?
+                new ObjectParameter("khoi", khoi) :
+                new ObjectParameter("khoi", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spThongKeDoanhthu", khoiParameter);
+        }
     }
 }

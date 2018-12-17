@@ -216,6 +216,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Admin\angular\angular-csp.css" />
+    <Content Include="Assets\Admin\angular\angular.js" />
+    <Content Include="Assets\Admin\angular\angular.min.js" />
+    <Content Include="Assets\Admin\angular\index.js" />
     <Content Include="Assets\Admin\css\user.css" />
     <Content Include="Assets\Admin\dist\css\sb-admin-2.css" />
     <Content Include="Assets\Admin\dist\css\sb-admin-2.min.css" />
@@ -1507,6 +1511,9 @@
     <Content Include="Assets\Admin\fontawesome-free-5.1.0-web\webfonts\fa-regular-400.svg" />
     <Content Include="Assets\Admin\fontawesome-free-5.1.0-web\webfonts\fa-solid-900.svg" />
     <Content Include="Assets\Admin\js\alertBox.js" />
+    <Content Include="Assets\Admin\js\Home\homDTNDController.js" />
+    <Content Include="Assets\Admin\js\Home\homDTOBController.js" />
+    <Content Include="Assets\Admin\js\Home\homNdController.js" />
     <Content Include="Assets\Admin\js\Plugin\numeral\Gruntfile.js" />
     <Content Include="Assets\Admin\js\Plugin\numeral\karma-ci.conf.js" />
     <Content Include="Assets\Admin\js\Plugin\numeral\locales.js" />
@@ -2171,6 +2178,13 @@
     <Content Include="Assets\Admin\fontawesome-free-5.1.0-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Assets\Admin\fontawesome-free-5.1.0-web\webfonts\fa-solid-900.woff" />
     <Content Include="Assets\Admin\fontawesome-free-5.1.0-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="Assets\Admin\angular\.bower.json" />
+    <Content Include="Assets\Admin\angular\angular.min.js.gzip" />
+    <Content Include="Assets\Admin\angular\angular.min.js.map" />
+    <Content Include="Assets\Admin\angular\bower.json" />
+    <Content Include="Assets\Admin\angular\LICENSE.md" />
+    <Content Include="Assets\Admin\angular\package.json" />
+    <Content Include="Assets\Admin\angular\README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

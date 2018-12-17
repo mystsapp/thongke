@@ -1,10 +1,10 @@
-﻿var app = angular.module("app", ["chart.js"]);
+﻿//var app = angular.module("app", ["chart.js"]);
 
-app.controller("ChartController", ChartController);
+app.controller("ChartNDController", ChartNDController);
 
-ChartController.$inject = ['$scope', '$http'];
+ChartNDController.$inject = ['$scope', '$http'];
 
-function ChartController($scope,$http) {
+function ChartNDController($scope,$http) {
     var vm = this;
 
     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
@@ -20,7 +20,7 @@ function ChartController($scope,$http) {
     //$scope.colours = ['#72C02C', '#3498DB', '#717984', '#F1C40F'];
 
     $http({
-        url: '/Home/LoadDataThongKeSoKhachOB',
+        url: '/Home/LoadDataThongKeSoKhachND',
         type: 'GET'
         //data: {
         //    tungay: "01/01/2016",

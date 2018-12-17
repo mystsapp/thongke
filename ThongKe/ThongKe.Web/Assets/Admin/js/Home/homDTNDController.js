@@ -1,14 +1,14 @@
-﻿var app = angular.module("app", ["chart.js"]);
+﻿//var app = angular.module("app", ["chart.js"]);
 
-app.controller("ChartController", ChartController);
+app.controller("ChartDTNDController", ChartDTNDController);
 
-ChartController.$inject = ['$scope', '$http'];
+ChartDTNDController.$inject = ['$scope', '$http'];
 
-function ChartController($scope,$http) {
+function ChartDTNDController($scope,$http) {
     var vm = this;
 
     $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    $scope.series = ['SK Hiện tại', 'SK Tháng trước'];
+    $scope.series = ['Doanh Thu Hiện tại', 'Doanh Thu Tháng trước'];
     //$scope.series = ['Series A', 'Series B'];
 
     $scope.data = [
@@ -20,7 +20,7 @@ function ChartController($scope,$http) {
     //$scope.colours = ['#72C02C', '#3498DB', '#717984', '#F1C40F'];
 
     $http({
-        url: '/Home/LoadDataThongKeSoKhachOB',
+        url: '/Home/LoadDataThongDoanhThuOB',
         type: 'GET'
         //data: {
         //    tungay: "01/01/2016",
@@ -34,8 +34,8 @@ function ChartController($scope,$http) {
 
         var labels = [];
         var chartData = [];
-        var sokhachht = [];
-        var sokhachtt = [];
+        var doanhthuht = [];
+        var doanhthutt = [];
         
 
         var ajaxdata = response.data;
@@ -43,12 +43,12 @@ function ChartController($scope,$http) {
 
         $.each(tableData, function (i, item) {
             labels.push(item.DaiLyXuatVe);
-            sokhachht.push(item.SoKhachHT); 
-            sokhachtt.push(item.SoKhachTT);
+            doanhthuht.push(item.DoanhThuHT); 
+            doanhthutt.push(item.DoanhThuTT);
         });
 
-        chartData.push(sokhachht);
-        chartData.push(sokhachtt);
+        chartData.push(doanhthuht);
+        chartData.push(doanhthutt);
         $scope.data = chartData;
         $scope.labels = labels;
         $scope.tableData = tableData;
