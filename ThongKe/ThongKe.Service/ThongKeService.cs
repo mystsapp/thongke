@@ -39,7 +39,12 @@ namespace ThongKe.Service
         DataTable doanhthuKhachleHethong(string tungay, string denngay, string chinhanh, string khoi);
         IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
-        //IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi);
+        DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string tungay, string denngay, string khoi);
+
+        DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi);
+
+        DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi);
+        DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi);
 
     }
     public class ThongKeService : IThongKeService
@@ -135,6 +140,30 @@ namespace ThongKe.Service
         {
             var listDanhThu = _thongkeRepository.doanhthuKhachLeHeThongEntities(tungay, denngay, chinhanh, khoi, page, pageSize, out totalRow);
             return listDanhThu;
+        }
+
+        public DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string tungay, string denngay, string khoi)
+        {
+            var result = _thongkeRepository.doanhthuQuayTheoNgayDiChitiet(quay, tungay, denngay, khoi);
+            return result;
+        }
+
+        public DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi)
+        {
+            var result = _thongkeRepository.doanhthuQuayTheoNgayBanChitiet(tungay, denngay, quay, khoi);
+            return result;
+        }
+
+        public DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        {
+            var result = _thongkeRepository.doanhthuSaleTheoNgayBanChitiet(tungay, denngay, nhanvien, khoi);
+            return result;
+        }
+
+        public DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        {
+            var result = _thongkeRepository.doanhthuSaleTheoNgayDiChitiet(tungay, denngay, nhanvien, khoi);
+            return result;
         }
 
         //public IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi)

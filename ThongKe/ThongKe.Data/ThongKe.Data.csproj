@@ -68,6 +68,12 @@
     <Compile Include="Models\EF\doanhthuDoanNgayDi.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\doanhthuQuayChitiet.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\doanhthuSaleChitiet.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\doanhthuSaleQuay.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>

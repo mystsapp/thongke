@@ -80,6 +80,29 @@ var saleTheoQuayController = {
             }
         });
 
+        $('.btnExportDetail').off('click').on('click', function () {
+
+            var tungay = $('#txtTuNgay').val();
+            var denngay = $('#txtDenNgay').val();
+            var cn = $('#hidCn').data('cn');
+            var nhanvien = $(this).data('nhanvien');
+            if (cn == "") {
+                cn = $('#ddlChiNhanh').val();
+                var khoi = $('#ddlKhoi').val();
+            } else {
+                var khoi = $('#hidKhoi').data('khoi');
+            }
+
+            $('#hidTuNgay').val(tungay);
+            $('#hidDenNgay').val(denngay);
+            $('#hidNhanVien').val(nhanvien);
+            $('#hidKhoi').val(khoi);
+
+            $('#frmDetail').submit();
+            //alert(daily);
+            //quayTheoNgayDiController.ExportDetail();
+        });
+
         $("#txtTuNgay, #txtDenNgay").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -187,7 +210,7 @@ var saleTheoQuayController = {
                     saleTheoQuayController.paging(response.total, function () {
                         saleTheoQuayController.LoadData();
                     }, changePageSize);
-                    //saleTheoQuayController.registerEvent();
+                    saleTheoQuayController.registerEvent();
                 }
             }
         })

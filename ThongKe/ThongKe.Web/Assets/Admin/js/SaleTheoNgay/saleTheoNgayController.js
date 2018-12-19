@@ -39,6 +39,8 @@
             saleTheoNgayController.resetForm();
         });
 
+        
+
         $("#txtTuNgay, #txtDenNgay").datepicker({
             changeMonth: true,
             changeYear: true,

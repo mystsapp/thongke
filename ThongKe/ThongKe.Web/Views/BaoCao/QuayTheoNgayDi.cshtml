@@ -85,6 +85,7 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr class="text-left">
+                    <td>#</td>
                     <td>STT</td>
                     <td>Văn phòng xuất vé</td>
                     <td>Chi nhánh</td>
@@ -104,7 +105,16 @@
     <script id="data-template" type="x-tmpl-mustache">
         Hello {{ hoten }}!
         <tr>
+            <td>
+                <form id="frmDetail" action="/BaoCao/LoadDataQuayTheoNgayDiChitietToExcel">
+                    <input type="hidden" name="tungay" id="hidTuNgay" />
+                    <input type="hidden" name="denngay" id="hidDenNgay" />
+                    <input type="hidden" name="quay" id="hidQuay" />
+                    <input type="hidden" name="khoi" id="hidKhoi" />
+                    <button type="button" data-daily="{{dailyxuatve}}" class="btn btn-outline btn-success btnExportDetail"><i class="fas fa-file-export"></i></button>
 
+                </form>
+            </td>
             <td class="text-center">{{stt}}</td>
             <td class="text-left">{{dailyxuatve}}</td>
             <td class="text-center">{{{chinhanh}}}</td>
@@ -114,4 +124,8 @@
 
         </tr>
     </script>
+</div>
+
+<div id="test">
+
 </div>

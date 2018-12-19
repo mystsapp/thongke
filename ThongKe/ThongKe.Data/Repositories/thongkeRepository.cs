@@ -43,6 +43,14 @@ namespace ThongKe.Data.Repositories
         IEnumerable<ThongKeKhachViewModel> ThongKeSoKhachOB(string khoi);
 
         IEnumerable<ThongKeDoanhThuViewModel> ThongKeDoanhThuOB(string khoi);
+
+        DataTable doanhthuQuayTheoNgayDiChitiet(string quay,string tungay, string denngay, string khoi);
+
+        DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi);
+
+        DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi);
+
+        DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi);
     }
 
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
@@ -359,6 +367,74 @@ namespace ThongKe.Data.Repositories
             };
             var result = DbContext.Database.SqlQuery<ThongKeDoanhThuViewModel>("spThongKeDoanhthu @khoi", parammeter);
             return result;
+        }
+
+        public DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string tungay, string denngay, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var result = DbContext.spDoanhSoQuayChitietNgaydi(quay, Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var result = DbContext.spDoanhSoQuayChitietNgayBan(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), quay, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable(); 
+                 var result = DbContext.spDoanhThuSaleChitietNgayban(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), nhanvien, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var result = DbContext.spDoanhThuSaleChitietNgaydi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), nhanvien, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

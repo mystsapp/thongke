@@ -77,6 +77,29 @@ var quayTheoNgayBanController = {
             }
         });
 
+        $('.btnExportDetail').off('click').on('click', function () {
+
+            var tungay = $('#txtTuNgay').val();
+            var denngay = $('#txtDenNgay').val();
+            var cn = $('#hidCn').data('cn');
+            var daily = $(this).data('daily');
+            if (cn == "") {
+                cn = $('#ddlChiNhanh').val();
+                var khoi = $('#ddlKhoi').val();
+            } else {
+                var khoi = $('#hidKhoi').data('khoi');
+            }
+
+            $('#hidTuNgay').val(tungay);
+            $('#hidDenNgay').val(denngay);
+            $('#hidQuay').val(daily);
+            $('#hidKhoi').val(khoi);
+
+            $('#frmDetail').submit();
+            //alert(daily);
+            //quayTheoNgayDiController.ExportDetail();
+        });
+
         $("#txtTuNgay, #txtDenNgay").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -177,7 +200,7 @@ var quayTheoNgayBanController = {
                     quayTheoNgayBanController.paging(response.total, function () {
                         quayTheoNgayBanController.LoadData();
                     }, changePageSize);
-                    //quayTheoNgayBanController.registerEvent();
+                    quayTheoNgayBanController.registerEvent();
                 }
             }
         })

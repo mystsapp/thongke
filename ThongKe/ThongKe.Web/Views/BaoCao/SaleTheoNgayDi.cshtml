@@ -86,6 +86,7 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr class="text-left">
+                    <td>#</td>
                     <td>STT</td>
                     <td>Người xuất vé</td>
                     <td>Doanh số</td>
@@ -103,7 +104,16 @@
     <script id="data-template" type="x-tmpl-mustache">
         Hello {{ hoten }}!
         <tr>
+            <td>
+                <form id="frmDetail" action="/BaoCao/LoadDataSaleTheoNgayDiChitietToExcel">
+                    <input type="hidden" name="tungay" id="hidTuNgay" />
+                    <input type="hidden" name="denngay" id="hidDenNgay" />
+                    <input type="hidden" name="nhanvien" id="hidNhanVien" />
+                    <input type="hidden" name="khoi" id="hidKhoi" />
+                    <button type="button" data-nhanvien="{{nguoixuatve}}" class="btn btn-outline btn-success btnExportDetail"><i class="fas fa-file-export"></i></button>
 
+                </form>
+            </td>
             <td class="text-center">{{stt}}</td>
             <td class="text-left">{{nguoixuatve}}</td>
             <td class="text-right">{{{doanhso}}}</td>

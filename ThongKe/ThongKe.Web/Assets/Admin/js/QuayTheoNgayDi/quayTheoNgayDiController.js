@@ -74,9 +74,33 @@ var quayTheoNgayDiController = {
         $('#btnSearch').off('click').on('click', function () {
             if ($('#frmSearch').valid()) {
                 quayTheoNgayDiController.LoadData();
+
             }
         });
 
+        $('.btnExportDetail').off('click').on('click', function () {
+
+            var tungay = $('#txtTuNgay').val();
+            var denngay = $('#txtDenNgay').val();
+            var cn = $('#hidCn').data('cn');
+            var daily = $(this).data('daily');
+
+            if (cn == "") {
+                cn = $('#ddlChiNhanh').val();
+                var khoi = $('#ddlKhoi').val();
+            } else {
+                var khoi = $('#hidKhoi').data('khoi');
+            }
+
+            $('#hidTuNgay').val(tungay);
+            $('#hidDenNgay').val(denngay);
+            $('#hidQuay').val(daily);
+            $('#hidKhoi').val(khoi);
+
+            $('#frmDetail').submit();
+            //alert(daily);
+            //quayTheoNgayDiController.ExportDetail();
+        });
 
         $("#txtTuNgay, #txtDenNgay").datepicker({
             changeMonth: true,
@@ -174,10 +198,47 @@ var quayTheoNgayDiController = {
                     quayTheoNgayDiController.paging(response.total, function () {
                         quayTheoNgayDiController.LoadData();
                     }, changePageSize);
-                    //quayTheoNgayDiController.registerEvent();
+                    quayTheoNgayDiController.registerEvent();
+                    
                 }
             }
         })
+    },
+
+    ExportDetail: function () {
+
+        var tungay = $('#txtTuNgay').val();
+        var denngay = $('#txtDenNgay').val();
+        var cn = $('#hidCn').data('cn');
+        var daily = $('.btnExportDetail').data('daily');
+
+        if (cn == "") {
+            cn = $('#ddlChiNhanh').val();
+            var khoi = $('#ddlKhoi').val();
+        } else {
+            var khoi = $('#hidKhoi').data('khoi');
+        }
+
+        var url= '/BaoCao/LoadDataQuayTheoNgayDiChitietToExcel';
+        $.get(url, function (data) {
+            $('#test').html(data);
+        });
+
+        //$.ajax({
+        //    url: '/BaoCao/LoadDataQuayTheoNgayDiChitietToExcel',
+        //    type: 'POST',
+        //    data: {
+        //        quay: daily,
+        //        tungay: tungay,
+        //        denngay: denngay,
+        //        khoi: khoi
+        //    },
+        //    dataType: 'json',
+        //    success: function (response) {
+        //        console.log(response.status);
+        //        alert('a');
+        //    }
+        //})
     },
 
     paging: function (totalRow, callback, changePageSize) {
