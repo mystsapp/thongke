@@ -28,5 +28,6 @@ namespace ThongKe.Data.Models.EF
         public System.DateTime ngaytao { get; set; }
         public string nguoicapnhat { get; set; }
         public Nullable<System.DateTime> ngaycapnhat { get; set; }
+        public string nhom { get; set; }
     }
 }

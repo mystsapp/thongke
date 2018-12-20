@@ -9,9 +9,9 @@ namespace ThongKe.Service
 {
     public interface ICommonService
     {
-        IEnumerable<string> GetAllChiNhanh();
+        IEnumerable<string> GetAllChiNhanhByNhom(string nhom);
 
-        IEnumerable<dmdaily> GetDmdailyByChiNhanh(string chinhanh);
+        IEnumerable<dmdaily> GetDmdailyByNhomChiNhanh(string nhom);
 
         IEnumerable<dmdaily> GetAllDmDaiLy();
 
@@ -27,7 +27,7 @@ namespace ThongKe.Service
         private IthongkeRepository _thongkeRepository;
         private IUnitOfWork _unitOfWork;
 
-        public CommonService(IchinhanhRepository chinhanhRepository, IdmdailyRepository dmdailyRepository,IthongkeRepository thongkeRepository, IUnitOfWork unitOfWork)
+        public CommonService(IchinhanhRepository chinhanhRepository, IdmdailyRepository dmdailyRepository, IthongkeRepository thongkeRepository, IUnitOfWork unitOfWork)
         {
             _chinhanhRepository = chinhanhRepository;
             _dmdailyRepository = dmdailyRepository;
@@ -35,10 +35,19 @@ namespace ThongKe.Service
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<string> GetAllChiNhanh()
+        public IEnumerable<string> GetAllChiNhanhByNhom(string nhom)
         {
-            var result = _chinhanhRepository.GetAll().Select(x => x.chinhanh1).Distinct();
-            var count = result.Count();
+            var result = new List<string>();
+            if (nhom == "Admins")
+            {
+                result = _chinhanhRepository.GetAll().Select(x => x.chinhanh1).Distinct().ToList();
+            }
+            else
+            {
+                result = _chinhanhRepository.GetMulti(x => x.nhom == nhom).Select(x => x.chinhanh1).Distinct().ToList();
+                var count = result.Count();
+            }
+
             return result;
         }
 
@@ -47,13 +56,55 @@ namespace ThongKe.Service
             return _dmdailyRepository.GetAll();
         }
 
-        public IEnumerable<dmdaily> GetDmdailyByChiNhanh(string chinhanh)
+        public IEnumerable<dmdaily> GetDmdailyByNhomChiNhanh(string nhom)
         {
             var listDaily = new List<dmdaily>();
-            if (chinhanh != "")
-                listDaily = _dmdailyRepository.GetMulti(x => x.chinhanh == chinhanh && x.trangthai).ToList();
-            else
-                listDaily = _dmdailyRepository.GetAll().ToList();
+            switch (nhom)
+            {
+                //case "Admins":
+                //    listDaily = _dmdailyRepository.GetAll().ToList();
+                //    break;
+                case "TNB":
+                    var listChinhanhTNB = _chinhanhRepository.GetMulti(x => x.nhom == nhom).ToList();
+                    foreach (var chinhanh in listChinhanhTNB)
+                    {
+                        var daily = _dmdailyRepository.GetSingleByCondition(x => x.chinhanh == chinhanh.chinhanh1);
+                        listDaily.Add(daily);
+                    }
+                    break;
+                case "DNB":
+                    var listChinhanhDNB = _chinhanhRepository.GetMulti(x => x.nhom == nhom).ToList();
+                    foreach (var chinhanh in listChinhanhDNB)
+                    {
+                        var daily = _dmdailyRepository.GetSingleByCondition(x => x.chinhanh == chinhanh.chinhanh1);
+                        listDaily.Add(daily);
+                    }
+                    break;
+                case "MT":
+                    var listChinhanhMT = _chinhanhRepository.GetMulti(x => x.nhom == nhom).ToList();
+                    foreach (var chinhanh in listChinhanhMT)
+                    {
+                        var daily = _dmdailyRepository.GetSingleByCondition(x => x.chinhanh == chinhanh.chinhanh1);
+                        listDaily.Add(daily);
+                    }
+                    break;
+                case "MB":
+                    var listChinhanhMB = _chinhanhRepository.GetMulti(x => x.nhom == nhom).ToList();
+                    foreach (var chinhanh in listChinhanhMB)
+                    {
+                        var daily = _dmdailyRepository.GetSingleByCondition(x => x.chinhanh == chinhanh.chinhanh1);
+                        listDaily.Add(daily);
+                    }
+                    break;
+                default:
+                    listDaily = _dmdailyRepository.GetAll().ToList();
+                    break;
+
+            }
+            //if (chinhanh != "")
+            //    listDaily = _dmdailyRepository.GetMulti(x => x.chinhanh == chinhanh && x.trangthai).ToList();
+            //else
+            //    listDaily = _dmdailyRepository.GetAll().ToList();
             return listDaily;
         }
 

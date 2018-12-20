@@ -23,6 +23,7 @@
           <Property Name="ngaytao" Type="datetime" Nullable="false" />
           <Property Name="nguoicapnhat" Type="nvarchar" MaxLength="50" />
           <Property Name="ngaycapnhat" Type="datetime" />
+          <Property Name="nhom" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="chinhanh">
           <Key>
@@ -37,6 +38,7 @@
           <Property Name="fax" Type="nvarchar" MaxLength="50" />
           <Property Name="masothue" Type="varchar" MaxLength="50" />
           <Property Name="trangthai" Type="bit" Nullable="false" />
+          <Property Name="nhom" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="dmdaily">
           <Key>
@@ -226,39 +228,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="thongkeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="account">
-          <Key>
-            <PropertyRef Name="username" />
-          </Key>
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="daily" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="chinhanh" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="doimatkhau" Type="Boolean" Nullable="false" />
-          <Property Name="ngaydoimk" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="trangthai" Type="Boolean" Nullable="false" />
-          <Property Name="khoi" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nguoitao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ngaytao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="nguoicapnhat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ngaycapnhat" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="chinhanh">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="chinhanh1" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="tencn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="diachi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="thanhpho" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
-          <Property Name="dienthoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="masothue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="trangthai" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="dmdaily">
           <Key>
             <PropertyRef Name="Id" />
@@ -273,8 +242,6 @@
           <Property Name="trangthai" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityContainer Name="TKDbContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="accounts" EntityType="Self.account" />
-          <EntitySet Name="chinhanhs" EntityType="Self.chinhanh" />
           <EntitySet Name="dmdailies" EntityType="Self.dmdaily" />
           <FunctionImport Name="spBaocaoDoanhThuDoanTheoNgayDi" EntitySet="doanhthuDoanNgayDis" ReturnType="Collection(thongkeModel.doanhthuDoanNgayDi)">
             <Parameter Name="tungay" Mode="In" Type="DateTime" />
@@ -357,6 +324,8 @@
             <Parameter Name="khoi" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="doanhthuSaleChitiets" EntityType="thongkeModel.doanhthuSaleChitiet" />
+          <EntitySet Name="accounts" EntityType="thongkeModel.account" />
+          <EntitySet Name="chinhanhs" EntityType="thongkeModel.chinhanh" />
         </EntityContainer>
         <ComplexType Name="spDoanthuQuayTungay_Dengay_Result">
           <Property Type="String" Name="sgtcode" Nullable="false" MaxLength="17" />
@@ -455,47 +424,47 @@
           <Property Name="thucthu" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="nguoixuatve" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="hoten" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="daily" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="chinhanh" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="doimatkhau" Type="Boolean" Nullable="false" />
+          <Property Name="ngaydoimk" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="trangthai" Type="Boolean" Nullable="false" />
+          <Property Name="khoi" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="nguoitao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngaytao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nguoicapnhat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ngaycapnhat" Type="DateTime" Precision="3" />
+          <Property Name="nhom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="chinhanh">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="chinhanh1" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="tencn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="diachi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="thanhpho" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="dienthoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="masothue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="trangthai" Type="Boolean" Nullable="false" />
+          <Property Name="nhom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="thongkeModelStoreContainer" CdmEntityContainer="TKDbContext">
-          <EntitySetMapping Name="accounts">
-            <EntityTypeMapping TypeName="thongkeModel.account">
-              <MappingFragment StoreEntitySet="account">
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="hoten" ColumnName="hoten" />
-                <ScalarProperty Name="daily" ColumnName="daily" />
-                <ScalarProperty Name="chinhanh" ColumnName="chinhanh" />
-                <ScalarProperty Name="role" ColumnName="role" />
-                <ScalarProperty Name="doimatkhau" ColumnName="doimatkhau" />
-                <ScalarProperty Name="ngaydoimk" ColumnName="ngaydoimk" />
-                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
-                <ScalarProperty Name="khoi" ColumnName="khoi" />
-                <ScalarProperty Name="nguoitao" ColumnName="nguoitao" />
-                <ScalarProperty Name="ngaytao" ColumnName="ngaytao" />
-                <ScalarProperty Name="nguoicapnhat" ColumnName="nguoicapnhat" />
-                <ScalarProperty Name="ngaycapnhat" ColumnName="ngaycapnhat" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="chinhanhs">
-            <EntityTypeMapping TypeName="thongkeModel.chinhanh">
-              <MappingFragment StoreEntitySet="chinhanh">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="chinhanh1" ColumnName="chinhanh" />
-                <ScalarProperty Name="tencn" ColumnName="tencn" />
-                <ScalarProperty Name="diachi" ColumnName="diachi" />
-                <ScalarProperty Name="thanhpho" ColumnName="thanhpho" />
-                <ScalarProperty Name="dienthoai" ColumnName="dienthoai" />
-                <ScalarProperty Name="fax" ColumnName="fax" />
-                <ScalarProperty Name="masothue" ColumnName="masothue" />
-                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="dmdailies">
             <EntityTypeMapping TypeName="thongkeModel.dmdaily">
               <MappingFragment StoreEntitySet="dmdaily">
@@ -612,6 +581,43 @@
                 <ScalarProperty Name="vetourid" ColumnName="vetourid" />
                 <ScalarProperty Name="sgtcode" ColumnName="sgtcode" />
                 <ScalarProperty Name="stt" ColumnName="stt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="thongkeModel.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="nhom" ColumnName="nhom" />
+                <ScalarProperty Name="ngaycapnhat" ColumnName="ngaycapnhat" />
+                <ScalarProperty Name="nguoicapnhat" ColumnName="nguoicapnhat" />
+                <ScalarProperty Name="ngaytao" ColumnName="ngaytao" />
+                <ScalarProperty Name="nguoitao" ColumnName="nguoitao" />
+                <ScalarProperty Name="khoi" ColumnName="khoi" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+                <ScalarProperty Name="ngaydoimk" ColumnName="ngaydoimk" />
+                <ScalarProperty Name="doimatkhau" ColumnName="doimatkhau" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="chinhanh" ColumnName="chinhanh" />
+                <ScalarProperty Name="daily" ColumnName="daily" />
+                <ScalarProperty Name="hoten" ColumnName="hoten" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="chinhanhs">
+            <EntityTypeMapping TypeName="thongkeModel.chinhanh">
+              <MappingFragment StoreEntitySet="chinhanh">
+                <ScalarProperty Name="nhom" ColumnName="nhom" />
+                <ScalarProperty Name="trangthai" ColumnName="trangthai" />
+                <ScalarProperty Name="masothue" ColumnName="masothue" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="dienthoai" ColumnName="dienthoai" />
+                <ScalarProperty Name="thanhpho" ColumnName="thanhpho" />
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="tencn" ColumnName="tencn" />
+                <ScalarProperty Name="chinhanh1" ColumnName="chinhanh" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

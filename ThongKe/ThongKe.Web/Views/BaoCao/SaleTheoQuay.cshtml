@@ -2,8 +2,20 @@
 @{
     ViewBag.Title = "SaleTheoQuay";
     Layout = "/Views/Shared/_Layout.cshtml";
-    var cn = Session["chinhanh"].ToString();
-    
+
+    var cn = "";
+    if ((Session["chinhanh"]) == null)
+    {
+        cn = "";
+    }
+    else
+    {
+        cn = Session["chinhanh"].ToString();
+    }
+
+    var nhom = Session["nhom"].ToString();
+
+
 }
 
 @section scripts{
@@ -32,6 +44,7 @@
                     <div class="col-md-12">
 
                         <input type="hidden" name="cn" data-cn="@cn" id="hidCn" />
+                        <input type="hidden" name="hidnhom" data-nhom="@nhom" id="hidNhom" />
                         <div class="col-md-2">
                             Từ ngày
                             <input type="text" class="form-control maskInput" name="tungay" id="txtTuNgay" placeholder="Type date..." />
@@ -49,8 +62,7 @@
                                 <option value="STL">STL</option>
                             </select>
                         </div>
-                        @if (Session["chinhanh"].ToString() == "")
-
+                        @if (nhom == "Admins" || nhom == "TNB" || nhom == "DNB" || nhom == "MT" || nhom == "MB")
                         {
                             <div class="col-md-2">
                                 Khối
@@ -92,7 +104,7 @@
                     <td>Nhân viên sale</td>
                     <td>Doanh số</td>
                     <td>Thực thu</td>
-                    
+
                 </tr>
             </thead>
             <tbody id="tblData" class="table"></tbody>

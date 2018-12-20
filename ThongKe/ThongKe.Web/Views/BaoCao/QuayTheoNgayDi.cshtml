@@ -3,7 +3,17 @@
     ViewBag.Title = "QuayVaNgay";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var cn = Session["chinhanh"].ToString();
+    var cn = "";
+    if ((Session["chinhanh"]) == null)
+    {
+        cn = "";
+    }
+    else
+    {
+        cn = Session["chinhanh"].ToString();
+    }
+
+    var nhom = Session["nhom"].ToString();
 
 }
 
@@ -29,6 +39,7 @@
                     <div class="col-md-12">
 
                         <input type="hidden" id="hidCn" data-cn="@cn" />
+                        <input type="hidden" id="hidNhom" data-nhom="@nhom" />
 
                         <div class="col-md-2">
                             Từ ngày
@@ -39,7 +50,7 @@
                             Đến ngày
                             <input type="text" class="form-control maskInput" name="denngay" id="txtDenNgay" placeholder="Type date..." />
                         </div>
-                        @if (Session["chinhanh"].ToString() == "")
+                        @if (nhom == "Admins" || nhom == "TNB" || nhom == "DNB" || nhom == "MT" || nhom == "MB")
                         {
                             <div class="col-md-2">
                                 Code CN

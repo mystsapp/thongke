@@ -115,17 +115,18 @@ var saleTheoNgayDiController = {
     loadDdlDaiLy: function () {
         
         $('#ddlDaiLy').html('');
-        var cn = $('#hidCn').data('cn');
+        //var cn = $('#hidCn').data('cn');
+        var nhom = $('#hidNhom').data('nhom');
         //alert(cn);
         var option = '';
         option = '<option value=" ">' + "Tất cả" + '</option>';
         // option = option + '<option value=select>Select</option>';
 
         $.ajax({
-            url: '/account/GetDmdailyByChiNhanh',
+            url: '/account/GetDmdailyByNhomChiNhanh',
             type: 'GET',
             data: {
-                chinhanh: cn
+                nhom: nhom
             },
             dataType: 'json',
             success: function (response) {
@@ -139,6 +140,10 @@ var saleTheoNgayDiController = {
 
                 });
                 $('#ddlDaiLy').html(option);
+
+                if (nhom != 'Admins')
+                    $("#ddlDaiLy option[value=' ']").remove();
+
             }
         });
         

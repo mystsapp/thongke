@@ -34,5 +34,7 @@ namespace ThongKe.Web.Models
         public string nguoicapnhat { get; set; }
 
         public DateTime? ngaycapnhat { get; set; }
+
+        public string nhom { get; set; }
     }
 }

@@ -45,6 +45,7 @@ namespace ThongKe.Web.Controllers
                     Session["role"] = userInfo.role;
                     Session["daily"] = userInfo.daily;
                     Session["khoi"] = userInfo.khoi;
+                    Session["nhom"] = userInfo.nhom;
 
                     bool doi = userInfo.doimatkhau;
                     if (doi)

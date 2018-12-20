@@ -2,7 +2,18 @@
 @{
     ViewBag.Title = "SaleTheoNgayDi";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var cn = Session["chinhanh"].ToString();
+    var cn = "";
+    if ((Session["chinhanh"]) == null)
+    {
+        cn = "";
+    }
+    else
+    {
+        cn = Session["chinhanh"].ToString();
+    }
+
+    var nhom = Session["nhom"].ToString();
+
 }
 
 
@@ -32,6 +43,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <input type="hidden" name="cn" data-cn="@cn" id="hidCn" />
+                        <input type="hidden" name="hidnhom" data-nhom="@nhom" id="hidNhom" />
                         <div class="col-md-2">
                             Từ ngày
                             <input type="text" class="form-control maskInput" name="tungay" id="txtTuNgay" placeholder="Type date..." />
@@ -49,7 +61,7 @@
                                 <option value="45 LE THANH TON">45 LE THANH TON</option>
                             </select>
                         </div>
-                        @if (Session["chinhanh"].ToString() == "")
+                        @if (nhom == "Admins" || nhom == "TNB" || nhom == "DNB" || nhom == "MT" || nhom == "MB")
                         {
                             <div class="col-md-2">
                                 Khối

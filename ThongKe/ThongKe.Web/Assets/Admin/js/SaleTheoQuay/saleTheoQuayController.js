@@ -103,6 +103,7 @@ var saleTheoQuayController = {
             //quayTheoNgayDiController.ExportDetail();
         });
 
+
         $("#txtTuNgay, #txtDenNgay").datepicker({
             changeMonth: true,
             changeYear: true,
@@ -114,18 +115,19 @@ var saleTheoQuayController = {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
     },
-    
+
 
     loadDdlDaiLyByChiNhanh: function () {
-        var cn = $('#hidCn').data('cn');
+        //var cn = $('#hidCn').data('cn');
+        var nhom = $('#hidNhom').data('nhom');
         $('#ddlDaiLy').html('');
         var option = '';
         option = '<option value=" ">' + "Tất cả" + '</option>';
         $.ajax({
-            url: '/account/GetDmdailyByChiNhanh',
+            url: '/account/GetDmdailyByNhomChiNhanh',
             type: 'GET',
             data: {
-                chinhanh: cn
+                nhom: nhom
             },
             dataType: 'json',
             success: function (response) {
@@ -139,10 +141,19 @@ var saleTheoQuayController = {
                 });
                 $('#ddlDaiLy').html(option);
 
+                //$('#ddlDaiLy option').each(function () {
+                //    if ($(this).val() == null) {
+                //        $(this).remove();
+                //    }
+                //});
+                if (nhom != 'Admins')
+                    $("#ddlDaiLy option[value=' ']").remove();
+
             }
         });
         //homeController.resetForm();
         //var id = $('.btn-edit').data('id');
+
 
     },
 
@@ -153,7 +164,7 @@ var saleTheoQuayController = {
         var denngay = $('#txtDenNgay').val();
         var daily = $('#ddlDaiLy').val();
         var hidCn = $('#hidCn').data('cn');
-        
+
         //var hidCn = '' ? khoi = $('#ddlKhoi').val() : khoi = $('#hidKhoi').data('khoi');
         if (hidCn == "")
             var khoi = $('#ddlKhoi').val();

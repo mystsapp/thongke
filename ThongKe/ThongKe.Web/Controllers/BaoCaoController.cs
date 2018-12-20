@@ -901,7 +901,11 @@ namespace ThongKe.Web.Controllers
         [HttpGet]
         public JsonResult LoadDataSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize)
         {
-            cn = String.IsNullOrEmpty(cn) ? Session["chinhanh"].ToString() : cn;
+            //cn = String.IsNullOrEmpty(cn) ? Session["chinhanh"].ToString() : cn;
+            if (cn == null)
+            {
+                cn = "";
+            }
             khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
 
             int totalRow = 0;

@@ -27,8 +27,6 @@ namespace ThongKe.Data.Models.EF
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<account> accounts { get; set; }
-        public virtual DbSet<chinhanh> chinhanhs { get; set; }
         public virtual DbSet<dmdaily> dmdailies { get; set; }
         public virtual DbSet<doanhthuSaleQuay> doanhthuSaleQuays { get; set; }
         public virtual DbSet<doanhthuDoanNgayDi> doanhthuDoanNgayDis { get; set; }
@@ -37,6 +35,8 @@ namespace ThongKe.Data.Models.EF
         public virtual DbSet<tuyentqNgaydi> tuyentqNgaydis { get; set; }
         public virtual DbSet<doanhthuQuayChitiet> doanhthuQuayChitiets { get; set; }
         public virtual DbSet<doanhthuSaleChitiet> doanhthuSaleChitiets { get; set; }
+        public virtual DbSet<account> accounts { get; set; }
+        public virtual DbSet<chinhanh> chinhanhs { get; set; }
     
         public virtual ObjectResult<doanhthuDoanNgayDi> spBaocaoDoanhThuDoanTheoNgayDi(Nullable<System.DateTime> tungay, Nullable<System.DateTime> denngay, string chinhanh, string khoi)
         {

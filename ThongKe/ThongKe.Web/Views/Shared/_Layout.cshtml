@@ -91,7 +91,7 @@
                     <li>
                         <a href="/"><i class="fas fa-home"></i> Trang chủ</a>
                     </li>
-                    @if (Session["role"].ToString() == "admin")
+                    @if (Session["nhom"].ToString() == "Admins")
                     {
                     <li>
                         <a href="/Account"><i class="fas fa-user-circle"></i> Tài khoản</a>
@@ -125,7 +125,7 @@
                             </li>
 
                             <li>
-                                <a href="/BaoCao/KhachleHethong">Khách lẽ toàn hệ thống</a>
+                                <a href="/BaoCao/KhachleHethong">Quầy khách lẽ toàn hệ thống</a>
                             </li>
 
                         </ul>

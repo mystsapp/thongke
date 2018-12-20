@@ -105,10 +105,14 @@ var doanTheoNgayDiController = {
         $('#ddlChiNhanh').html('');
         var option = '';
         // option = option + '<option value=select>Select</option>';
+        var nhom = $('#hidNhom').data('nhom');
 
         $.ajax({
-            url: '/account/GetAllChiNhanh',
+            url: '/account/GetAllChiNhanhByNhom',
             type: 'GET',
+            data: {
+                nhom: nhom
+            },
             dataType: 'json',
             success: function (response) {
                 var data = [];
@@ -190,7 +194,7 @@ var doanTheoNgayDiController = {
                     doanTheoNgayDiController.paging(response.total, function () {
                         doanTheoNgayDiController.LoadData();
                     }, changePageSize);
-                    //quayTheoNgayDiController.registerEvent();
+                    //quayTheoNgayDiController.registerEvent(); // bao' loi khi response.total == null==>ko sao
                 }
             }
         })

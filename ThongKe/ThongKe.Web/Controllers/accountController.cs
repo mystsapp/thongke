@@ -149,9 +149,9 @@ namespace ThongKe.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllChiNhanh()
+        public JsonResult GetAllChiNhanhByNhom(string nhom)
         {
-            var model = _commonService.GetAllChiNhanh();
+            var model = _commonService.GetAllChiNhanhByNhom(nhom);
             //var viewModel = Mapper.Map<IEnumerable<chinhanh>, IEnumerable<chinhanhViewModel>>(model);
             return Json(new
             {
@@ -160,9 +160,9 @@ namespace ThongKe.Web.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetDmdailyByChiNhanh(string chinhanh)
+        public JsonResult GetDmdailyByNhomChiNhanh(string nhom)
         {
-            var model = _commonService.GetDmdailyByChiNhanh(chinhanh);
+            var model = _commonService.GetDmdailyByNhomChiNhanh(nhom);
             var viewModel = Mapper.Map<IEnumerable<dmdaily>, IEnumerable<dmdailyViewModel>>(model);
             return Json(new
             {

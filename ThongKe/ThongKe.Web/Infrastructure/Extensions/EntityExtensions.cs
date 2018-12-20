@@ -22,6 +22,8 @@ namespace ThongKe.Web.Infrastructure.Extensions
 
             acc.nguoicapnhat = accViewModel.nguoicapnhat;
             acc.ngaycapnhat = accViewModel.ngaycapnhat;
+
+            acc.nhom = accViewModel.nhom;
         }
     }
 }

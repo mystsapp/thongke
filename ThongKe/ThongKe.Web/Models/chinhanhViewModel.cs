@@ -11,5 +11,7 @@
         public string fax { get; set; }
         public string masothue { get; set; }
         public bool trangthai { get; set; }
+
+        public string nhom { get; set; }
     }
 }

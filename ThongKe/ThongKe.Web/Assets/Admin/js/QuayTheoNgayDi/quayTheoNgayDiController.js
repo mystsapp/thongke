@@ -117,10 +117,14 @@ var quayTheoNgayDiController = {
         $('#ddlChiNhanh').html('');
         var option = '';
         // option = option + '<option value=select>Select</option>';
+        var nhom = $('#hidNhom').data('nhom');
 
         $.ajax({
-            url: '/account/GetAllChiNhanh',
+            url: '/account/GetAllChiNhanhByNhom',
             type: 'GET',
+            data: {
+                nhom: nhom
+            },
             dataType: 'json',
             success: function (response) {
 

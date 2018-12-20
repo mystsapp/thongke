@@ -3,8 +3,16 @@
     ViewBag.Title = "";
     Layout = "/Views/Shared/_Layout.cshtml";
 
-    var cn = Session["chinhanh"].ToString();
-
+    var cn = "";
+    if ((Session["chinhanh"]) == null)
+    {
+        cn = "";
+    }
+    else
+    {
+        cn = Session["chinhanh"].ToString();
+    }
+    var nhom = Session["nhom"].ToString();
 }
 
 @section scripts{
@@ -34,6 +42,7 @@
                     <div class="col-md-12">
 
                         <input type="hidden" id="hidCn" data-cn="@cn" />
+                        <input type="hidden" id="hidNhom" data-nhom="@nhom" />
 
                         <div class="col-md-2">
                             Từ ngày
@@ -44,7 +53,7 @@
                             Đến ngày
                             <input type="text" class="form-control maskInput" name="denngay" id="txtDenNgay" placeholder="Type date..." />
                         </div>
-                        @if (Session["chinhanh"].ToString() == "")
+                        @if (nhom == "Admins" || nhom == "TNB" || nhom == "DNB" || nhom == "MT" || nhom == "MB")
                         {
                             <div class="col-md-2">
                                 Code CN
@@ -73,7 +82,7 @@
 
                             <span class="btn-group">
                                 <button type="button" id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-search"></i></button>
-                                <button id="btnReset" class="btn btn-outline btn-default">Reset</button>
+                                <button id="btnReset" class="btn btn-outline btn-warning"><i class="fas fa-broom"></i></button>
                                 <button id="btnExport" class="btn btn-outline btn-success"><i class="fas fa-file-export"></i></button>
                             </span>
                         </div>

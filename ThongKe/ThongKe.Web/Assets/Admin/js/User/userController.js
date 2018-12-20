@@ -90,6 +90,23 @@ var userController = {
             userController.loadDdlDaiLy();
         });
 
+        $('#ddlNhom').off('change').on('change', function () {
+            //var optionValue = $(this).val();
+            //userController.loadDdlDaiLyByChiNhanh(optionValue);
+            var optionValue = $(this).val();
+            if (optionValue == 'Users') {
+                $('#ddlChiNhanh').prop("disabled", false);
+                $('#ddlDaiLy').prop("disabled", false);
+                //console.log('user.');
+            }
+            else {
+                $('#ddlChiNhanh').prop("disabled", true);
+                $('#ddlDaiLy').prop("disabled", true);
+                //console.log('admin.');
+            }
+
+        });
+
         $('#ddlChiNhanh').off('change').on('change', function () {
             var optionValue = $(this).val();
             userController.loadDdlDaiLyByChiNhanh(optionValue);
@@ -119,12 +136,20 @@ var userController = {
         $('.btn-edit').off('click').on('click', function () {
             $('#modalAddUpdate').modal('show');
             var id = $(this).data('id');
-           // $('#txtHidID').val(id);
+            // $('#txtHidID').val(id);
 
             $('#txtUsername').prop("disabled", true);
             userController.loadDdlChiNhanh();
             userController.loadDdlDaiLy();
             userController.loadDetail(id);
+
+
+
+            //if ($('#ddlNhom').val() != "Users") {
+
+            //    $('#ddlChiNhanh').prop("disabled", true);
+            //    $('#ddlDaiLy').prop("disabled", true);
+            //}
 
         });
 
@@ -163,7 +188,7 @@ var userController = {
     loadDdlChiNhanh: function () {
         $('#ddlChiNhanh').html('');
         var option = '';
-       // option = option + '<option value=select>Select</option>';
+        // option = option + '<option value=select>Select</option>';
 
         $.ajax({
             url: '/account/GetAllChiNhanh',
@@ -174,7 +199,7 @@ var userController = {
                 //var data = JSON.stringify(response.data);
                 var data = JSON.parse(response.data);
                 $('#ddlChiNhanh').html('');
-                
+
                 //$.each(data, function (i, item) {
                 //    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
 
@@ -188,7 +213,7 @@ var userController = {
                     //params[ele] = $('#' + ele).val();
                 }
                 $('#ddlChiNhanh').html(option);
-                
+
             }
         });
         //homeController.resetForm();
@@ -358,6 +383,7 @@ var userController = {
         var username = $('#txtUsername').val();
         var password = $('#txtPassword').val();
         var hoten = $('#txtHoTen').val();
+        var nhom = $('#ddlNhom').val();
         var chinhanh = $('#ddlChiNhanh').val();
         var daily = $('#ddlDaiLy').val();
         var role = $('#ddlRole').val();
@@ -380,6 +406,7 @@ var userController = {
             username: username,
             password: password,
             hoten: hoten,
+            nhom: nhom,
             chinhanh: chinhanh,
             daily: daily,
             role: role,
@@ -456,7 +483,8 @@ var userController = {
                     $('#txtUsername').val(data.username);
                     $('#txtPassword').val('');
                     $('#txtHoTen').val(data.hoten);
-                    $('#ddlChiNhanh').val(data.chinhanh);
+                    $('#ddlNhom').val(data.nhom);
+                    $('#ddlChiNhanh').val(data.chinhanh1);
                     $('#ddlDaiLy').val(data.daily);
                     $('#ddlRole').val(data.role);
                     //var gioitinh = data.phai;
@@ -471,6 +499,13 @@ var userController = {
                     $('#txtNgayTao').val(nt);
                     $('#txtNgayCapNhat').val(ncn);
                     $('#txtHidPass').val(data.password);
+
+                    //alert($('#ddlNhom').val());
+                    if ($('#ddlNhom').val() != "Users") {
+
+                        $('#ddlChiNhanh').prop("disabled", true);
+                        $('#ddlDaiLy').prop("disabled", true);
+                    }
                 }
                 else {
                     bootbox.alert({
@@ -568,6 +603,7 @@ var userController = {
                         html += Mustache.render(template, {
                             username: item.username,
                             hoten: item.hoten,
+                            nhom: item.nhom,
                             daily: item.daily,
                             chinhanh: item.chinhanh,
                             trangthai: item.trangthai == true ? "<span class=\"label label-success\">Kích hoạt</span>" : "<span class=\"label label-danger\">Khóa</span>"
