@@ -53,9 +53,22 @@ namespace ThongKe.Web.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult LoadDataThongDoanhThuOB()
+        public JsonResult LoadDataThongKeDoanhThuOB()
         {
             string khoi = "OB";
+
+            var listOB = _commonService.ThongKeDoanhThuOB(khoi);//doanhthuKhachLeHeThongEntities
+
+            return Json(new
+            {
+                data = listOB,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LoadDataThongKeDoanhThuND()
+        {
+            string khoi = "ND";
 
             var listOB = _commonService.ThongKeDoanhThuOB(khoi);//doanhthuKhachLeHeThongEntities
 

@@ -9,8 +9,10 @@ namespace ThongKe.Service
 {
     public interface ICommonService
     {
-        IEnumerable<string> GetAllChiNhanhByNhom(string nhom);
+        IEnumerable<string> GetAllChiNhanh();
+        IEnumerable<string> GetAllChiNhanhByNhom(string nhom,string chinhanh);
 
+        IEnumerable<dmdaily> GetDmdailyByChiNhanh(string chinhanh);
         IEnumerable<dmdaily> GetDmdailyByNhomChiNhanh(string nhom);
 
         IEnumerable<dmdaily> GetAllDmDaiLy();
@@ -35,17 +37,26 @@ namespace ThongKe.Service
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<string> GetAllChiNhanhByNhom(string nhom)
+        public IEnumerable<string> GetAllChiNhanh()
+        {
+            return _chinhanhRepository.GetAll().Select(x=>x.chinhanh1).Distinct();
+        }
+
+        public IEnumerable<string> GetAllChiNhanhByNhom(string nhom,string chinhanh)
         {
             var result = new List<string>();
             if (nhom == "Admins")
             {
                 result = _chinhanhRepository.GetAll().Select(x => x.chinhanh1).Distinct().ToList();
             }
-            else
+            else if(nhom=="TNB"||nhom=="DNB"||nhom=="MT"||nhom=="MB")
             {
                 result = _chinhanhRepository.GetMulti(x => x.nhom == nhom).Select(x => x.chinhanh1).Distinct().ToList();
                 var count = result.Count();
+            }
+            else
+            {
+                result.Add(_chinhanhRepository.GetSingleByCondition(x => x.chinhanh1 == chinhanh).chinhanh1);
             }
 
             return result;
@@ -54,6 +65,11 @@ namespace ThongKe.Service
         public IEnumerable<dmdaily> GetAllDmDaiLy()
         {
             return _dmdailyRepository.GetAll();
+        }
+
+        public IEnumerable<dmdaily> GetDmdailyByChiNhanh(string chinhanh)
+        {
+            return _dmdailyRepository.GetMulti(x => x.chinhanh == chinhanh);
         }
 
         public IEnumerable<dmdaily> GetDmdailyByNhomChiNhanh(string nhom)

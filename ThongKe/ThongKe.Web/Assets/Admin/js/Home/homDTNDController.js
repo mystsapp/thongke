@@ -20,7 +20,7 @@ function ChartDTNDController($scope,$http) {
     //$scope.colours = ['#72C02C', '#3498DB', '#717984', '#F1C40F'];
 
     $http({
-        url: '/Home/LoadDataThongDoanhThuOB',
+        url: '/Home/LoadDataThongKeDoanhThuND',
         type: 'GET'
         //data: {
         //    tungay: "01/01/2016",

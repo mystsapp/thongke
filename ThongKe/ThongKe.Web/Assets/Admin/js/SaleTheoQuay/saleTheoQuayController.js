@@ -31,7 +31,8 @@ var saleTheoQuayController = {
     init: function () {
         // saleTheoQuayController.LoadData();
         //var cn = '@Request.RequestContext.HttpContext.Session["chinhanh"]';
-        saleTheoQuayController.loadDdlDaiLyByChiNhanh();
+        //saleTheoQuayController.loadDdlDaiLyByChiNhanh();
+        saleTheoQuayController.loadDdlChiNhanh();
         saleTheoQuayController.registerEvent();
     },
 
@@ -84,20 +85,27 @@ var saleTheoQuayController = {
 
             var tungay = $('#txtTuNgay').val();
             var denngay = $('#txtDenNgay').val();
-            var cn = $('#hidCn').data('cn');
             var nhanvien = $(this).data('nhanvien');
-            if (cn == "") {
-                cn = $('#ddlChiNhanh').val();
-                var khoi = $('#ddlKhoi').val();
+            var cn = $(this).data('chinhanh');
+            var khoi = '';
+            //if (cn == "") {
+            //    cn = $('#ddlChiNhanh').val();
+            //    var khoi = $('#ddlKhoi').val();
+            //} else {
+            //    var khoi = $('#hidKhoi').data('khoi');
+            //}
+            if ($('#hidNhom').val() !== "Users") {
+                khoi = $('#ddlKhoi').val();
             } else {
-                var khoi = $('#hidKhoi').data('khoi');
+                khoi = $('#hidKhoi').data('khoi');
             }
 
             $('#hidTuNgay').val(tungay);
             $('#hidDenNgay').val(denngay);
             $('#hidNhanVien').val(nhanvien);
-            $('#hidKhoi').val(khoi);
 
+            $('#hidKhoi').val(khoi);
+            $('#hidChiNhanh').val(cn);
             $('#frmDetail').submit();
             //alert(daily);
             //quayTheoNgayDiController.ExportDetail();
@@ -116,60 +124,103 @@ var saleTheoQuayController = {
         $('#txtDenNgay').val('');
     },
 
-
-    loadDdlDaiLyByChiNhanh: function () {
-        //var cn = $('#hidCn').data('cn');
-        var nhom = $('#hidNhom').data('nhom');
-        $('#ddlDaiLy').html('');
+    loadDdlChiNhanh: function () {
+        $('#ddlChiNhanh').html('');
         var option = '';
-        option = '<option value=" ">' + "Tất cả" + '</option>';
+        // option = option + '<option value=select>Select</option>';
+        var nhom = $('#hidNhom').data('nhom');
+        var chinhanh = '';
+        if (nhom === 'Users')
+            chinhanh = $('#hidCn').data('cn');
+
         $.ajax({
-            url: '/account/GetDmdailyByNhomChiNhanh',
+            url: '/account/GetAllChiNhanhByNhom',
             type: 'GET',
             data: {
-                nhom: nhom
+                nhom: nhom,
+                chinhanh: chinhanh
             },
             dataType: 'json',
             success: function (response) {
 
                 var data = JSON.parse(response.data);
-                //console.log(data);
+                $('#ddlChiNhanh').html('');
 
-                $.each(data, function (i, item) {
-                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+                //$.each(data, function (i, item) {
+                //    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
 
-                });
-                $('#ddlDaiLy').html(option);
-
-                //$('#ddlDaiLy option').each(function () {
-                //    if ($(this).val() == null) {
-                //        $(this).remove();
-                //    }
                 //});
-                if (nhom != 'Admins')
-                    $("#ddlDaiLy option[value=' ']").remove();
+
+                for (var i = 0; i < data.length; i++) {
+                    // set the key/property (input element) for your object
+                    var ele = data[i];
+                    //console.log(ele);
+                    option = option + '<option value="' + ele + '">' + ele + '</option>'; //chinhanh1
+                    // add the property to the object and set the value
+                    //params[ele] = $('#' + ele).val();
+                }
+
+                $('#ddlChiNhanh').html(option);
 
             }
         });
-        //homeController.resetForm();
-        //var id = $('.btn-edit').data('id');
-
 
     },
+    //loadDdlDaiLyByChiNhanh: function () {
+    //    //var cn = $('#hidCn').data('cn');
+    //    var nhom = $('#hidNhom').data('nhom');
+    //    $('#ddlDaiLy').html('');
+    //    var option = '';
+    //    option = '<option value=" ">' + "Tất cả" + '</option>';
+    //    $.ajax({
+    //        url: '/account/GetDmdailyByNhomChiNhanh',
+    //        type: 'GET',
+    //        data: {
+    //            nhom: nhom
+    //        },
+    //        dataType: 'json',
+    //        success: function (response) {
+
+    //            var data = JSON.parse(response.data);
+    //            //console.log(data);
+
+    //            $.each(data, function (i, item) {
+    //                option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+
+    //            });
+    //            $('#ddlDaiLy').html(option);
+
+    //            //$('#ddlDaiLy option').each(function () {
+    //            //    if ($(this).val() == null) {
+    //            //        $(this).remove();
+    //            //    }
+    //            //});
+    //            if (nhom != 'Admins')
+    //                $("#ddlDaiLy option[value=' ']").remove();
+
+    //        }
+    //    });
+    //    //homeController.resetForm();
+    //    //var id = $('.btn-edit').data('id');
+
+
+    //},
 
     LoadData: function (changePageSize) {
         //var name = $('#txtNameS').val();
         //var status = $('#ddlStatusS').val();
         var tungay = $('#txtTuNgay').val();
         var denngay = $('#txtDenNgay').val();
-        var daily = $('#ddlDaiLy').val();
-        var hidCn = $('#hidCn').data('cn');
+        //var daily = $('#ddlDaiLy').val();
+        //var hidCn = $('#hidCn').data('cn');
+        var chinhanh = $('#ddlChiNhanh').val()
+        var khoi = '';
 
         //var hidCn = '' ? khoi = $('#ddlKhoi').val() : khoi = $('#hidKhoi').data('khoi');
-        if (hidCn == "")
-            var khoi = $('#ddlKhoi').val();
+        if (hidCn === "")
+            khoi = $('#ddlKhoi').val();
         else {
-            var khoi = $('#hidKhoi').data('khoi');
+            khoi = $('#hidKhoi').data('khoi');
         }
 
         $.ajax({
@@ -178,17 +229,16 @@ var saleTheoQuayController = {
             data: {
                 tungay: tungay,
                 denngay: denngay,
-                daily: daily,
-                cn: hidCn,
+                cn: chinhanh,
                 khoi: khoi,
                 page: homeconfig.pageIndex,
                 pageSize: homeconfig.pageSize
             },
             dataType: 'json',
             success: function (response) {
-                //console.log(response.data);
+                console.log(response.status);
                 if (response.status) {
-                    //console.log(response.data);
+                    console.log(response.data);
                     var data = response.data;
                     //var data = JSON.parse(response.data);
 
@@ -196,19 +246,22 @@ var saleTheoQuayController = {
                     var html = '';
                     var template = $('#data-template').html();
 
+
                     $.each(data, function (i, item) {
                         //usage:
                         //var formattedDate = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
                         //alert(formattedDate)
-                        var ns = "";
-                        if (item.ngaysinh == null)
-                            ns = "";
-                        else
-                            ns = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
+
+                        //var ns = "";
+                        //if (item.ngaysinh === null)
+                        //    ns = "";
+                        //else
+                        //    ns = $.formattedDate(new Date(parseInt(item.ngaysinh.substr(6))));
 
                         html += Mustache.render(template, {
                             stt: item.stt,
                             nguoixuatve: item.nguoixuatve,
+                            chinhanh: item.chinhanh,
                             doanhso: numeral(item.doanhso).format('0,0'),
                             thucthu: numeral(item.thucthu).format('0,0')
                             //tongcong: item.chinhanh,

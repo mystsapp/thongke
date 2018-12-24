@@ -11,5 +11,6 @@ namespace ThongKe.Web.Models
         public string nguoixuatve { get; set; }
         public Nullable<decimal> doanhso { get; set; }
         public Nullable<decimal> thucthu { get; set; }
+        public string chinhanh { get; set; }
     }
 }

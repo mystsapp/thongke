@@ -23,5 +23,6 @@ namespace ThongKe.Data.Models.EF
         public string ngayve { get; set; }
         public Nullable<decimal> giave { get; set; }
         public string nguoiban { get; set; }
+        public string chinhanh { get; set; }
     }
 }

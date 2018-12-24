@@ -15,6 +15,7 @@ namespace ThongKe.Data.Models.EF
     public partial class doanhthuSaleChitiet
     {
         public long stt { get; set; }
+        public string chinhanh { get; set; }
         public string sgtcode { get; set; }
         public Nullable<int> vetourid { get; set; }
         public string tenkhach { get; set; }

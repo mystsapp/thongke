@@ -54,13 +54,23 @@
                             <input type="text" class="form-control maskInput" name="denngay" id="txtDenNgay" placeholder="Type date..." />
                         </div>
 
+                        @*<div class="col-md-3">
+            Văn phòng
+            <select class="form-control" id="ddlDaiLy" name="daily">
+                <option value="">Tất cả</option>
+                <option value="45 LE THANH TON">45 LE THANH TON</option>
+            </select>
+        </div>*@
+
                         <div class="col-md-3">
-                            Văn phòng
-                            <select class="form-control" id="ddlDaiLy" name="daily">
-                                <option value="">Tất cả</option>
-                                <option value="45 LE THANH TON">45 LE THANH TON</option>
+                            Chi nhánh
+                            <select class="form-control" id="ddlChiNhanh" name="chinhanh">
+                                <option value=""></option>
+                                <option value="sts">sts</option>
+                                <option value="STL">STL</option>
                             </select>
                         </div>
+
                         @if (nhom == "Admins" || nhom == "TNB" || nhom == "DNB" || nhom == "MT" || nhom == "MB")
                         {
                             <div class="col-md-2">
@@ -101,6 +111,7 @@
                     <td>#</td>
                     <td>STT</td>
                     <td>Người xuất vé</td>
+                    <td>Code CN</td>
                     <td>Doanh số</td>
                     <td>Thực thu</td>
 
@@ -122,12 +133,14 @@
                     <input type="hidden" name="denngay" id="hidDenNgay" />
                     <input type="hidden" name="nhanvien" id="hidNhanVien" />
                     <input type="hidden" name="khoi" id="hidKhoi" />
-                    <button type="button" data-nhanvien="{{nguoixuatve}}" class="btn btn-outline btn-success btnExportDetail"><i class="fas fa-file-export"></i></button>
+                    <input type="hidden" name="chinhanh" id="hidChiNhanh" />
+                    <button type="button" data-chinhanh="{{chinhanh}}" data-nhanvien="{{nguoixuatve}}" class="btn btn-outline btn-success btnExportDetail"><i class="fas fa-file-export"></i></button>
 
                 </form>
             </td>
             <td class="text-center">{{stt}}</td>
             <td class="text-left">{{nguoixuatve}}</td>
+            <td class="text-left">{{chinhanh}}</td>
             <td class="text-right">{{{doanhso}}}</td>
             <td class="text-right">{{thucthu}}</td>
 

@@ -29,7 +29,8 @@ var homeconfig = {
 var saleTheoNgayDiController = {
     init: function () {
         // saleTheoNgayDiController.LoadData();
-        saleTheoNgayDiController.loadDdlDaiLy();
+        //saleTheoNgayDiController.loadDdlDaiLy();
+        saleTheoNgayDiController.loadDdlChiNhanh();
         saleTheoNgayDiController.registerEvent();
     },
 
@@ -82,10 +83,17 @@ var saleTheoNgayDiController = {
 
             var tungay = $('#txtTuNgay').val();
             var denngay = $('#txtDenNgay').val();
-            var cn = $('#hidCn').data('cn');
+            var cn = $(this).data('chinhanh');
             var nhanvien = $(this).data('nhanvien');
-            if (cn == "") {
-                cn = $('#ddlChiNhanh').val();
+            
+            //if (cn == "") {
+            //    cn = $('#ddlChiNhanh').val();
+            //    var khoi = $('#ddlKhoi').val();
+            //} else {
+            //    var khoi = $('#hidKhoi').data('khoi');
+            //}
+
+            if ($('#hidNhom').val() != "Users") {
                 var khoi = $('#ddlKhoi').val();
             } else {
                 var khoi = $('#hidKhoi').data('khoi');
@@ -94,6 +102,7 @@ var saleTheoNgayDiController = {
             $('#hidTuNgay').val(tungay);
             $('#hidDenNgay').val(denngay);
             $('#hidNhanVien').val(nhanvien);
+            $('#hidChiNhanh').val(cn);
             $('#hidKhoi').val(khoi);
 
             $('#frmDetail').submit();
@@ -112,43 +121,82 @@ var saleTheoNgayDiController = {
         $('#txtTuNgay').val('');
         $('#txtDenNgay').val('');
     },
-    loadDdlDaiLy: function () {
-        
-        $('#ddlDaiLy').html('');
-        //var cn = $('#hidCn').data('cn');
-        var nhom = $('#hidNhom').data('nhom');
-        //alert(cn);
+
+    loadDdlChiNhanh: function () {
+        $('#ddlChiNhanh').html('');
         var option = '';
-        option = '<option value=" ">' + "Tất cả" + '</option>';
         // option = option + '<option value=select>Select</option>';
+        var nhom = $('#hidNhom').data('nhom');
 
         $.ajax({
-            url: '/account/GetDmdailyByNhomChiNhanh',
+            url: '/account/GetAllChiNhanhByNhom',
             type: 'GET',
             data: {
                 nhom: nhom
             },
             dataType: 'json',
             success: function (response) {
-                //if (response.length > 0) {
-                //var data = JSON.stringify(response.data);
+
                 var data = JSON.parse(response.data);
-                console.log(data);
+                $('#ddlChiNhanh').html('');
 
-                $.each(data, function (i, item) {
-                    option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+                //$.each(data, function (i, item) {
+                //    option = option + '<option value="' + item.chinhanh1 + '">' + item.chinhanh1 + '</option>'; //chinhanh1
 
-                });
-                $('#ddlDaiLy').html(option);
+                //});
 
-                if (nhom != 'Admins')
-                    $("#ddlDaiLy option[value=' ']").remove();
+                for (var i = 0; i < data.length; i++) {
+                    // set the key/property (input element) for your object
+                    var ele = data[i];
+                    //console.log(ele);
+                    option = option + '<option value="' + ele + '">' + ele + '</option>'; //chinhanh1
+                    // add the property to the object and set the value
+                    //params[ele] = $('#' + ele).val();
+                }
+
+                $('#ddlChiNhanh').html(option);
 
             }
         });
-        
 
     },
+    //loadDdlDaiLy: function () {
+        
+    //    $('#ddlDaiLy').html('');
+    //    //var cn = $('#hidCn').data('cn');
+    //    var nhom = $('#hidNhom').data('nhom');
+    //    //alert(cn);
+    //    var option = '';
+    //    option = '<option value=" ">' + "Tất cả" + '</option>';
+    //    // option = option + '<option value=select>Select</option>';
+
+    //    $.ajax({
+    //        url: '/account/GetDmdailyByNhomChiNhanh',
+    //        type: 'GET',
+    //        data: {
+    //            nhom: nhom
+    //        },
+    //        dataType: 'json',
+    //        success: function (response) {
+    //            //if (response.length > 0) {
+    //            //var data = JSON.stringify(response.data);
+    //            var data = JSON.parse(response.data);
+    //            console.log(data);
+
+    //            $.each(data, function (i, item) {
+    //                option = option + '<option value="' + item.Daily + '">' + item.Daily + '</option>'; //chinhanh1
+
+    //            });
+    //            $('#ddlDaiLy').html(option);
+
+    //            if (nhom != 'Admins')
+    //                $("#ddlDaiLy option[value=' ']").remove();
+
+    //        }
+    //    });
+        
+
+    //},
 
     LoadData: function (changePageSize) {
         var tungay = $('#txtTuNgay').val();
@@ -190,6 +238,7 @@ var saleTheoNgayDiController = {
                         html += Mustache.render(template, {
                             stt: item.stt,
                             nguoixuatve: item.nguoixuatve,
+                            chinhanh: item.chinhanh,
                             doanhso: numeral(item.doanhso).format('0,0'),
                             thucthu: numeral(item.thucthu).format('0,0')
                         });

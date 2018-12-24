@@ -81,18 +81,20 @@ var quayTheoNgayBanController = {
 
             var tungay = $('#txtTuNgay').val();
             var denngay = $('#txtDenNgay').val();
-            var cn = $('#hidCn').data('cn');
             var daily = $(this).data('daily');
-            if (cn == "") {
-                cn = $('#ddlChiNhanh').val();
-                var khoi = $('#ddlKhoi').val();
+            var cn = $('#hidCn').data('cn');
+            var chinhanh = $(this).data('cn');
+            var khoi = '';
+            if (cn === "") {
+                khoi = $('#ddlKhoi').val();
             } else {
-                var khoi = $('#hidKhoi').data('khoi');
+                khoi = $('#hidKhoi').data('khoi');
             }
 
             $('#hidTuNgay').val(tungay);
             $('#hidDenNgay').val(denngay);
             $('#hidQuay').val(daily);
+            $('#hidChiNhanh').val(chinhanh);
             $('#hidKhoi').val(khoi);
 
             $('#frmDetail').submit();
@@ -157,11 +159,12 @@ var quayTheoNgayBanController = {
         var tungay = $('#txtTuNgay').val();
         var denngay = $('#txtDenNgay').val();
         var cn = $('#hidCn').data('cn');
-        if (cn == "") {
+        var khoi = '';
+        if (cn === "") {
             cn = $('#ddlChiNhanh').val();
-            var khoi = $('#ddlKhoi').val();
+            khoi = $('#ddlKhoi').val();
         } else {
-            var khoi = $('#hidKhoi').data('khoi');
+            khoi = $('#hidKhoi').data('khoi');
         }
 
         $.ajax({

@@ -12,13 +12,13 @@ namespace ThongKe.Service
 {
     public interface IThongKeService
     {
-        DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi);
+        DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string cn, string khoi);
 
-        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow);
+        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow);
 
-        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi);
+        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
 
-        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string daily, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
+        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
 
         DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi);
 
@@ -41,10 +41,10 @@ namespace ThongKe.Service
 
         DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string tungay, string denngay, string khoi);
 
-        DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi);
+        DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string chinhanh, string khoi);
 
-        DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi);
-        DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi);
+        DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
+        DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
 
     }
     public class ThongKeService : IThongKeService
@@ -88,27 +88,27 @@ namespace ThongKe.Service
             return listDanhThu;
         }
 
-        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi)
+        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi)
         {
-            var result = _thongkeRepository.doanhthuSaleTheoNgayDi(tungay, denngay, daily, chinhanh, khoi);
+            var result = _thongkeRepository.doanhthuSaleTheoNgayDi(tungay, denngay, chinhanh, khoi);
             return result;
         }
 
-        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
+        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow)
         {
-            var listDanhThu = _thongkeRepository.doanhthuSaleTheoNgayDiEntities(tungay, denngay, daily, cn, khoi, page, pageSize, out totalRow);
+            var listDanhThu = _thongkeRepository.doanhthuSaleTheoNgayDiEntities(tungay, denngay, cn, khoi, page, pageSize, out totalRow);
             return listDanhThu;
         }
 
-        public DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi)
+        public DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string cn, string khoi)
         {
-            var result = _thongkeRepository.doanhthuSaleTheoQuay(tungay, denngay, daily, cn, khoi);
+            var result = _thongkeRepository.doanhthuSaleTheoQuay(tungay, denngay, cn, khoi);
             return result;
         }
 
-        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
+        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow)
         {
-            var listDanhThu = _thongkeRepository.doanhthuSaleTheoQuayEntities(tungay, denngay, daily, cn, khoi, page, pageSize, out totalRow);
+            var listDanhThu = _thongkeRepository.doanhthuSaleTheoQuayEntities(tungay, denngay, cn, khoi, page, pageSize, out totalRow);
             return listDanhThu;
         }
 
@@ -148,28 +148,23 @@ namespace ThongKe.Service
             return result;
         }
 
-        public DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi)
+        public DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string chinhanh, string khoi)
         {
-            var result = _thongkeRepository.doanhthuQuayTheoNgayBanChitiet(tungay, denngay, quay, khoi);
+            var result = _thongkeRepository.doanhthuQuayTheoNgayBanChitiet(tungay, denngay, quay, chinhanh, khoi);
             return result;
         }
 
-        public DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        public DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi)
         {
-            var result = _thongkeRepository.doanhthuSaleTheoNgayBanChitiet(tungay, denngay, nhanvien, khoi);
+            var result = _thongkeRepository.doanhthuSaleTheoNgayBanChitiet(tungay, denngay, nhanvien, chinhanh, khoi);
             return result;
         }
 
-        public DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        public DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi)
         {
-            var result = _thongkeRepository.doanhthuSaleTheoNgayDiChitiet(tungay, denngay, nhanvien, khoi);
+            var result = _thongkeRepository.doanhthuSaleTheoNgayDiChitiet(tungay, denngay, nhanvien, chinhanh, khoi);
             return result;
         }
 
-        //public IEnumerable<doanhthuToanhethong> doanhthuKhachLeHeThongEntities(string tungay, string denngay, string chinhanh, string khoi)
-        //{
-        //    var listDanhThu = _thongkeRepository.doanhthuKhachLeHeThongEntities(tungay, denngay, chinhanh, khoi);
-        //    return listDanhThu;
-        //}
     }
 }

@@ -12,13 +12,13 @@ namespace ThongKe.Data.Repositories
 {
     public interface IthongkeRepository : IRepository<doanthuQuayNgayBan>
     {
-        DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi);
+        DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string cn, string khoi);
 
-        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow);
+        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow);
 
-        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi);
+        DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
 
-        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow);
+        IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow);
 
         DataTable doanhthuQuayTheoNgayBan(string tungay, string denngay, string chinhanh, string khoi);
 
@@ -44,13 +44,13 @@ namespace ThongKe.Data.Repositories
 
         IEnumerable<ThongKeDoanhThuViewModel> ThongKeDoanhThuOB(string khoi);
 
-        DataTable doanhthuQuayTheoNgayDiChitiet(string quay,string tungay, string denngay, string khoi);
+        DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string tungay, string denngay, string khoi);
 
-        DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi);
+        DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string chinhanh, string khoi);
 
-        DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi);
+        DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
 
-        DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi);
+        DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
     }
 
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
@@ -97,7 +97,7 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string daily, string cn, string khoi)
+        public DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string cn, string khoi)
         {
             try
             {
@@ -106,7 +106,7 @@ namespace ThongKe.Data.Repositories
                 //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
                 //DateTime dn = Convert.ToDateTime("2018-11-10");
 
-                var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, cn, khoi).ToList();
+                var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), cn, khoi).ToList();
                 var count = result.Count();
                 //var result = db.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, khoi);
                 //var count = result.Count();
@@ -121,7 +121,7 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string daily, string cn, string khoi, int page, int pageSize, out int totalRow)
+        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow)
         {
             // pageSize = 10;
             try
@@ -129,7 +129,7 @@ namespace ThongKe.Data.Repositories
                 //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
                 //DateTime dn = Convert.ToDateTime("2018-11-10");
 
-                var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, cn, khoi).ToList();
+                var result = DbContext.spBaocaoDoanhThuSaleTheoQuay(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), cn, khoi).ToList();
                 totalRow = result.Count();
 
                 result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -201,12 +201,12 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string daily, string chinhanh, string khoi)
+        public DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi)
         {
             try
             {
                 DataTable dt = new DataTable();
-                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, chinhanh, khoi).ToList();
+                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 var count = result.Count();
 
                 dt = EntityToTable.ToDataTable(result);
@@ -218,11 +218,11 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string daily, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
+        public IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
         {
             try
             {
-                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), daily, chinhanh, khoi).ToList();
+                var result = DbContext.spBaocaoDoanhThuSaleTheoNgayDi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 totalRow = result.Count();
 
                 result = result.OrderBy(x => x.stt).Skip((page - 1) * pageSize).Take(pageSize).ToList();
@@ -386,12 +386,12 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string khoi)
+        public DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string chinhanh, string khoi)
         {
             try
             {
                 DataTable dt = new DataTable();
-                var result = DbContext.spDoanhSoQuayChitietNgayBan(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), quay, khoi).ToList();
+                var result = DbContext.spDoanhSoQuayChitietNgayBan(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), quay, chinhanh, khoi).ToList();
                 var count = result.Count();
 
                 dt = EntityToTable.ToDataTable(result);
@@ -403,12 +403,12 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        public DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi)
         {
             try
             {
-                DataTable dt = new DataTable(); 
-                 var result = DbContext.spDoanhThuSaleChitietNgayban(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), nhanvien, khoi).ToList();
+                DataTable dt = new DataTable();
+                var result = DbContext.spDoanhThuSaleChitietNgayban(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), nhanvien, chinhanh, khoi).ToList();
                 var count = result.Count();
 
                 dt = EntityToTable.ToDataTable(result);
@@ -420,12 +420,12 @@ namespace ThongKe.Data.Repositories
             }
         }
 
-        public DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string khoi)
+        public DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi)
         {
             try
             {
                 DataTable dt = new DataTable();
-                var result = DbContext.spDoanhThuSaleChitietNgaydi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), nhanvien, khoi).ToList();
+                var result = DbContext.spDoanhThuSaleChitietNgaydi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), nhanvien, chinhanh, khoi).ToList();
                 var count = result.Count();
 
                 dt = EntityToTable.ToDataTable(result);

@@ -195,6 +195,7 @@ var userController = {
             type: 'GET',
             dataType: 'json',
             success: function (response) {
+                console.log(response.data);
                 //if (response.length > 0) {
                 //var data = JSON.stringify(response.data);
                 var data = JSON.parse(response.data);
