@@ -83,9 +83,6 @@
     <Compile Include="Models\EF\doanthuQuayNgayBan.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\spDoanthuQuayTungay_Dengay_Result.cs">
-      <DependentUpon>TKDbContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EF\TKDbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

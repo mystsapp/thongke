@@ -15,6 +15,7 @@ namespace ThongKe.Data.Models.EF
     public partial class doanhthuQuayChitiet
     {
         public long stt { get; set; }
+        public string chinhanh { get; set; }
         public string sgtcode { get; set; }
         public string serial { get; set; }
         public string tenkhach { get; set; }
@@ -23,6 +24,5 @@ namespace ThongKe.Data.Models.EF
         public string ngayve { get; set; }
         public Nullable<decimal> giave { get; set; }
         public string nguoiban { get; set; }
-        public string chinhanh { get; set; }
     }
 }

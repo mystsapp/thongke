@@ -83,18 +83,20 @@ var quayTheoNgayDiController = {
             var tungay = $('#txtTuNgay').val();
             var denngay = $('#txtDenNgay').val();
             var cn = $('#hidCn').data('cn');
+            var chinhanh = $(this).data('chinhanh');
             var daily = $(this).data('daily');
 
-            if (cn == "") {
-                cn = $('#ddlChiNhanh').val();
+            if (cn === "") {
+                //cn = $('#ddlChiNhanh').val();
                 var khoi = $('#ddlKhoi').val();
             } else {
                 var khoi = $('#hidKhoi').data('khoi');
             }
 
+            $('#hidQuay').val(daily);
+            $('#hidChiNhanh').val(chinhanh);
             $('#hidTuNgay').val(tungay);
             $('#hidDenNgay').val(denngay);
-            $('#hidQuay').val(daily);
             $('#hidKhoi').val(khoi);
 
             $('#frmDetail').submit();
@@ -118,12 +120,16 @@ var quayTheoNgayDiController = {
         var option = '';
         // option = option + '<option value=select>Select</option>';
         var nhom = $('#hidNhom').data('nhom');
+        var chinhanh = '';
+        if (nhom === 'Users')
+            chinhanh = $('#hidCn').data('cn');
 
         $.ajax({
             url: '/account/GetAllChiNhanhByNhom',
             type: 'GET',
             data: {
-                nhom: nhom
+                nhom: nhom,
+                chinhanh, chinhanh
             },
             dataType: 'json',
             success: function (response) {
@@ -203,7 +209,7 @@ var quayTheoNgayDiController = {
                         quayTheoNgayDiController.LoadData();
                     }, changePageSize);
                     quayTheoNgayDiController.registerEvent();
-                    
+
                 }
             }
         })
@@ -223,7 +229,7 @@ var quayTheoNgayDiController = {
             var khoi = $('#hidKhoi').data('khoi');
         }
 
-        var url= '/BaoCao/LoadDataQuayTheoNgayDiChitietToExcel';
+        var url = '/BaoCao/LoadDataQuayTheoNgayDiChitietToExcel';
         $.get(url, function (data) {
             $('#test').html(data);
         });

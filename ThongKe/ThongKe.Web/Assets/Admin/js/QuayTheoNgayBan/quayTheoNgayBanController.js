@@ -121,12 +121,17 @@ var quayTheoNgayBanController = {
         var option = '';
         // option = option + '<option value=select>Select</option>';
         var nhom = $('#hidNhom').data('nhom');
+        var chinhanh = '';
+
+        if (nhom === 'Users')
+            chinhanh = $('#hidCn').data('cn');
 
         $.ajax({
             url: '/account/GetAllChiNhanhByNhom',
             type: 'GET',
             data: {
-                nhom: nhom
+                nhom: nhom,
+                chinhanh:chinhanh
             },
             dataType: 'json',
             success: function (response) {

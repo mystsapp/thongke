@@ -212,7 +212,7 @@ var saleTheoQuayController = {
         var tungay = $('#txtTuNgay').val();
         var denngay = $('#txtDenNgay').val();
         //var daily = $('#ddlDaiLy').val();
-        //var hidCn = $('#hidCn').data('cn');
+        var hidCn = $('#hidCn').data('cn');
         var chinhanh = $('#ddlChiNhanh').val()
         var khoi = '';
 

@@ -107,11 +107,16 @@ var doanTheoNgayDiController = {
         // option = option + '<option value=select>Select</option>';
         var nhom = $('#hidNhom').data('nhom');
 
+        var chinhanh = '';
+        if (nhom === 'Users')
+            chinhanh = $('#hidCn').data('cn');
+
         $.ajax({
             url: '/account/GetAllChiNhanhByNhom',
             type: 'GET',
             data: {
-                nhom: nhom
+                nhom: nhom,
+                chinhanh, chinhanh
             },
             dataType: 'json',
             success: function (response) {
@@ -143,11 +148,19 @@ var doanTheoNgayDiController = {
         var tungay = $('#txtTuNgay').val();
         var denngay = $('#txtDenNgay').val();
         var cn = $('#hidCn').data('cn');
-        if (cn == "") {
+        var nhom = $('#hidNhom').data('nhom');
+        var khoi = '';
+
+        if (cn === "") {
             cn = $('#ddlChiNhanh').val();
-            var khoi = $('#ddlKhoi').val();
-        } else {
-            var khoi = $('#hidKhoi').data('khoi');
+            khoi = $('#ddlKhoi').val();
+        }
+        else{
+            khoi = $('#hidKhoi').data('khoi');
+        }
+        if (nhom === "STS") {
+            cn = nhom;
+            khoi = khoi = $('#hidKhoi').data('khoi');
         }
 
         $.ajax({

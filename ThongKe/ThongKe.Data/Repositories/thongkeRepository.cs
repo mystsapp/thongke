@@ -44,7 +44,7 @@ namespace ThongKe.Data.Repositories
 
         IEnumerable<ThongKeDoanhThuViewModel> ThongKeDoanhThuOB(string khoi);
 
-        DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string tungay, string denngay, string khoi);
+        DataTable doanhthuQuayTheoNgayDiChitiet(string quay,string chinhanh, string tungay, string denngay, string khoi);
 
         DataTable doanhthuQuayTheoNgayBanChitiet(string tungay, string denngay, string quay, string chinhanh, string khoi);
 
@@ -369,12 +369,12 @@ namespace ThongKe.Data.Repositories
             return result;
         }
 
-        public DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string tungay, string denngay, string khoi)
+        public DataTable doanhthuQuayTheoNgayDiChitiet(string quay, string chinhanh, string tungay, string denngay, string khoi)
         {
             try
             {
                 DataTable dt = new DataTable();
-                var result = DbContext.spDoanhSoQuayChitietNgaydi(quay, Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), khoi).ToList();
+                var result = DbContext.spDoanhSoQuayChitietNgaydi(quay, chinhanh, Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), khoi).ToList();
                 var count = result.Count();
 
                 dt = EntityToTable.ToDataTable(result);

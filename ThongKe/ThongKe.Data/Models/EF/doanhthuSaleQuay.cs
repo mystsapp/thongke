@@ -16,8 +16,8 @@ namespace ThongKe.Data.Models.EF
     {
         public long stt { get; set; }
         public string nguoixuatve { get; set; }
+        public string chinhanh { get; set; }
         public Nullable<decimal> doanhso { get; set; }
         public Nullable<decimal> thucthu { get; set; }
-        public string chinhanh { get; set; }
     }
 }
