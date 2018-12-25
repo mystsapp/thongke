@@ -155,7 +155,7 @@ var tuyentqTheoNgayDiController = {
             },
             dataType: 'json',
             success: function (response) {
-                //console.log(response.data);
+                console.log(response.data);
                 if (response.status) {
                     //console.log(response.data);
                     var data = response.data;
@@ -174,12 +174,10 @@ var tuyentqTheoNgayDiController = {
                             stt: item.stt,
                             chinhanh: item.chinhanh,
                             tuyentq: item.tuyentq,
-                            skkl: item.skkl,
-                            dtkl: numeral(item.dtkl).format('0,0'),
-                            skkd: item.skkd,
-                            dtkd: item.dtkd,
-                            tongkhach: item.tongkhach,
-                            tongdoanhthu: numeral(item.tongdoanhthu).format('0,0')
+                            khachht: item.khachht,
+                            thucthuht: numeral(item.thucthuht).format('0,0'),
+                            khachcu: item.skkd,
+                            thucthucu: numeral(item.thucthucu).format('0,0')
                             //doanhthu: numeral(item.doanhthu).format('0,0'),
                         });
 
