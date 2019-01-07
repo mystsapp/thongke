@@ -2222,6 +2222,7 @@
     <Content Include="Views\BaoCao\SaleTheoNgayDi.cshtml" />
     <Content Include="Views\BaoCao\LoadDataQuayTheoNgayDiChitietToExcel.cshtml" />
     <Content Include="Views\BaoCao\LoadDataQuayTheoNgayBanChitietToExcel.cshtml" />
+    <Content Include="Views\BaoCao\KinhDoanhOnline.cshtml" />
     <None Include="Views\BaoCao\TuyentqTheoNgayDi.cshtml" />
     <Content Include="Views\BaoCao\QuayTheoNgayDi.cshtml" />
     <Content Include="Views\Shared\_Layout_.cshtml" />

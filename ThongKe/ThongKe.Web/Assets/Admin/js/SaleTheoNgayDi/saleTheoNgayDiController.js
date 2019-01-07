@@ -85,7 +85,7 @@ var saleTheoNgayDiController = {
             var denngay = $('#txtDenNgay').val();
             var cn = $(this).data('chinhanh');
             var nhanvien = $(this).data('nhanvien');
-            
+
             //if (cn == "") {
             //    cn = $('#ddlChiNhanh').val();
             //    var khoi = $('#ddlKhoi').val();
@@ -165,7 +165,7 @@ var saleTheoNgayDiController = {
 
     },
     //loadDdlDaiLy: function () {
-        
+
     //    $('#ddlDaiLy').html('');
     //    //var cn = $('#hidCn').data('cn');
     //    var nhom = $('#hidNhom').data('nhom');
@@ -198,17 +198,18 @@ var saleTheoNgayDiController = {
 
     //        }
     //    });
-        
+
 
     //},
 
     LoadData: function (changePageSize) {
         var tungay = $('#txtTuNgay').val();
         var denngay = $('#txtDenNgay').val();
-        var daily = $('#ddlDaiLy').val();
+        //var daily = $('#ddlDaiLy').val();
         var cn = $('#hidCn').data('cn');
         if (cn == "") {
             var khoi = $('#ddlKhoi').val();
+            cn = $('#ddlChiNhanh').val();
         } else {
             var khoi = $('#hidKhoi').data('khoi');
         }
@@ -219,7 +220,7 @@ var saleTheoNgayDiController = {
             data: {
                 tungay: tungay,
                 denngay: denngay,
-                daily: daily,
+                //daily: daily,
                 chinhanh: cn,
                 khoi: khoi,
                 page: homeconfig.pageIndex,
@@ -238,7 +239,7 @@ var saleTheoNgayDiController = {
                     var template = $('#data-template').html();
 
                     $.each(data, function (i, item) {
-                       
+
                         html += Mustache.render(template, {
                             stt: item.stt,
                             nguoixuatve: item.nguoixuatve,

@@ -1,5 +1,36 @@
 ﻿var app = angular.module("app", ["chart.js"]);
 
+app.config(['ChartJsProvider', function (ChartJsProvider) {
+    // Configure all charts
+    ChartJsProvider.setOptions({
+        //colours: ['#72C02C', '#3498DB', '#717984', '#F1C40F'],
+        colours: [
+            { // blue
+                fillColor: "rgba(62, 92, 154,1)",
+                strokeColor: "rgba(151,200,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,0.8)"
+            },
+            { // dark grey
+                fillColor: "rgba(255, 242, 0,1)",
+                strokeColor: "rgba(255,200,96,1)",
+                pointColor: "rgba(77,83,96,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(77,83,96,1)"
+            }
+        ],
+        responsive: true
+    });
+    // Configure all line charts
+    //ChartJsProvider.setOptions('Bar', {
+    //    datasetFill: false
+    //});
+
+}])
+
 app.controller("ChartController", ChartController);
 
 ChartController.$inject = ['$scope', '$http'];

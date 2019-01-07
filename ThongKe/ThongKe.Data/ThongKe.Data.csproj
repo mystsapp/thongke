@@ -83,6 +83,15 @@
     <Compile Include="Models\EF\doanthuQuayNgayBan.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\spThongkeWebchitiet_Result.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\thongkeweb.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\thongkewebchitiet.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\TKDbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
