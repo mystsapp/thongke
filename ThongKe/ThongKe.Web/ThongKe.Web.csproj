@@ -212,6 +212,7 @@
     <Compile Include="Models\doanhthuToanhethongViewModel.cs" />
     <Compile Include="Models\doanthuQuayNgayBanViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\thongkewebViewModel.cs" />
     <Compile Include="Models\tuyentqNgaydiViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1681,6 +1682,7 @@
     <Content Include="Assets\Admin\js\LienKetKhachLe\lienKetKhachLeController.js" />
     <Content Include="Assets\Admin\js\SaleTheoNgay\saleTheoNgayController.js" />
     <Content Include="Assets\Admin\js\DoanTheoNgayDi\doanTheoNgayDiController.js" />
+    <Content Include="Assets\Admin\js\KinhDoanhOnline\kinhDoanhOnlineController.js" />
     <Content Include="Assets\Admin\js\TuyentqTheoNgayDi\tuyentqTheoNgayDiController.js" />
     <Content Include="Assets\Admin\js\QuayTheoNgayDi\quayTheoNgayDiController.js" />
     <Content Include="Assets\Admin\js\SaleTheoQuay\saleTheoQuayController.js" />

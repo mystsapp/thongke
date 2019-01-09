@@ -15,6 +15,7 @@ namespace ThongKe.Service
         DataTable doanhthuSaleTheoQuay(string tungay, string denngay, string cn, string khoi);
 
         IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow);
+        IEnumerable<thongkeweb> KinhDoanhOnlineEntities(string tungay,string denngay,string khoi,int page,int pageSize, out int totalRow);
 
         DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
 
@@ -45,6 +46,8 @@ namespace ThongKe.Service
 
         DataTable doanhthuSaleTheoNgayBanChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
         DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
+
+        DataTable ThongkeWebchitiet(string tungay, string denngay, string chinhanh, string khoi);
 
     }
     public class ThongKeService : IThongKeService
@@ -166,5 +169,16 @@ namespace ThongKe.Service
             return result;
         }
 
+        public IEnumerable<thongkeweb> KinhDoanhOnlineEntities(string tungay, string denngay, string khoi, int page, int pageSize, out int totalRow)
+        {
+            var listDanhThu = _thongkeRepository.KinhDoanhOnlineEntities(tungay, denngay,  khoi, page, pageSize, out totalRow);
+            return listDanhThu;
+        }
+
+        public DataTable ThongkeWebchitiet(string tungay, string denngay, string chinhanh, string khoi)
+        {
+            var result = _thongkeRepository.ThongkeWebchitiet(tungay, denngay, chinhanh, khoi);
+            return result;
+        }
     }
 }

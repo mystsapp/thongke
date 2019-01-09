@@ -2,7 +2,17 @@
 @{
     ViewBag.Title = "KinhDoanhOnline";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var khoi = Session["khoi"].ToString();
+
+    var cn = "";
+    if ((Session["chinhanh"]) == null)
+    {
+        cn = "";
+    }
+    else
+    {
+        cn = Session["chinhanh"].ToString();
+    }
+    var nhom = Session["nhom"].ToString();
 }
 
 @section scripts{
@@ -11,12 +21,12 @@
     <script src="~/Assets/Admin/js/User/jquery.twbsPagination.min.js"></script>
     <script src="~/Assets/Admin/js/User/jquery.validate.min.js"></script>
     <script src="~/Assets/Admin/js/User/jquery-ui/jquery-ui.js"></script>
-    @*<script src="~/Assets/Admin/js/DoanTheoNgayDi/doanTheoNgayDiController.js"></script>*@
+    <script src="~/Assets/Admin/js/KinhDoanhOnline/kinhDoanhOnlineController.js"></script>
     <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
     <script>
-            //$(function () {
-            //    $('.modal-dialog').draggable();
-            //});
+                            //$(function () {
+                            //    $('.modal-dialog').draggable();
+                            //});
 
     </script>
 
@@ -24,13 +34,16 @@
 
 <div class="row">
     <div class="panel panel-default">
-        <div class="panel page-heading">
-            <h4> BÁO CÁO DOANH THU KINH DOANH ONLINE</h4>
+        <div class="panel-heading">
+            <h4>BÁO CÁO DOANH THU ĐOÀN THEO NGÀY ĐI TOUR</h4>
         </div>
-        <div class="panel panel-body">
-            <form id="frmSearch" asp-controller="BaoCao" asp-action="KinhDoanhOnline" method="post" class="form-horizontal" role="form">
+        <div class="panel-body">
+            <form id="frmSearch" asp-controller="BaoCao" asp-action="DoanTheoNgay" method="post" class="form-horizontal" role="form">
                 <div class="row">
                     <div class="col-md-12">
+
+                        <input type="hidden" id="hidCn" data-cn="@cn" />
+                        <input type="hidden" id="hidNhom" data-nhom="@nhom" />
 
                         <div class="col-md-2">
                             Từ ngày
@@ -41,7 +54,6 @@
                             Đến ngày
                             <input type="text" class="form-control maskInput" name="denngay" id="txtDenNgay" placeholder="Type date..." />
                         </div>
-
                         <div class="col-md-2">
                             Khối
                             <select class="form-control" id="ddlKhoi" name="khoi">
@@ -49,16 +61,29 @@
                                 <option value="ND">ND</option>
                             </select>
                         </div>
-                        <input type="hidden" id="hidKhoi" data-khoi="@khoi" />
+                        @*@if (nhom == "Admins" || nhom == "TNB" || nhom == "DNB" || nhom == "MT" || nhom == "MB")
+                            {
+                                <div class="col-md-2">
+                                    Khối
+                                    <select class="form-control" id="ddlKhoi" name="khoi">
+                                        <option value="OB">OB</option>
+                                        <option value="ND">ND</option>
+                                    </select>
+                                </div>
+                            }
+                            else
+                            {
 
-
+                                var khoi = Session["khoi"].ToString();
+                                <input type="hidden" id="hidKhoi" data-khoi="@khoi" />
+                            }*@
                         <br />
                         <div class="col-md-3">
 
                             <span class="btn-group">
                                 <button type="button" id="btnSearch" class="btn btn-outline btn-primary"><i class="fa fa-search"></i></button>
                                 <button id="btnReset" class="btn btn-outline btn-warning"><i class="fas fa-broom"></i></button>
-                                <button id="btnExport" class="btn btn-outline btn-success"><i class="fas fa-file-export"></i></button>
+                                @*<button id="btnExport" class="btn btn-outline btn-success"><i class="fas fa-file-export"></i></button>*@
                             </span>
                         </div>
                     </div>
@@ -68,14 +93,15 @@
         </div>
     </div>
 </div>
+<br />
 
-<br/>
 <div class="row">
     <div class="col-md-12">
         <table class="table table-bordered table-hover">
             <thead>
                 <tr class="text-center">
-                    <td>CN</td>
+                    <td>#</td>
+                    <td>Code CN</td>
                     <td>Tạo vé</td>
                     <td>Tự huỷ</td>
                     <td>Chưa xuất vé</td>
@@ -85,8 +111,31 @@
             </thead>
             <tbody id="tblData" class="table table-hover"></tbody>
         </table>
+
+        <div id="pagination" class="pagination"></div>
     </div>
 
+
+    <script id="data-template" type="x-tmpl-mustache">
+        Hello {{ hoten }}!
+        <tr>
+            <td>
+                <form id="frmDetail" action="/BaoCao/LoadDataKinhDoanhOnlineChitietToExcel">
+                    <input type="hidden" name="tungay" id="hidTuNgay" />
+                    <input type="hidden" name="denngay" id="hidDenNgay" />
+                    <input type="hidden" name="chinhanh" id="hidChiNhanh" />
+                    <input type="hidden" name="khoi" id="hidKhoi" />
+                    <button type="button" data-chinhanh="{{chinhanh}}" class="btn btn-outline btn-success btnExportDetail"><i class="fas fa-file-export"></i></button>
+
+                </form>
+            </td>
+            <td class="text-center">{{chinhanh}}</td>
+            <td class="text-left">{{taove}}</td>
+            <td class="text-left">{{tuhuy}}</td>
+            <td class="text-center">{{chuaxuatve}}</td>
+            <td class="text-center">{{thanhcong}}</td>
+            <td class="text-center">{{huy}}</td>
+
+        </tr>
+    </script>
 </div>
-
-

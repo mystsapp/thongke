@@ -23,6 +23,8 @@ namespace ThongKe.Web.Mappings
             Mapper.CreateMap<tuyentqNgaydi, tuyentqNgaydiViewModel>();
             Mapper.CreateMap<doanhthuToanhethong, doanhthuToanhethongViewModel>();
 
+            Mapper.CreateMap<thongkeweb, thongkewebViewModel>();
+
         }
     }
 }

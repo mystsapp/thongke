@@ -94,7 +94,7 @@ var userController = {
             //var optionValue = $(this).val();
             //userController.loadDdlDaiLyByChiNhanh(optionValue);
             var optionValue = $(this).val();
-            if (optionValue == 'Users') {
+            if (optionValue === 'Users') {
                 $('#ddlChiNhanh').prop("disabled", false);
                 $('#ddlDaiLy').prop("disabled", false);
                 //console.log('user.');
