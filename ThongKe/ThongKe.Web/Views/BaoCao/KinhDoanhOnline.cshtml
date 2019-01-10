@@ -24,9 +24,9 @@
     <script src="~/Assets/Admin/js/KinhDoanhOnline/kinhDoanhOnlineController.js"></script>
     <link href="~/Assets/Admin/css/user.css" rel="stylesheet" />
     <script>
-                            //$(function () {
-                            //    $('.modal-dialog').draggable();
-                            //});
+                    //$(function () {
+                    //    $('.modal-dialog').draggable();
+                    //});
 
     </script>
 
@@ -62,21 +62,21 @@
                             </select>
                         </div>
                         @*@if (nhom == "Admins" || nhom == "TNB" || nhom == "DNB" || nhom == "MT" || nhom == "MB")
-                            {
-                                <div class="col-md-2">
-                                    Khối
-                                    <select class="form-control" id="ddlKhoi" name="khoi">
-                                        <option value="OB">OB</option>
-                                        <option value="ND">ND</option>
-                                    </select>
-                                </div>
-                            }
-                            else
-                            {
+        {
+            <div class="col-md-2">
+                Khối
+                <select class="form-control" id="ddlKhoi" name="khoi">
+                    <option value="OB">OB</option>
+                    <option value="ND">ND</option>
+                </select>
+            </div>
+        }
+        else
+        {
 
-                                var khoi = Session["khoi"].ToString();
-                                <input type="hidden" id="hidKhoi" data-khoi="@khoi" />
-                            }*@
+            var khoi = Session["khoi"].ToString();
+            <input type="hidden" id="hidKhoi" data-khoi="@khoi" />
+        }*@
                         <br />
                         <div class="col-md-3">
 
@@ -130,8 +130,8 @@
                 </form>
             </td>
             <td class="text-center">{{chinhanh}}</td>
-            <td class="text-left">{{taove}}</td>
-            <td class="text-left">{{tuhuy}}</td>
+            <td class="text-center">{{taove}}</td>
+            <td class="text-center">{{tuhuy}}</td>
             <td class="text-center">{{chuaxuatve}}</td>
             <td class="text-center">{{thanhcong}}</td>
             <td class="text-center">{{huy}}</td>

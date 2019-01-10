@@ -87,7 +87,7 @@
           <Property Name="stt" Type="bigint" Nullable="false" />
           <Property Name="chinhanh" Type="varchar" MaxLength="3" />
           <Property Name="sgtcode" Type="varchar" MaxLength="17" />
-          <Property Name="vetourid" Type="int" />
+          <Property Name="tuyentq" Type="nvarchar" MaxLength="50" />
           <Property Name="tenkhach" Type="nvarchar" MaxLength="50" />
           <Property Name="chiemcho" Type="int" />
           <Property Name="doanhthu" Type="decimal" Precision="18" Scale="0" />
@@ -347,20 +347,6 @@
           <Property Name="giave" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="nguoiban" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="doanhthuSaleChitiet">
-          <Key>
-            <PropertyRef Name="stt" />
-          </Key>
-          <Property Name="stt" Type="Int64" Nullable="false" />
-          <Property Name="chinhanh" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="sgtcode" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
-          <Property Name="vetourid" Type="Int32" />
-          <Property Name="tenkhach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="chiemcho" Type="Int32" />
-          <Property Name="doanhthu" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="thucthu" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="nguoixuatve" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="doanhthuSaleQuay">
           <Key>
             <PropertyRef Name="stt" />
@@ -400,7 +386,6 @@
           <EntitySet Name="dmdailies" EntityType="Self.dmdaily" />
           <EntitySet Name="doanhthuDoanNgayDis" EntityType="Self.doanhthuDoanNgayDi" />
           <EntitySet Name="doanhthuQuayChitiets" EntityType="Self.doanhthuQuayChitiet" />
-          <EntitySet Name="doanhthuSaleChitiets" EntityType="Self.doanhthuSaleChitiet" />
           <EntitySet Name="doanhthuSaleQuays" EntityType="Self.doanhthuSaleQuay" />
           <EntitySet Name="doanhthuToanhethongs" EntityType="Self.doanhthuToanhethong" />
           <EntitySet Name="doanthuQuayNgayBans" EntityType="Self.doanthuQuayNgayBan" />
@@ -494,6 +479,7 @@
             <Parameter Name="chinhanh" Mode="In" Type="String" />
             <Parameter Name="khoi" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="doanhthuSaleChitiets" EntityType="thongkeModel.doanhthuSaleChitiet" />
         </EntityContainer>
         <EntityType Name="tuyentqNgaydi">
           <Key>
@@ -549,6 +535,20 @@
           <Property Type="String" Name="dailyxuatve" Nullable="true" MaxLength="25" />
           <Property Type="String" Name="kenhgd" Nullable="true" MaxLength="30" />
         </ComplexType>
+        <EntityType Name="doanhthuSaleChitiet">
+          <Key>
+            <PropertyRef Name="stt" />
+          </Key>
+          <Property Name="stt" Type="Int64" Nullable="false" />
+          <Property Name="chinhanh" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="sgtcode" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="tuyentq" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tenkhach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="chiemcho" Type="Int32" />
+          <Property Name="doanhthu" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="thucthu" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="nguoixuatve" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -632,21 +632,6 @@
                 <ScalarProperty Name="ngayve" ColumnName="ngayve" />
                 <ScalarProperty Name="giave" ColumnName="giave" />
                 <ScalarProperty Name="nguoiban" ColumnName="nguoiban" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="doanhthuSaleChitiets">
-            <EntityTypeMapping TypeName="thongkeModel.doanhthuSaleChitiet">
-              <MappingFragment StoreEntitySet="doanhthuSaleChitiet">
-                <ScalarProperty Name="stt" ColumnName="stt" />
-                <ScalarProperty Name="chinhanh" ColumnName="chinhanh" />
-                <ScalarProperty Name="sgtcode" ColumnName="sgtcode" />
-                <ScalarProperty Name="vetourid" ColumnName="vetourid" />
-                <ScalarProperty Name="tenkhach" ColumnName="tenkhach" />
-                <ScalarProperty Name="chiemcho" ColumnName="chiemcho" />
-                <ScalarProperty Name="doanhthu" ColumnName="doanhthu" />
-                <ScalarProperty Name="thucthu" ColumnName="thucthu" />
-                <ScalarProperty Name="nguoixuatve" ColumnName="nguoixuatve" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -745,6 +730,21 @@
           <FunctionImportMapping FunctionImportName="spThongkeWeb" FunctionName="thongkeModel.Store.spThongkeWeb" />
           <FunctionImportMapping FunctionImportName="spThongkeWebchitiet" FunctionName="thongkeModel.Store.spThongkeWebchitiet">
           </FunctionImportMapping>
+          <EntitySetMapping Name="doanhthuSaleChitiets">
+            <EntityTypeMapping TypeName="thongkeModel.doanhthuSaleChitiet">
+              <MappingFragment StoreEntitySet="doanhthuSaleChitiet">
+                <ScalarProperty Name="nguoixuatve" ColumnName="nguoixuatve" />
+                <ScalarProperty Name="thucthu" ColumnName="thucthu" />
+                <ScalarProperty Name="doanhthu" ColumnName="doanhthu" />
+                <ScalarProperty Name="chiemcho" ColumnName="chiemcho" />
+                <ScalarProperty Name="tenkhach" ColumnName="tenkhach" />
+                <ScalarProperty Name="tuyentq" ColumnName="tuyentq" />
+                <ScalarProperty Name="sgtcode" ColumnName="sgtcode" />
+                <ScalarProperty Name="chinhanh" ColumnName="chinhanh" />
+                <ScalarProperty Name="stt" ColumnName="stt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

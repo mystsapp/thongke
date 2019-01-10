@@ -17,7 +17,7 @@ namespace ThongKe.Data.Models.EF
         public long stt { get; set; }
         public string chinhanh { get; set; }
         public string sgtcode { get; set; }
-        public Nullable<int> vetourid { get; set; }
+        public string tuyentq { get; set; }
         public string tenkhach { get; set; }
         public Nullable<int> chiemcho { get; set; }
         public Nullable<decimal> doanhthu { get; set; }

@@ -1482,7 +1482,7 @@ namespace ThongKe.Web.Controllers
                 xlSheet.Column(1).Width = 10;//stt
                 xlSheet.Column(2).Width = 10;// chi nhanh
                 xlSheet.Column(3).Width = 25;// code
-                xlSheet.Column(4).Width = 10;// vetourid
+                xlSheet.Column(4).Width = 25;// tuyen tham quan
                 xlSheet.Column(5).Width = 40;// ten khach
                 xlSheet.Column(6).Width = 10;// so khach
                 xlSheet.Column(7).Width = 20;//doanhthu
@@ -1509,7 +1509,7 @@ namespace ThongKe.Web.Controllers
                 xlSheet.Cells[5, 1].Value = "STT";
                 xlSheet.Cells[5, 2].Value = "Code CN";
                 xlSheet.Cells[5, 3].Value = "Code Đoàn";
-                xlSheet.Cells[5, 4].Value = "Vé tour";
+                xlSheet.Cells[5, 4].Value = "Tuyến tham quan";
                 xlSheet.Cells[5, 5].Value = "Tên khách";
                 xlSheet.Cells[5, 6].Value = "Số khách";
                 xlSheet.Cells[5, 7].Value = "Tổng tiền";
@@ -1559,7 +1559,7 @@ namespace ThongKe.Web.Controllers
                 setFontBold(5, 1, 5, 9, 12, xlSheet);
                 setFontSize(6, 1, 6 + dt.Rows.Count, 9, 12, xlSheet);
                 NumberFormat(6, 7, 6 + dt.Rows.Count, 8, xlSheet);
-                setCenterAligment(6, 1, 6 + dt.Rows.Count, 4, xlSheet);
+                setCenterAligment(6, 1, 6 + dt.Rows.Count, 3, xlSheet);
                 setCenterAligment(6, 6, 6 + dt.Rows.Count, 6, xlSheet);
                 xlSheet.View.FreezePanes(6, 20);
 
@@ -1589,7 +1589,7 @@ namespace ThongKe.Web.Controllers
                 xlSheet.Column(1).Width = 10;//stt
                 xlSheet.Column(2).Width = 10;// chi nhanh
                 xlSheet.Column(3).Width = 25;// sgtcode
-                xlSheet.Column(4).Width = 10;// vetourid
+                xlSheet.Column(4).Width = 25;// tuyen tham quan
                 xlSheet.Column(5).Width = 40;// ten khach
                 xlSheet.Column(6).Width = 10;// so khach
                 xlSheet.Column(7).Width = 20;//doanhthu
@@ -1616,7 +1616,7 @@ namespace ThongKe.Web.Controllers
                 xlSheet.Cells[5, 1].Value = "STT";
                 xlSheet.Cells[5, 2].Value = "Code CN";
                 xlSheet.Cells[5, 3].Value = "Code Đoàn";
-                xlSheet.Cells[5, 4].Value = "Vé tour";
+                xlSheet.Cells[5, 4].Value = "Tuyến tham quan";
                 xlSheet.Cells[5, 5].Value = "Tên khách";
                 xlSheet.Cells[5, 6].Value = "Số khách";
                 xlSheet.Cells[5, 7].Value = "Tổng tiền";
