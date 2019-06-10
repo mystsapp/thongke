@@ -46,7 +46,7 @@ var doanTheoNgayDiController = {
     },
 
     registerEvent: function () {
-
+        
         //$('.modal-dialog').draggable();
 
         $('#frmSearch').validate({
@@ -87,8 +87,11 @@ var doanTheoNgayDiController = {
         $('#btnSearch').off('click').on('click', function () {
             if ($('#frmSearch').valid()) {
                 doanTheoNgayDiController.LoadData();
+                
             }
         });
+
+
 
         $("#txtTuNgay, #txtDenNgay").datepicker({
             changeMonth: true,
@@ -142,6 +145,28 @@ var doanTheoNgayDiController = {
             }
         });
 
+    },
+
+    loadExportDetail: function () {
+        
+        $('.btnExportDetail').off('click').on('click', function () {
+
+            var sgtcode = $(this).data('sgtcode');
+            var khoi = '';
+
+
+            if ($('#hidNhom').val() !== "Users") {
+                khoi = $('#ddlKhoi').val();
+            } else {
+                khoi = $('#hidKhoi').data('khoi');
+            }
+
+            $('#hidSgtcode').val(sgtcode);
+            $('#hidKhoi').val(khoi);
+
+            $('#frmDetail').submit();
+
+        });
     },
 
     LoadData: function (changePageSize) {
@@ -208,9 +233,10 @@ var doanTheoNgayDiController = {
                         doanTheoNgayDiController.LoadData();
                     }, changePageSize);
                     //quayTheoNgayDiController.registerEvent(); // bao' loi khi response.total == null==>ko sao
+                    doanTheoNgayDiController.loadExportDetail();
                 }
             }
-        })
+        });
     },
 
     paging: function (totalRow, callback, changePageSize) {

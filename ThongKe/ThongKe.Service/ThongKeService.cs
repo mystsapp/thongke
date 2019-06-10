@@ -16,7 +16,7 @@ namespace ThongKe.Service
 
         IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow);
         IEnumerable<thongkeweb> KinhDoanhOnlineEntities(string tungay,string denngay,string khoi,int page,int pageSize, out int totalRow);
-
+        IEnumerable<thongkeweb> KinhDoanhOnlineEntities_ngaydi(string tungay, string denngay, string khoi, int page, int pageSize, out int totalRow);
         DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
 
         IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow);
@@ -48,7 +48,9 @@ namespace ThongKe.Service
         DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
 
         DataTable ThongkeWebchitiet(string tungay, string denngay, string chinhanh, string khoi);
-
+        DataTable doanhthuDoanTheoNgayDiChitiet(string sgtcode, string khoi);
+        DataTable getTourbySgtcode(string sgtcode, string khoi);
+        DataTable ThongkeWebchitiet_ngaydi(string tungay, string denngay, string chinhanh, string khoi);
     }
     public class ThongKeService : IThongKeService
     {
@@ -174,10 +176,30 @@ namespace ThongKe.Service
             var listDanhThu = _thongkeRepository.KinhDoanhOnlineEntities(tungay, denngay,  khoi, page, pageSize, out totalRow);
             return listDanhThu;
         }
-
+        public IEnumerable<thongkeweb> KinhDoanhOnlineEntities_ngaydi(string tungay, string denngay, string khoi, int page, int pageSize, out int totalRow)
+        {
+            var listDanhThu = _thongkeRepository.KinhDoanhOnlineEntities_ngaydi(tungay, denngay, khoi, page, pageSize, out totalRow);
+            return listDanhThu;
+        }
         public DataTable ThongkeWebchitiet(string tungay, string denngay, string chinhanh, string khoi)
         {
             var result = _thongkeRepository.ThongkeWebchitiet(tungay, denngay, chinhanh, khoi);
+            return result;
+        }
+        public DataTable ThongkeWebchitiet_ngaydi(string tungay, string denngay, string chinhanh, string khoi)
+        {
+            var result = _thongkeRepository.ThongkeWebchitiet_ngaydi(tungay, denngay, chinhanh, khoi);
+            return result;
+        }
+        public DataTable doanhthuDoanTheoNgayDiChitiet(string sgtcode, string khoi)
+        {
+            var result = _thongkeRepository.doanhthuDoanTheoNgayDiChitiet(sgtcode, khoi);
+            return result;
+        }
+
+        public DataTable getTourbySgtcode(string sgtcode, string khoi)
+        {
+            var result = _thongkeRepository.getTourbySgtcode(sgtcode, khoi);
             return result;
         }
     }

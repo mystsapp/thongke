@@ -17,6 +17,8 @@ using ThongKe.Web.Infrastructure.Extensions;
 using ThongKe.Web.Models;
 using Newtonsoft.Json;
 using AutoMapper;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ThongKe.Web.Controllers
 {
@@ -45,7 +47,10 @@ namespace ThongKe.Web.Controllers
         {
             return View();
         }//
-
+        public ActionResult KinhDoanhOnline_ngaydi()
+        {
+            return View();
+        }
         [HttpPost]
         public ViewResult SaleTheoQuay(string tungay, string denngay, string chinhanh, string khoi)//(string tungay,string denngay, string daily)
         {
@@ -1108,7 +1113,24 @@ namespace ThongKe.Web.Controllers
                 status = true
             }, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult LoadDataKinhDoanhOnline_ngaydi(string tungay, string denngay, string khoi, int page, int pageSize)
+        {
+            khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
 
+            int totalRow = 0;
+
+            var listAccount = _thongkeService.KinhDoanhOnlineEntities_ngaydi(tungay, denngay, khoi, page, pageSize, out totalRow);
+            //var query = listuser.OrderBy(x => x.tenhd);
+            var responseData = Mapper.Map<IEnumerable<thongkeweb>, IEnumerable<thongkewebViewModel>>(listAccount);
+
+            return Json(new
+            {
+                data = responseData,
+                total = totalRow,
+                status = true
+            }, JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public ActionResult LoadDataKinhDoanhOnlineChitietToExcel(string tungay, string denngay, string chinhanh, string khoi)
         {
@@ -1127,13 +1149,14 @@ namespace ThongKe.Web.Controllers
             xlSheet.Column(6).Width = 30;// TEN KHACH
             xlSheet.Column(7).Width = 15;//  SERIAL
             xlSheet.Column(8).Width = 15;//  HUY VE
-            xlSheet.Column(9).Width = 15;//  DOANH SO
-            xlSheet.Column(10).Width = 30;//  sale
-            xlSheet.Column(11).Width = 30;//  DAI LY 
-            xlSheet.Column(12).Width = 20;//  KENH GD
+            xlSheet.Column(9).Width = 10;//  SÔ KHÁCH
+            xlSheet.Column(10).Width = 15;//  DOANH SO
+            xlSheet.Column(11).Width = 30;//  sale
+            xlSheet.Column(12).Width = 30;//  DAI LY 
+            xlSheet.Column(13).Width = 20;//  KENH GD
 
 
-            xlSheet.Cells[2, 1].Value = "BÁO CÁO DOANH THU ON LINE " + chinhanh;
+            xlSheet.Cells[2, 1].Value = "BÁO CÁO DOANH THU ONLINE THEO NGÀY BÁN " + chinhanh;
             xlSheet.Cells[2, 1].Style.Font.SetFromFont(new Font("Times New Roman", 16, FontStyle.Bold));
             xlSheet.Cells[2, 1, 2, 12].Merge = true;
             setCenterAligment(2, 1, 2, 12, xlSheet);
@@ -1147,9 +1170,9 @@ namespace ThongKe.Web.Controllers
                 fromTo = "Từ ngày: " + tungay + " đến ngày: " + denngay;
             }
             xlSheet.Cells[3, 1].Value = fromTo;
-            xlSheet.Cells[3, 1, 3, 12].Merge = true;
+            xlSheet.Cells[3, 1, 3, 13].Merge = true;
             xlSheet.Cells[3, 1].Style.Font.SetFromFont(new Font("Times New Roman", 14, FontStyle.Bold));
-            setCenterAligment(3, 1, 3, 12, xlSheet);
+            setCenterAligment(3, 1, 3, 13, xlSheet);
 
             // Tạo header
             xlSheet.Cells[5, 1].Value = "STT";
@@ -1160,11 +1183,12 @@ namespace ThongKe.Web.Controllers
             xlSheet.Cells[5, 6].Value = "Tên khách";
             xlSheet.Cells[5, 7].Value = "Serial";
             xlSheet.Cells[5, 8].Value = "Huỷ vé";
-            xlSheet.Cells[5, 9].Value = "Doanh số";
-            xlSheet.Cells[5, 10].Value = "Nhân viên";
-            xlSheet.Cells[5, 11].Value = "Đại lý";
-            xlSheet.Cells[5, 12].Value = "Kênh GD";
-            xlSheet.Cells[5, 1, 5, 12].Style.Font.SetFromFont(new Font("Times New Roman", 12, FontStyle.Bold));
+            xlSheet.Cells[5, 9].Value = "Số khách";
+            xlSheet.Cells[5, 10].Value = "Doanh số";
+            xlSheet.Cells[5, 11].Value = "Nhân viên";
+            xlSheet.Cells[5, 12].Value = "Đại lý";
+            xlSheet.Cells[5, 13].Value = "Kênh GD";
+            xlSheet.Cells[5, 1, 5, 13].Style.Font.SetFromFont(new Font("Times New Roman", 12, FontStyle.Bold));
 
             // do du lieu tu table
             int dong = 5;
@@ -1199,18 +1223,141 @@ namespace ThongKe.Web.Controllers
 
             xlSheet.Cells[dong, 8].Value = "TC";
             xlSheet.Cells[dong, 9].Formula = "SUM(I6:I" + (6 + dt.Rows.Count - 1) + ")";
-
+            xlSheet.Cells[dong, 10].Formula = "SUM(J6:J" + (6 + dt.Rows.Count - 1) + ")";
             // định dạng số
-            NumberFormat(6, 9, 6 + dt.Rows.Count, 9, xlSheet);
-            setFontSize(6, 1, 6 + dt.Rows.Count, 12, 12, xlSheet);
-            setBorder(5, 1, 5 + dt.Rows.Count, 12, xlSheet);
-            setFontBold(5, 1, 5, 10, 12, xlSheet);
+            NumberFormat(6, 10, 6 + dt.Rows.Count, 10, xlSheet);
+            setFontSize(6, 1, 6 + dt.Rows.Count, 13, 12, xlSheet);
+            setBorder(5, 1, 5 + dt.Rows.Count, 13, xlSheet);
+            setFontBold(5, 1, 5, 10, 13, xlSheet);
 
             // canh giưa cot stt
             setCenterAligment(6, 1, 6 + dt.Rows.Count, 2, xlSheet);
+            // canh giưa cot so khach
+            setCenterAligment(6, 9, 6 + dt.Rows.Count, 9, xlSheet);
 
-            setBorder(dong, 8, dong, 9, xlSheet);
-            setFontBold(dong, 8, dong, 9, 12, xlSheet);
+            setBorder(dong, 8, dong, 10, xlSheet);
+            setFontBold(dong, 8, dong, 10, 12, xlSheet);
+            // canh giưa cot ngay di va ngày ve
+            setCenterAligment(6, 4, 6 + dt.Rows.Count, 5, xlSheet);
+            DateFormat(6, 4, 6 + dt.Rows.Count, 5, xlSheet);
+
+
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("Content-Disposition", "attachment; filename=" + "DoanhThuKinhDoanhOnline" + "_" + System.DateTime.Now.ToString("dd/MM/yyyy HH:mm") + ".xlsx");
+            Response.BinaryWrite(ExcelApp.GetAsByteArray());
+            Response.End();
+
+            //return RedirectToAction("LoadDataQuayTheoNgayDiChitietToExcel");
+            return View();
+        }
+        [HttpGet]
+        public ActionResult LoadDataKinhDoanhOnlineChitiet_ngaydiToExcel(string tungay, string denngay, string chinhanh, string khoi)
+        {
+
+            //cn = String.IsNullOrEmpty(cn) ? Session["chinhanh"].ToString() : cn;
+            khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
+            string fromTo = "";
+            ExcelPackage ExcelApp = new ExcelPackage();
+            ExcelWorksheet xlSheet = ExcelApp.Workbook.Worksheets.Add("Report");
+            // Định dạng chiều dài cho cột
+            xlSheet.Column(1).Width = 10;//STT
+            xlSheet.Column(2).Width = 25;//SGTCODE
+            xlSheet.Column(3).Width = 35;// TUYEN TQ
+            xlSheet.Column(4).Width = 15;// NGAY DI
+            xlSheet.Column(5).Width = 15;// NGAY VE
+            xlSheet.Column(6).Width = 30;// TEN KHACH
+            xlSheet.Column(7).Width = 15;//  SERIAL
+            xlSheet.Column(8).Width = 15;//  HUY VE
+            xlSheet.Column(9).Width = 10;//  SO KHACH
+            xlSheet.Column(10).Width = 15;//  DOANH SO
+            xlSheet.Column(11).Width = 30;//  sale
+            xlSheet.Column(12).Width = 30;//  DAI LY 
+            xlSheet.Column(13).Width = 20;//  KENH GD
+
+
+            xlSheet.Cells[2, 1].Value = "BÁO CÁO DOANH THU ONLINE THEO NGÀY ĐI TOUR " + chinhanh;
+            xlSheet.Cells[2, 1].Style.Font.SetFromFont(new Font("Times New Roman", 16, FontStyle.Bold));
+            xlSheet.Cells[2, 1, 2, 13].Merge = true;
+            setCenterAligment(2, 1, 2, 13, xlSheet);
+            // dinh dang tu ngay den ngay
+            if (tungay == denngay)
+            {
+                fromTo = "Ngày: " + tungay;
+            }
+            else
+            {
+                fromTo = "Từ ngày: " + tungay + " đến ngày: " + denngay;
+            }
+            xlSheet.Cells[3, 1].Value = fromTo;
+            xlSheet.Cells[3, 1, 3, 13].Merge = true;
+            xlSheet.Cells[3, 1].Style.Font.SetFromFont(new Font("Times New Roman", 14, FontStyle.Bold));
+            setCenterAligment(3, 1, 3, 13, xlSheet);
+
+            // Tạo header
+            xlSheet.Cells[5, 1].Value = "STT";
+            xlSheet.Cells[5, 2].Value = "Sgt Code";
+            xlSheet.Cells[5, 3].Value = "Hành trình ";
+            xlSheet.Cells[5, 4].Value = "Ngày đi";
+            xlSheet.Cells[5, 5].Value = "Ngày về";
+            xlSheet.Cells[5, 6].Value = "Tên khách";
+            xlSheet.Cells[5, 7].Value = "Serial";
+            xlSheet.Cells[5, 8].Value = "Huỷ vé";
+            xlSheet.Cells[5, 9].Value = "Số khách";
+            xlSheet.Cells[5, 10].Value = "Doanh số";
+            xlSheet.Cells[5, 11].Value = "Nhân viên";
+            xlSheet.Cells[5, 12].Value = "Đại lý";
+            xlSheet.Cells[5, 13].Value = "Kênh GD";
+            xlSheet.Cells[5, 1, 5, 13].Style.Font.SetFromFont(new Font("Times New Roman", 12, FontStyle.Bold));
+
+            // do du lieu tu table
+            int dong = 5;
+
+            DataTable dt = _thongkeService.ThongkeWebchitiet_ngaydi(tungay, denngay, chinhanh, khoi);// Session["daily"].ToString(), Session["khoi"].ToString());
+
+            if (dt != null)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dong++;
+                    for (int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        if (String.IsNullOrEmpty(dt.Rows[i][j].ToString()))
+                        {
+                            xlSheet.Cells[dong, j + 1].Value = 0;
+                        }
+                        else
+                        {
+                            xlSheet.Cells[dong, j + 1].Value = dt.Rows[i][j];
+                        }
+                    }
+                }
+            }
+            else
+            {
+                SetAlert("No sale.", "warning");
+                return View();
+            }
+
+            dong++;
+
+            xlSheet.Cells[dong, 8].Value = "TC";
+            xlSheet.Cells[dong, 9].Formula = "SUM(I6:I" + (6 + dt.Rows.Count - 1) + ")";
+            xlSheet.Cells[dong, 10].Formula = "SUM(J6:J" + (6 + dt.Rows.Count - 1) + ")";
+            // định dạng số
+            NumberFormat(6, 10, 6 + dt.Rows.Count, 10, xlSheet);
+            setFontSize(6, 1, 6 + dt.Rows.Count, 13, 12, xlSheet);
+            setBorder(5, 1, 5 + dt.Rows.Count, 13, xlSheet);
+            setFontBold(5, 1, 5, 10, 13, xlSheet);
+
+            // canh giưa cot stt
+            setCenterAligment(6, 1, 6 + dt.Rows.Count, 2, xlSheet);
+            // canh giưa cot so khach
+            setCenterAligment(6, 9, 6 + dt.Rows.Count, 9, xlSheet);
+
+            setBorder(dong, 8, dong, 10, xlSheet);
+            setFontBold(dong, 8, dong, 10, 12, xlSheet);
+            
             // canh giưa cot ngay di va ngày ve
             setCenterAligment(6, 4, 6 + dt.Rows.Count, 5, xlSheet);
             DateFormat(6, 4, 6 + dt.Rows.Count, 5, xlSheet);
@@ -1473,7 +1620,7 @@ namespace ThongKe.Web.Controllers
         {
             try
             {
-
+                nhanvien = convertToUnSign3(nhanvien);
                 khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
                 string fromTo = "";
                 ExcelPackage ExcelApp = new ExcelPackage();
@@ -1581,6 +1728,7 @@ namespace ThongKe.Web.Controllers
         {
             try
             {
+                nhanvien = convertToUnSign3(nhanvien);
                 khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
                 string fromTo = "";
                 ExcelPackage ExcelApp = new ExcelPackage();
@@ -1683,7 +1831,146 @@ namespace ThongKe.Web.Controllers
             }
             return View();
         }
+        public ViewResult LoadDataDoanTheoNgayDiChitietToExcel(string sgtcode, string khoi)
+        {
+            try
+            {
+                khoi = String.IsNullOrEmpty(khoi) ? Session["khoi"].ToString() : khoi;
+                string fromTo = "";
+                DataTable d = _thongkeService.getTourbySgtcode(sgtcode, khoi);
+                string tuyentq = d.Rows[0]["tuyentq"].ToString();
+                string ngay = "ĐOÀN: " + sgtcode + " bắt đầu: " + Convert.ToDateTime(d.Rows[0]["batdau"]).ToString("dd/MM/yyyy HH:mm") + " kết thúc: " + Convert.ToDateTime(d.Rows[0]["ketthuc"]).ToString("dd/MM/yyyy HH:mm");
+                ExcelPackage ExcelApp = new ExcelPackage();
+                ExcelWorksheet xlSheet = ExcelApp.Workbook.Worksheets.Add("DoanhthuDoan");
+                // Định dạng chiều dài cho cột
+                xlSheet.Column(1).Width = 7;//stt
+                xlSheet.Column(2).Width = 20;// Serial
+                xlSheet.Column(3).Width = 40;// Ten khach
+                xlSheet.Column(4).Width = 45;// Dia chi
+                xlSheet.Column(5).Width = 30;// Diem don
+                xlSheet.Column(6).Width =10;// Gia ve
+                xlSheet.Column(7).Width = 10;//Thuc thu
+                xlSheet.Column(8).Width = 10;//Cong no
+                xlSheet.Column(9).Width = 45;//Ghi chu
 
+                xlSheet.Cells[2, 1].Value = tuyentq;// "BÁO CÁO DOANH THU THEO NGÀY ĐI " + sgtcode;
+                xlSheet.Cells[2, 1].Style.Font.SetFromFont(new Font("Times New Roman", 16, FontStyle.Bold));
+                xlSheet.Cells[2, 1, 2, 8].Merge = true;
+
+                xlSheet.Cells[3, 1].Value = ngay;
+                xlSheet.Cells[3, 1, 3, 8].Merge = true;
+                xlSheet.Cells[3, 1].Style.Font.SetFromFont(new Font("Times New Roman", 12, FontStyle.Regular));
+                setCenterAligment(2, 1, 3, 8, xlSheet);
+
+                // Tạo header
+                xlSheet.Cells[5, 1].Value = "STT";
+                xlSheet.Cells[5, 2].Value = "Serial";
+                xlSheet.Cells[5, 3].Value = "Tên khách";
+                xlSheet.Cells[5, 4].Value = "Địa chỉ - Tel";
+                xlSheet.Cells[5, 5].Value = "Điểm đón";
+                xlSheet.Cells[5, 6].Value = "Giá vé";
+                xlSheet.Cells[5, 7].Value = "Thực thu";
+                xlSheet.Cells[5, 8].Value = "Công nợ";
+                xlSheet.Cells[5, 9].Value = "Ghi chú";
+               
+                xlSheet.Cells[5, 1, 5, 9].Style.Font.SetFromFont(new Font("Times New Roman", 10, FontStyle.Bold));
+                setBorder(5, 1, 5 , 9, xlSheet);
+                int dong = 5;
+                int giongnhau = 0;
+                DataTable dt = _thongkeService.doanhthuDoanTheoNgayDiChitiet(sgtcode, khoi);// Session["fullName"].ToString());
+
+                if (dt != null)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        dong++;
+                        for (int j = 2; j < dt.Columns.Count; j++)
+                        {
+                            if (String.IsNullOrEmpty(dt.Rows[i][j].ToString()))
+                            {
+                                xlSheet.Cells[dong, j - 1].Value = " ";
+                            }
+                            else
+                            {
+                                xlSheet.Cells[dong, j - 1].Value = dt.Rows[i][j];
+                            }
+                        }
+                        if (i > 0 && dt.Rows[i][1].ToString() == dt.Rows[i - 1][1].ToString())
+                        {
+                            giongnhau++;
+                            
+                        }
+                        else
+                        {
+                            giongnhau = 0;
+                        }
+                        if (giongnhau > 0)
+                        {
+                            mergercell(dong - giongnhau, 2, dong, 2, xlSheet);
+                            mergercell(dong - giongnhau, 5, dong, 5, xlSheet);
+                            numberMergercell(dong - giongnhau, 6, dong, 6, xlSheet);
+                            numberMergercell(dong - giongnhau, 7, dong, 7, xlSheet);
+                            numberMergercell(dong - giongnhau, 8, dong, 8, xlSheet);
+                            mergercell(dong - giongnhau, 9, dong, 9, xlSheet);
+                            setBorderAround(dong - giongnhau, 1, dong, 1, xlSheet);
+                            setBorderAround(dong - giongnhau, 2, dong, 2, xlSheet);
+                            setBorderAround(dong - giongnhau, 3, dong, 3, xlSheet);
+                            setBorderAround(dong - giongnhau, 4, dong, 4, xlSheet);
+                            setBorderAround(dong - giongnhau, 5, dong, 5, xlSheet);
+                            setBorderAround(dong - giongnhau, 6, dong, 6, xlSheet);
+                            setBorderAround(dong - giongnhau, 7, dong, 7, xlSheet);
+                            setBorderAround(dong - giongnhau, 8, dong, 8, xlSheet);
+                            setBorderAround(dong - giongnhau, 9, dong, 9, xlSheet);
+                        }
+                        else
+                        {
+                            wrapText(dong, 2, dong, 2, xlSheet);
+                            wrapText(dong, 5, dong, 9, xlSheet);
+                            wrapText(dong, 9, dong, 9, xlSheet);
+                            setBorderAround(dong, 1, dong, 1, xlSheet);
+                            setBorderAround(dong , 2, dong, 2, xlSheet);
+                            setBorderAround(dong, 3, dong, 3, xlSheet);
+                            setBorderAround(dong , 4, dong, 4, xlSheet);
+                            setBorderAround(dong , 5, dong, 5, xlSheet);
+                            setBorderAround(dong , 6, dong, 6, xlSheet);
+                            setBorderAround(dong , 7, dong, 7, xlSheet);
+                            setBorderAround(dong , 8, dong, 8, xlSheet);
+                            setBorderAround(dong , 9, dong, 9, xlSheet);
+                        }
+                        
+                    }
+                    
+                }
+                else
+                {
+                    SetAlert("No sale.", "warning");
+                    return View();
+                }
+                dong++;
+                // set border
+              //  setBorder(5, 1, 5 + dt.Rows.Count, 9, xlSheet);
+                setFontSize(6, 1, 6 + dt.Rows.Count+1, 9,9, xlSheet);
+                setCenterAligment(6, 1, 6 + dt.Rows.Count, 1, xlSheet);
+                wrapText(6, 6, 6 + dt.Rows.Count + 1, 8, xlSheet);
+
+                //// Sum tổng tiền
+                xlSheet.Cells[dong, 6].Formula = "SUM(F6:F" + (6 + dt.Rows.Count - 1) + ")";
+                NumberFormat(6, 6, 6 + dt.Rows.Count +1, 8, xlSheet);
+                
+              
+                Response.Clear();
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + "DoanhThuDoan_" + sgtcode + "_" + System.DateTime.Now.ToString("dd/MM/yyyy HH:mm") + ".xlsx");
+                Response.BinaryWrite(ExcelApp.GetAsByteArray());
+                Response.End();
+
+            }
+            catch
+            {
+                throw;
+            }
+            return View();
+        }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1748,6 +2035,14 @@ namespace ThongKe.Web.Controllers
                 range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                 range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
                 range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+
+            }
+        }
+        private static void setBorderAround(int fromRow, int fromColumn, int toRow, int toColumn, ExcelWorksheet sheet)
+        {
+            using (var range = sheet.Cells[fromRow, fromColumn, toRow, toColumn])
+            {               
+                range.Style.Border.BorderAround(ExcelBorderStyle.Thin);              
             }
         }
         private static void PhantramFormat(int fromRow, int fromColumn, int toRow, int toColumn, ExcelWorksheet sheet)
@@ -1757,6 +2052,41 @@ namespace ThongKe.Web.Controllers
                 range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 range.Style.Numberformat.Format = "0 %";
             }
+        }
+        private static void mergercell(int fromRow, int fromColumn, int toRow, int toColumn, ExcelWorksheet sheet)
+        {
+            using (var range = sheet.Cells[fromRow, fromColumn, toRow, toColumn])
+            {
+                range.Merge = true;
+                range.Style.VerticalAlignment = ExcelVerticalAlignment.Top;                              
+                range.Style.WrapText = true;
+            }
+            
+        }
+        private static void numberMergercell(int fromRow, int fromColumn, int toRow, int toColumn, ExcelWorksheet sheet)
+        {
+            using (var range = sheet.Cells[fromRow, fromColumn, toRow, toColumn])
+            {
+                var a = sheet.Cells[fromRow, fromColumn].Value;
+                range.Merge = true;
+                range.Style.VerticalAlignment = ExcelVerticalAlignment.Top;
+                range.Clear();
+                sheet.Cells[fromRow, fromColumn].Value = a;
+            }
+        }
+        private static void wrapText(int fromRow, int fromColumn, int toRow, int toColumn, ExcelWorksheet sheet)
+        {
+            using (var range = sheet.Cells[fromRow, fromColumn, toRow, toColumn])
+            {               
+                range.Style.WrapText = true;
+            }
+
+        }
+        public static string convertToUnSign3(string s)
+        {
+            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = s.Normalize(NormalizationForm.FormD);
+            return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
     }
 }

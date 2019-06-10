@@ -16,7 +16,7 @@ namespace ThongKe.Data.Repositories
 
         IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoQuayEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow);
         IEnumerable<thongkeweb> KinhDoanhOnlineEntities(string tungay, string denngay, string khoi, int page, int pageSize, out int totalRow);
-
+        IEnumerable<thongkeweb> KinhDoanhOnlineEntities_ngaydi(string tungay, string denngay, string khoi, int page, int pageSize, out int totalRow);
         DataTable doanhthuSaleTheoNgayDi(string tungay, string denngay, string chinhanh, string khoi);
 
         IEnumerable<doanhthuSaleQuay> doanhthuSaleTheoNgayDiEntities(string tungay, string denngay, string cn, string khoi, int page, int pageSize, out int totalRow);
@@ -53,6 +53,9 @@ namespace ThongKe.Data.Repositories
 
         DataTable doanhthuSaleTheoNgayDiChitiet(string tungay, string denngay, string nhanvien, string chinhanh, string khoi);
         DataTable ThongkeWebchitiet(string tungay, string denngay, string chinhanh, string khoi);
+        DataTable doanhthuDoanTheoNgayDiChitiet(string sgtcode, string khoi);
+        DataTable getTourbySgtcode(string sgtcode, string khoi);
+        DataTable ThongkeWebchitiet_ngaydi(string tungay, string denngay, string chinhanh, string khoi);
     }
 
     public class thongkeRepository : RepositoryBase<doanthuQuayNgayBan>, IthongkeRepository
@@ -295,7 +298,25 @@ namespace ThongKe.Data.Repositories
                 throw;
             }
         }
+        public DataTable getTourbySgtcode(string sgtcode,string khoi)
+        {
+            try
+            {
 
+                //chitiettour a = DbContext.spGetTourByCode(sgtcode, khoi).ToList();
+                //return a;
+                DataTable dt = new DataTable();
+                var result = DbContext.spGetTourByCode(sgtcode, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+        }
         public IEnumerable<tuyentqNgaydi> doanhthuTuyentqTheoNgayDiEntities(string tungay, string denngay, string chinhanh, string khoi, int page, int pageSize, out int totalRow)
         {
             try
@@ -468,6 +489,60 @@ namespace ThongKe.Data.Repositories
             {
                 DataTable dt = new DataTable();
                 var result = DbContext.spThongkeWebchitiet(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public DataTable doanhthuDoanTheoNgayDiChitiet(string sgtcode, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var result = DbContext.spDoanhthuDoanChitiet(sgtcode, khoi).ToList();
+                var count = result.Count();
+
+                dt = EntityToTable.ToDataTable(result);
+                return dt;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public IEnumerable<thongkeweb> KinhDoanhOnlineEntities_ngaydi(string tungay, string denngay, string khoi, int page, int pageSize, out int totalRow)
+        {
+            // pageSize = 10;
+            try
+            {
+                //DateTime tn = Convert.ToDateTime("2018 - 11 - 01");
+                //DateTime dn = Convert.ToDateTime("2018-11-10");
+
+                var result = DbContext.spThongkeWeb_ngaydi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), khoi).ToList();
+                totalRow = result.Count();
+
+                result = result.OrderBy(x => x.chinhanh).Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                // dt = EntityToTable.ToDataTable(result);
+                if (result.Count > 0)
+                    return result;
+                return null;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public DataTable ThongkeWebchitiet_ngaydi(string tungay, string denngay, string chinhanh, string khoi)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                var result = DbContext.spThongkeWebchitiet_ngaydi(Convert.ToDateTime(tungay), Convert.ToDateTime(denngay), chinhanh, khoi).ToList();
                 var count = result.Count();
 
                 dt = EntityToTable.ToDataTable(result);

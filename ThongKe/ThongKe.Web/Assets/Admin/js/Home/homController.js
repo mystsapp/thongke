@@ -38,14 +38,14 @@ ChartController.$inject = ['$scope', '$http'];
 function ChartController($scope,$http) {
     var vm = this;
 
-    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    $scope.series = ['SK Hiện tại', 'SK Tháng trước'];
+    //$scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+    //$scope.series = ['SK Hiện tại', 'SK Tháng trước'];
     //$scope.series = ['Series A', 'Series B'];
 
-    $scope.data = [
-        [65, 59, 80, 81, 56, 55, 40],
-        [28, 48, 40, 19, 86, 27, 90]
-    ];
+    //$scope.data = [
+    //    [65, 59, 80, 81, 56, 55, 40],
+    //    [28, 48, 40, 19, 86, 27, 90]
+    //];
     $scope.tableData = [];
 
     //$scope.colours = ['#72C02C', '#3498DB', '#717984', '#F1C40F'];

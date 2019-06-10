@@ -100,6 +100,7 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr class="text-left">
+                    <td>#</td>
                     <td>STT</td>
                     <td>SGT code</td>
                     <td>Tuyen tham quan</td>
@@ -120,7 +121,13 @@
     <script id="data-template" type="x-tmpl-mustache">
         Hello {{ hoten }}!
         <tr>
-
+            <td>
+                <form id="frmDetail" action="/BaoCao/LoadDataDoanTheoNgayDiChitietToExcel">
+                    <input type="hidden" name="sgtcode" id="hidSgtcode" />
+                    <input type="hidden" name="khoi" id="hidKhoi" />
+                    <button type="button" data-sgtcode="{{sgtcode}}" class="btn btn-outline btn-success btnExportDetail"><i class="fas fa-file-export"></i></button>
+                </form>
+            </td>
             <td class="text-center">{{stt}}</td>
             <td class="text-left">{{sgtcode}}</td>
             <td class="text-left">{{tuyentq}}</td>

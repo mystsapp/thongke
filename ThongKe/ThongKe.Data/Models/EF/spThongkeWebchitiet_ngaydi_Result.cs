@@ -10,19 +10,17 @@
 namespace ThongKe.Data.Models.EF
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class thongkewebchitiet
+    public partial class spThongkeWebchitiet_ngaydi_Result
     {
-        public long stt { get; set; }
+        public Nullable<long> stt { get; set; }
         public string sgtcode { get; set; }
         public string hanhtrinh { get; set; }
-        public Nullable<System.DateTime> ngaydi { get; set; }
-        public Nullable<System.DateTime> ngayve { get; set; }
+        public System.DateTime ngaydi { get; set; }
+        public System.DateTime ngayve { get; set; }
         public string tenkhach { get; set; }
         public string serial { get; set; }
         public string huyve { get; set; }
-        public Nullable<int> sokhach { get; set; }
         public Nullable<decimal> doanhso { get; set; }
         public string nguoixuatve { get; set; }
         public string dailyxuatve { get; set; }

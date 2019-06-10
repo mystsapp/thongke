@@ -62,7 +62,13 @@
     <Compile Include="Models\EF\chinhanh.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EF\chitiettour.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\dmdaily.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\doanhthuDoanChitiet.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\doanhthuDoanNgayDi.cs">
@@ -81,6 +87,12 @@
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\doanthuQuayNgayBan.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\spGetTourByCode_Result.cs">
+      <DependentUpon>TKDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\spThongkeWebchitiet_ngaydi_Result.cs">
       <DependentUpon>TKDbContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\spThongkeWebchitiet_Result.cs">
